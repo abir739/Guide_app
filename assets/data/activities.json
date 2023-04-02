@@ -1,0 +1,20 @@
+
+[  { "time": "10:00 AM",
+    "name": "Meeting with John",  
+    "icon": "meeting_icon.png",  
+    "description": "Discuss project progress",
+    "status": "Pending", 
+    "location": "Conference Room A"  },
+  {    
+    "time": "12:00 PM",
+    "name": "Lunch with Sarah",
+    "icon": "lunch_icon.png",
+    "description": "Catch up on personal news",
+    "status": "Done",
+    "location": "Cafeteria"  },
+  {  "time": "2:00 PM",
+    "name": "Presentation to clients",
+    "icon": "presentation_icon.png",
+    "description": "Introduce new products",
+    "status": "In Progress", 
+    "location": "Boardroom"  }]
