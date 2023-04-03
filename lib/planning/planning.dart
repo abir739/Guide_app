@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
+//import 'package:guide_app/activity/newactivity.dart';
+import 'package:guide_app/activity/newactivity_test.dart';
 
 // the description of an activity
 class Activity {
@@ -56,7 +58,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
       name: "Restaurants",
       time: "19:00-20:00",
       price: "0€",
-      logoPath: 'assets/images/44.png',
+      logoPath: 'assets/images/restt.svg',
       symbolName: 'Restaurant Dar El Jeld',
       photoPath:
           'https://www.sejours-tunisie.com/wp-content/uploads/2019/02/meilleurs-restaurants-tunis.jpg',
@@ -68,7 +70,19 @@ class _PlanningScreenState extends State<PlanningScreen> {
       name: "Vols",
       time: "14:00-14:45",
       price: "0€",
-      logoPath: 'assets/images/55.jpg',
+      logoPath: 'assets/images/Vol.svg',
+      symbolName: 'Aéroport de Tunis',
+      photoPath:
+          'https://destinationsmed.com/wp-content/uploads/2022/08/TUN_1-984x554-1.jpg',
+      place: 'Aéroport tunis carthage',
+      description:
+          'cette aéroport porte le nom de la cité historique de Carthage qui est située à cette aéroport. Lors de sa mise en exploitation, aérodrome est connu sous le nom de Tunis-El Aouina.',
+    ),
+    Activity(
+      name: "Transport",
+      time: "14:00-14:45",
+      price: "0€",
+      logoPath: 'assets/images/bus.svg',
       symbolName: 'Aéroport de Tunis',
       photoPath:
           'https://destinationsmed.com/wp-content/uploads/2022/08/TUN_1-984x554-1.jpg',
@@ -80,7 +94,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
       name: "Hotles",
       time: "16:00-16:50",
       price: "0€",
-      logoPath: 'assets/images/22.jpg',
+      logoPath: 'assets/images/hottt.svg',
       symbolName: 'Royal Azur Hotel Thalassa',
       photoPath:
           'https://fwk.resabo.com/cr.fwk/images/hotels/Hotel-8905-20230102-095053.jpg',
@@ -92,7 +106,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
       name: "Visites",
       time: "17:00-18:00",
       price: "28,51€",
-      logoPath: 'assets/images/maps.png',
+      logoPath: 'assets/images/vis.svg',
       symbolName: 'Sidi Bou Said',
       photoPath:
           "https://travelfree.info/wp-content/uploads/2020/06/tunisia-2425441_1280-e1593516163383.jpg",
@@ -104,7 +118,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
       name: "Activities",
       time: "10:00-12:30",
       price: "48,51€",
-      logoPath: 'assets/images/maps.png',
+      logoPath: 'assets/images/mount.svg',
       symbolName: 'lle de Djerba',
       photoPath:
           'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/cd/1b/31/caption.jpg?w=500&h=400&s=1',
@@ -285,11 +299,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       children: [
                         SizedBox(height: 14),
                         ClipOval(
-                          child: Image.asset(
+                          child: SvgPicture.asset(
                             index.logoPath,
-                            width: 40,
-                            height: 40,
-                            fit: BoxFit.contain,
+                            fit: BoxFit.cover,
+                            height: 40.0,
                           ),
                         ),
                         SizedBox(width: 8, height: 16),
@@ -411,6 +424,14 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Widget build(BuildContext context) {
     final start = DateFormat("MMM dd, yyyy").format(_startDate);
     final end = DateFormat("MMM dd, yyyy").format(_endDate);
+    List<String> _works = [
+      'Work 1',
+      'Work 2',
+      'Work 3',
+      'Work 4',
+      'Work 5',
+      'Work 6'
+    ]; // add the _works list
 
     return Scaffold(
       appBar: AppBar(
@@ -438,7 +459,104 @@ class _PlanningScreenState extends State<PlanningScreen> {
                 ),
                 InkWell(
                   onTap: () {
-                    // Handle the button press
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (context) {
+                        return Container(
+                          height: MediaQuery.of(context).size.height * 0.6,
+                          padding: EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Modify Activities',
+                                style: TextStyle(
+                                  fontSize: 24.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+                              Expanded(
+                                child: ListView.builder(
+                                  itemCount: activities.length,
+                                  itemBuilder: (context, index) {
+                                    return Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(vertical: 10.0),
+                                      child: ElevatedButton(
+                                        onPressed: () {
+                                          // Handle the button press
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          primary: Colors.grey[300],
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                        ),
+                                        child: Row(
+                                          children: [
+                                            SvgPicture.asset(
+                                              activities[index].logoPath,
+                                              width: 40.0,
+                                              height: 40.0,
+                                            ),
+                                            SizedBox(width: 16.0),
+                                            Text(
+                                              activities[index].name,
+                                              style: TextStyle(
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              SizedBox(height: 20.0),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      // Handle the button press
+                                      Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                          builder: (context) => NewActivity(),
+                                        ),
+                                      );
+                                    },
+                                    child: Text('Ajouter autre'),
+                                  ),
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          // Handle the button press
+                                        },
+                                        child: Text('Enregistrer'),
+                                      ),
+                                      SizedBox(width: 10.0),
+                                      ElevatedButton(
+                                        onPressed: () {
+                                          Navigator.pop(context);
+                                        },
+                                        child: Text('Annuler'),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        );
+                      },
+                    );
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -484,14 +602,14 @@ class _PlanningScreenState extends State<PlanningScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      /*floatingActionButton: FloatingActionButton(
         onPressed: () {
           // add new activity
         },
         tooltip: 'Add Activity',
         child: Icon(Icons.add),
         backgroundColor: Color.fromARGB(255, 243, 151, 208),
-      ),
+      ),*/
     );
   }
 }

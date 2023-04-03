@@ -39,6 +39,8 @@ dependencies:
   flutter_login_facebook: ^1.7.0
   cached_network_image: ^3.2.3
   intl: ^0.18.0
+  image_picker: ^0.8.7+1
+  flutter_local_notifications: ^8.2.0
 
 dev_dependencies:
   flutter_test:
