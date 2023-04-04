@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'dart:io';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
@@ -53,6 +56,7 @@ class NewActivity extends StatefulWidget {
 
 class _NewActivityState extends State<NewActivity> {
   final _formKey = GlobalKey<FormState>();
+  String _place = '';
   late String _activityName;
   late String _activityDescription;
   File? _imageFile;
@@ -60,9 +64,23 @@ class _NewActivityState extends State<NewActivity> {
   bool _isNotificationPressed = false; // Define the variable here
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
+  TextEditingController placeController = TextEditingController();
+
+  void launchMaps(String query) async {
+    String mapsQuery = Uri.encodeFull(query);
+    String mapsUrl =
+        "https://www.google.com/maps/search/?api=1&query=$mapsQuery";
+    if (await canLaunch(mapsUrl)) {
+      await launch(mapsUrl);
+    } else {
+      throw 'Could not launch $mapsUrl';
+    }
+  }
+
   @override
   void initState() {
     super.initState();
+    _getSavedPlace();
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     var initializationSettingsAndroid =
         AndroidInitializationSettings('app_icon');
@@ -105,6 +123,32 @@ class _NewActivityState extends State<NewActivity> {
       platformChannelSpecifics,
       payload: 'item x',
     );
+  }
+
+  void _getSavedPlace() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? savedPlace = prefs.getString('selectedPlace');
+    if (savedPlace != null) {
+      setState(() {
+        _place = savedPlace;
+        placeController.text = savedPlace;
+      });
+    }
+  }
+
+  void _saveSelectedPlace(String place) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setString('selectedPlace', place);
+  }
+
+  void _launchMaps() async {
+    final String mapsUrl =
+        'https://www.google.com/maps/search/?api=1&query=$_place';
+    if (await canLaunch(mapsUrl)) {
+      await launch(mapsUrl);
+    } else {
+      Fluttertoast.showToast(msg: 'Could not open the map.');
+    }
   }
 
   @override
@@ -167,21 +211,44 @@ class _NewActivityState extends State<NewActivity> {
                   },
                 ),
                 const SizedBox(height: 16.0),
-                CustomTextField(
-                  prefixIcon: Icon(
-                    Icons.location_city,
-                    size: 18,
+                TextFormField(
+                  controller: placeController,
+                  decoration: InputDecoration(
+                    labelText: 'Place',
+                    hintText: 'Search for a place',
+                    suffixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () async {
+                        final String mapsUrl =
+                            'https://www.google.com/maps/search/?api=1&query=${placeController.text}';
+                        if (await canLaunch(mapsUrl)) {
+                          await launch(mapsUrl);
+                          setState(() {
+                            _place = placeController.text;
+                          });
+                          _saveSelectedPlace(_place);
+                        } else {
+                          Fluttertoast.showToast(
+                              msg: 'Could not open the map.');
+                        }
+                      },
+                    ),
                   ),
-                  labelText: "Place",
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Please enter a place for the activity';
                     }
                     return null;
                   },
-                  onSaved: (value) {
-                    // Save the place
+                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // submit form
+                    }
                   },
+                  child: Text('Save'),
                 ),
                 const SizedBox(height: 16.0),
                 GestureDetector(
