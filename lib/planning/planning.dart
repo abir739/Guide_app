@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
-//import 'package:guide_app/activity/newactivity.dart';
-import 'package:guide_app/activity/newactivity_test.dart';
+import 'package:guide_app/activity/newactivityyy.dart';
+//import 'package:guide_app/activity/newactivity_test.dart';
 
 // the description of an activity
 class Activity {
