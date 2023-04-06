@@ -1,11 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:guide_app/NetworkHandler.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
 import 'package:guide_app/planning/planning.dart';
 //import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:quickalert/models/quickalert_type.dart';
+import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
@@ -24,11 +34,104 @@ class _LoginPageState extends State<LoginPage> {
   late TextEditingController _usernameController;
   late TextEditingController _passwordController;
 
+  bool? _checking = true;
+  String? _userData1;
+  String? _accessToken;
+  // GoogleSingInApi googole = new GoogleSingInApi();
+  GoogleSignIn _googleSignIn = GoogleSignIn(
+    scopes: [
+      'email',
+      'https://www.googleapis.com/auth/contacts.readonly',
+    ],
+  );
+
+  Map<String, dynamic>? _userData;
+
+  final _formKey = GlobalKey<FormState>();
+  bool _isConnected = true;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  TextEditingController confirmPasswordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
+  int selectedRadio = 0;
+  TextEditingController forgetEmailController = TextEditingController();
+  NetworkHandler networkHandler = NetworkHandler();
+  final storage = new FlutterSecureStorage();
+  // final facebookLogin = FacebookLogin();
+  late String errorText;
+  bool validate = false;
+  bool circular = false;
+
+  Future<void> checkConnection() async {
+    InternetConnectionChecker().onStatusChange.listen((status) {
+      setState(() {
+        _isConnected = status == InternetConnectionStatus.connected;
+        if (!_isConnected) {
+          QuickAlert.show(
+              context: context,
+              title: 'No internet connection....',
+              text: 'Waiting For Connction...',
+              type: QuickAlertType.loading,
+              barrierDismissible: _isConnected);
+        } else {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => PlanningScreen()),
+          );
+        }
+      });
+    });
+    // setState(() => _isConnected = false);
+  }
+
+  void setSelectedRadio(int val) {
+    setState(() {
+      selectedRadio = val;
+    });
+  }
+
+  bool isSignUp = false;
+  var isLoading = false.obs;
+
+  // late AuthController authController;
+
+  void _requestPermission() async {
+    final status = await Permission.storage.request();
+    print(status);
+  }
+
   @override
   void initState() {
     _usernameController = TextEditingController();
     _passwordController = TextEditingController();
+    _requestPermission();
+    checkLogin();
     super.initState();
+  }
+
+  void checkLogin() async {
+    String? token = await storage.read(key: "access_token");
+    if (token != null) {
+      setState(() {
+        print(token);
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => PlanningScreen(),
+            ),
+            (route) => false);
+      });
+    } else {
+      // setState(() {
+      //  Navigator.pushAndRemoveUntil(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => LoginView(),
+      //       ),
+      //       (route) => false);
+      // });
+    }
   }
 
   @override
@@ -71,24 +174,81 @@ class _LoginPageState extends State<LoginPage> {
             SizedBox(
               height: 50,
             ),
-            _getEmailTextField(),
-            SizedBox(
-              height: 15,
-            ),
-            _getPasswordTextField(),
-            SizedBox(
-              height: 30,
-            ),
-            CustomButtonWidget(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => PlanningScreen(),
+            Form(
+              key: _formKey,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  _getEmailTextField(),
+                  SizedBox(
+                    height: 15,
                   ),
-                );
+                  _getPasswordTextField(),
+                  SizedBox(
+                    height: 30,
+                  ),
+                  /* CustomButtonWidget(
+              onTap: () async {
+                isLoading.value = true;
+
+                //Login Logic start here
+                if (formKey.currentState!.validate()) {
+                  Map<String, String> data = {
+                    "email": emailController.text,
+                    "password": passwordController.text,
+                  };
+                  var response =
+                      await networkHandler.post("/api/v1/auth/login", data);
+                  print('$response test1');
+
+                  if (response.statusCode == 200 ||
+                      response.statusCode == 201) {
+                    Map<String, dynamic> output = new Map<String, dynamic>.from(
+                        json.decode(response.body));
+                    print(output["access_token"]);
+
+                    await storage.write(
+                        key: "access_token", value: output["access_token"]);
+                    isLoading.value = false;
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => PlanningScreen(),
+                        ),
+                        (route) => false);
+                  } else {
+                    Map<String, dynamic> output = new Map<String, dynamic>.from(
+                        json.decode(response.body));
+                    print(output);
+                    validate = false;
+                    isLoading.value = false;
+                    errorText = output["message"];
+                    Get.snackbar('Warning', '$errorText',
+                        colorText: Colors.white,
+                        backgroundColor: Color.fromARGB(255, 33, 243, 54));
+                  }
+                } else {
+                  isLoading.value = false;
+                }
               },
               title: "Sign In",
+            ),*/
+                  CustomButtonWidget(
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        // TODO: Handle login button pressed
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => PlanningScreen(),
+                          ),
+                        );
+                      }
+                    },
+                    title: "Sign In",
+                  ),
+                ],
+              ),
             ),
             SizedBox(
               height: 20,
@@ -117,24 +277,38 @@ class _LoginPageState extends State<LoginPage> {
                 text: "Don't have an account?",
                 style: TextStyle(color: primary.withOpacity(0.5))),
             TextSpan(text: "  "),
-            TextSpan(text: "Sign Up", style: TextStyle(color: primary))
+            TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
           ])),
         ));
   }
 
   Widget _getEmailTextField() {
     return CustomTextField(
-      prefixIcon: Icon(
-        Icons.mobile_off,
+      controller: emailController,
+      prefixIcon: const Icon(
+        Icons.email,
         size: 18,
       ),
-      controller: _usernameController,
       labelText: "Email",
+      validator: (value) {
+        if (value == null || value.isEmpty || !value.contains('@')) {
+          return 'Please enter a valid email address';
+        }
+        return null;
+      },
     );
   }
 
   Widget _getPasswordTextField() {
-    return CustomTextFieldPassword(controller: _passwordController);
+    return CustomTextFieldPassword(
+      controller: passwordController,
+      validator: (value) {
+        if (value == null || value.isEmpty || value.length < 8) {
+          return 'Password must be at least 8 characters long';
+        }
+        return null;
+      },
+    );
   }
 
   Widget _getForgetPassword() {

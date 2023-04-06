@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
+import 'package:guide_app/planning/Add_Client.dart';
+import 'package:guide_app/notification/notification.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
 // the description of an activity
@@ -441,6 +443,25 @@ class _PlanningScreenState extends State<PlanningScreen> {
           height: 36.0,
         ),
         backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications screen when button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              // Show menu options when button is pressed
+              _showMenu(context);
+            },
+          ),
+        ],
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -741,4 +762,49 @@ class BoxDescriptionPage extends StatelessWidget {
       ),
     );
   }
+}
+
+// Define a function to show the menu options
+void _showMenu(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    builder: (BuildContext context) {
+      return Container(
+        child: Wrap(
+          children: <Widget>[
+            ListTile(
+              leading: const Icon(Icons.local_hotel_outlined),
+              title: const Text('Hotels'),
+              onTap: () {
+                // Navigate to hotels screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddClientScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Restaurants'),
+              onTap: () {
+                // Navigate to restaurants screen when pressed
+                Navigator.pushNamed(context, '/restaurants');
+              },
+            ),
+            /* ListTile(
+              leading: const Icon(Icons.category),
+              title: const Text('Activié/Visite'),
+              onTap: () {
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => VisitesScreen()),
+                );
+              },
+            ),*/
+          ],
+        ),
+      );
+    },
+  );
 }
