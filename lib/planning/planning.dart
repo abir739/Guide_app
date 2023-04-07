@@ -7,6 +7,9 @@ import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
 import 'package:guide_app/planning/Add_Client.dart';
 import 'package:guide_app/notification/notification.dart';
+
+import '../HelpScreen.dart';
+import '../SettingsScreen.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
 // the description of an activity
@@ -765,7 +768,7 @@ class BoxDescriptionPage extends StatelessWidget {
 }
 
 // Define a function to show the menu options
-void _showMenu(BuildContext context) {
+/*void _showMenu(BuildContext context) {
   showModalBottomSheet(
     context: context,
     builder: (BuildContext context) {
@@ -802,6 +805,92 @@ void _showMenu(BuildContext context) {
                 );
               },
             ),*/
+          ],
+        ),
+      );
+    },
+  );
+}
+*/
+void _showMenu(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                // Navigate to home screen
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/home');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.person),
+              title: Text('Profile'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/profile');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_month),
+              title: Text('Schedule'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/Schedule');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.groups),
+              title: Text('Clients'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/clients');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.feedback),
+              title: Text('Feedbacks'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/Feedbacks');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                // Navigate to about screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
           ],
         ),
       );
