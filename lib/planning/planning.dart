@@ -12,8 +12,135 @@ import '../HelpScreen.dart';
 import '../SettingsScreen.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
+class EditActivityScreen extends StatefulWidget {
+  final Activity activity;
+
+  const EditActivityScreen({Key? key, required this.activity})
+      : super(key: key);
+
+  @override
+  _EditActivityScreenState createState() => _EditActivityScreenState();
+}
+
+class _EditActivityScreenState extends State<EditActivityScreen> {
+  late TextEditingController _nameController;
+  late TextEditingController _timeController;
+  late TextEditingController _priceController;
+  late TextEditingController _placeController;
+  late TextEditingController _commentController;
+  late TextEditingController _descriptionController;
+
+  @override
+  void initState() {
+    super.initState();
+    _nameController = TextEditingController(text: widget.activity.name);
+    _timeController = TextEditingController(text: widget.activity.time);
+    _priceController = TextEditingController(text: widget.activity.price);
+    _placeController = TextEditingController(text: widget.activity.place);
+    _commentController = TextEditingController(text: widget.activity.comment);
+    _descriptionController =
+        TextEditingController(text: widget.activity.description);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Edit Activity"),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            TextFormField(
+              controller: _nameController,
+              decoration: InputDecoration(
+                labelText: "Name",
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _timeController,
+              decoration: InputDecoration(
+                labelText: "Time",
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _priceController,
+              decoration: InputDecoration(
+                labelText: "Price",
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _placeController,
+              decoration: InputDecoration(
+                labelText: "Place",
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _commentController,
+              decoration: InputDecoration(
+                labelText: "Comment",
+              ),
+            ),
+            SizedBox(height: 16.0),
+            TextFormField(
+              controller: _descriptionController,
+              decoration: InputDecoration(
+                labelText: "Description",
+              ),
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          widget.activity.name = _nameController.text;
+          widget.activity.time = _timeController.text;
+          widget.activity.price = _priceController.text;
+          widget.activity.place = _placeController.text;
+          widget.activity.comment = _commentController.text;
+          widget.activity.description = _descriptionController.text;
+          Navigator.pop(context);
+        },
+        child: Icon(Icons.save),
+      ),
+    );
+  }
+}
+
+void showDialogForModify(BuildContext context, Function() onConfirm) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text("Modify Confirmation"),
+        content: Text("Are you sure you want to modify this activity?"),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context),
+            child: Text("CANCEL"),
+          ),
+          TextButton(
+            onPressed: () {
+              onConfirm();
+              Navigator.pop(context);
+            },
+            child: Text("MODIFY"),
+          ),
+        ],
+      );
+    },
+  );
+}
+
 // the description of an activity
 class Activity {
+  String id;
   String name;
   String time;
   String logoPath;
@@ -25,7 +152,8 @@ class Activity {
   String price;
 
   Activity(
-      {required this.name,
+      {required this.id,
+      required this.name,
       required this.time,
       required this.price,
       required this.logoPath,
@@ -60,6 +188,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   // exemple for list of activiies to test the activity list view
   final List<Activity> activities = [
     Activity(
+      id: "1",
       name: "Restaurants",
       time: "19:00-20:00",
       price: "0€",
@@ -72,6 +201,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'Dar El Jeld : avec sa localisation atypique au milieu du souk de Tunis, cette demeure exceptionnelle reconvertit en restaurant chic et raffiné propose divers plats orientaux et tunisiens d’exception : généreux et goûteux, vous serez agréablement séduit !',
     ),
     Activity(
+      id: "2",
       name: "Vols",
       time: "14:00-14:45",
       price: "0€",
@@ -84,6 +214,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'cette aéroport porte le nom de la cité historique de Carthage qui est située à cette aéroport. Lors de sa mise en exploitation, aérodrome est connu sous le nom de Tunis-El Aouina.',
     ),
     Activity(
+      id: "3",
       name: "Transport",
       time: "14:00-14:45",
       price: "0€",
@@ -96,6 +227,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'cette aéroport porte le nom de la cité historique de Carthage qui est située à cette aéroport. Lors de sa mise en exploitation, aérodrome est connu sous le nom de Tunis-El Aouina.',
     ),
     Activity(
+      id: "4",
       name: "Hotles",
       time: "16:00-16:50",
       price: "0€",
@@ -108,6 +240,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'L’Hôtel Royal Azur Thalassa propose une de?couverte Tunisienne à travers une déambulation dans ses espaces à caractère culturel profond.',
     ),
     Activity(
+      id: "5",
       name: "Visites",
       time: "17:00-18:00",
       price: "28,51€",
@@ -120,6 +253,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           "You could be forgiven for thinking that you’d made the hop across the Med to the islands of the Greek Aegean as you enter the vibrant interior of Sidi Bou Said town, sat just 20 kilometers from bustling Tunis.Yep, the sky-blue and whitewashed color scheme here is more than reminiscent of towns in Santorini and Mykonos.However, this one’s interesting hues were actually started by the French musicologist Rodolphe d’Erlanger.",
     ),
     Activity(
+      id: "6",
       name: "Activities",
       time: "10:00-12:30",
       price: "48,51€",
@@ -279,19 +413,74 @@ class _PlanningScreenState extends State<PlanningScreen> {
                         PopupMenuButton(
                           onSelected: (value) {
                             if (value == "delete") {
-                              // handle delete action
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Alert Dialog'),
+                                    content:
+                                        Text('Do you really want to delete?'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          // execute delete action
+                                          activities.removeWhere((element) {
+                                            return element.id == index.id;
+                                          });
+                                          setState(() {
+                                            // refresh UI after deleting element from list
+                                          });
+                                          Navigator.pop(
+                                              context); // close dialog
+                                        },
+                                        child: Text('Yes'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(
+                                              context); // close dialog
+                                        },
+                                        child: Text('Close'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             } else if (value == "modify") {
                               // handle modify action
+                              // navigate to EditActivityScreen to edit the activity data
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      EditActivityScreen(activity: index),
+                                ),
+                              ).then((value) {
+                                // refresh UI after returning from EditActivityScreen
+                                setState(() {});
+                              });
                             }
                           },
                           itemBuilder: (context) => [
                             PopupMenuItem(
                               value: "delete",
-                              child: Text("Delete"),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.delete),
+                                  SizedBox(width: 5),
+                                  Text("Delete"),
+                                ],
+                              ),
                             ),
                             PopupMenuItem(
                               value: "modify",
-                              child: Text("Modify"),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.edit),
+                                  SizedBox(width: 5),
+                                  Text("Modify"),
+                                ],
+                              ),
                             ),
                           ],
                           child: Icon(Icons.more_vert),
