@@ -10,6 +10,7 @@ import 'package:guide_app/notification/notification.dart';
 
 import '../HelpScreen.dart';
 import '../SettingsScreen.dart';
+import '../users/client_list.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
 class EditActivityScreen extends StatefulWidget {
@@ -1048,9 +1049,11 @@ void _showMenu(BuildContext context) {
               leading: Icon(Icons.groups),
               title: Text('Clients'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/clients');
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                );
               },
             ),
             ListTile(
