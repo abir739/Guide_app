@@ -45,7 +45,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
        {
         "id": "1lkqwnvl",
@@ -93,7 +94,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "1klnfhqlwkbjq",
@@ -141,7 +143,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
        {
         "id": "1lkqwnvl",
@@ -189,7 +192,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "1lkqwnvl",
@@ -237,7 +241,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "2qknv",
@@ -285,7 +290,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "1lkqwnvl",
@@ -333,7 +339,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "2qknv",
@@ -381,7 +388,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
        {
         "id": "1lkqwnvl",
@@ -429,7 +437,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "1l56895l",
@@ -477,7 +486,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       },
       {
         "id": "25689",
@@ -525,7 +535,8 @@
         "createdAt": {},
         "creatorUserId": "system",
         "updatedAt": {},
-        "updaterUserId": "system"
+        "updaterUserId": "system",
+        "isSelected" : false
       }
 
   ]

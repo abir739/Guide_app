@@ -53,6 +53,7 @@ dependencies:
   get: ^4.6.5
   permission_handler: ^10.2.0
   google_sign_in: ^6.0.2
+  flutter_speed_dial: ^6.2.0
 
 dev_dependencies:
   flutter_test:

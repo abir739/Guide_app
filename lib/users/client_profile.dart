@@ -5,6 +5,7 @@ import 'dart:convert';
 import '../models/users_model.dart';
 import '../notification/notification.dart';
 import 'client_list.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
@@ -247,8 +248,14 @@ class ProfileScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     // TODO: Call the user
+                    Uri phoneno = Uri.parse('tel:${user.phone}');
+                    if (await launchUrl(phoneno)) {
+                      //dialer opened
+                    } else {
+                      //dailer is not opened
+                    }
                   },
                 ),
                 GestureDetector(
@@ -263,8 +270,21 @@ class ProfileScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     // TODO: Send email to the user
+                    String email = Uri.encodeComponent('${user.email}');
+                    String subject =
+                        Uri.encodeComponent("Hello ${user.firstName}");
+                    String body = Uri.encodeComponent(
+                        "Hi! I'm Abir your Guide for the Trip");
+                    print(subject); //output: Hello%20Flutter
+                    Uri mail =
+                        Uri.parse("mailto:$email?subject=$subject&body=$body");
+                    if (await launchUrl(mail)) {
+                      //email app opened
+                    } else {
+                      //email app is not opened
+                    }
                   },
                 ),
                 GestureDetector(
@@ -279,8 +299,15 @@ class ProfileScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  onTap: () {
+                  onTap: () async {
                     // TODO: Send message to the user
+                    Uri sms =
+                        Uri.parse('sms:${user.phone}?body=your text here');
+                    if (await launchUrl(sms)) {
+                      //app opened
+                    } else {
+                      //app is not opened
+                    }
                   },
                 ),
               ],
