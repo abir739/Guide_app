@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 
 import '../models/users_model.dart';
+import '../planning/shedule.dart';
 import '../users/client_profile.dart';
 import '../notification/notification.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class ClientScreen extends StatefulWidget {
   @override
@@ -138,15 +141,59 @@ class _ClientScreenState extends State<ClientScreen> {
               itemBuilder: (context, index) {
                 final user = _users[index];
 
-                return GestureDetector(
-                  onTap: () => _navigateToProfile(user),
-                  child: Card(
-                    child: ListTile(
-                      leading: CircleAvatar(
-                        backgroundImage: NetworkImage(user.picture),
+                return Container(
+                  child: GestureDetector(
+                    onTap: () => _navigateToProfile(user),
+                    child: Slidable(
+                      startActionPane: ActionPane(
+                        motion: const DrawerMotion(),
+                        extentRatio: 0.25,
+                        children: [
+                          SlidableAction(
+                            label: 'Call',
+                            backgroundColor: Color.fromARGB(255, 27, 97, 39),
+                            icon: Icons.phone,
+                            onPressed: (context) async {
+                              // TODO: Call the user
+                              Uri phoneno = Uri.parse('tel:${user.phone}');
+                              if (await launchUrl(phoneno)) {
+                                //dialer opened
+                              } else {
+                                //dailer is not opened
+                              }
+                            },
+                          ),
+                        ],
                       ),
-                      title: Text('${user.firstName} ${user.lastName}'),
-                      subtitle: Text('ID: ${user.id}'),
+                      endActionPane: ActionPane(
+                        motion: const DrawerMotion(),
+                        extentRatio: 0.25,
+                        children: [
+                          SlidableAction(
+                            label: 'Delete',
+                            backgroundColor: Colors.red,
+                            icon: Icons.delete,
+                            onPressed: (context) {
+                              //delete action for this button
+                              _users.removeWhere((element) {
+                                return element.id == user.id;
+                              }); //go through the loop and match content to delete from list
+                              setState(() {
+                                //refresh UI after deleting element from list
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      child: Card(
+                        child: ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(user.picture),
+                          ),
+                          title: Text('${user.firstName} ${user.lastName}'),
+                          subtitle: Text('ID: ${user.id}'),
+                        ),
+                      ),
                     ),
                   ),
                 );
@@ -197,9 +244,10 @@ void _showMenu(BuildContext context) {
               leading: Icon(Icons.calendar_month),
               title: Text('Schedule'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/Schedule');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                );
               },
             ),
             ListTile(

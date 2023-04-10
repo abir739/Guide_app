@@ -3,6 +3,9 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_app/planning/shedule.dart';
+//import 'package:guide_app/planning/shedulee.dart';
+//import 'package:guide_app/planning/shedule_test.dart';
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
 import 'package:guide_app/planning/Add_Client.dart';
@@ -1040,9 +1043,10 @@ void _showMenu(BuildContext context) {
               leading: Icon(Icons.calendar_month),
               title: Text('Schedule'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/Schedule');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                );
               },
             ),
             ListTile(

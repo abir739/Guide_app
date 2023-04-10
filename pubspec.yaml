@@ -54,6 +54,7 @@ dependencies:
   permission_handler: ^10.2.0
   google_sign_in: ^6.0.2
   flutter_speed_dial: ^6.2.0
+  flutter_slidable: ^2.0.0
 
 dev_dependencies:
   flutter_test:
