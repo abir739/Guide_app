@@ -6,6 +6,7 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:guide_app/NetworkHandler.dart';
+import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
@@ -77,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
         } else {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => PlanningScreen()),
+            MaterialPageRoute(builder: (context) => PlanningListPage()),
           );
         }
       });
@@ -118,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
         Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
-              builder: (context) => PlanningScreen(),
+              builder: (context) => PlanningListPage(),
             ),
             (route) => false);
       });
@@ -240,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PlanningScreen(),
+                            builder: (context) => PlanningListPage(),
                           ),
                         );
                       }

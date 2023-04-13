@@ -97,7 +97,7 @@ class PlaceDescriptionScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        /*SizedBox(height: 8),
+                        /* SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [

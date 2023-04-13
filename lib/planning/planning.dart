@@ -15,6 +15,7 @@ import 'package:guide_app/notification/notification.dart';
 import '../HelpScreen.dart';
 import '../SettingsScreen.dart';
 import '../destination/destination.dart';
+import '../models/planing_model.dart';
 import '../users/client_list.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
@@ -171,6 +172,9 @@ class Activity {
 }
 
 class PlanningScreen extends StatefulWidget {
+  final Planning planning;
+
+  const PlanningScreen(this.planning);
   @override
   _PlanningScreenState createState() => _PlanningScreenState();
 }
@@ -696,7 +700,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Planning 1',
+                  'Planning ',
                   style: TextStyle(
                     fontSize: 27.0,
                     fontWeight: FontWeight.bold,

@@ -1,0 +1,23 @@
+[
+    {
+    "id": 1,
+    "tourist_group_id": 101,
+    "name": "Trip to Paris",
+    "start_date": "2023-05-01",
+    "end_date": "2023-05-10"
+    },
+    {
+    "id": 2,
+    "tourist_group_id": 102,
+    "name": "Beach Vacation",
+    "start_date": "2023-06-15",
+    "end_date": "2023-06-25"
+    },
+    {
+    "id": 3,
+    "tourist_group_id": 103,
+    "name": "Mountain Hiking",
+    "start_date": "2023-08-01",
+    "end_date": "2023-08-07"
+    }
+    ]
