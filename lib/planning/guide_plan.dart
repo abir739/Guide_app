@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
+
+//import '../destination/destination.dart';
+import '../destination/destination_test.dart';
+import '../notification/notification.dart';
+import '../users/client_list.dart';
 
 class ScheduleScreen extends StatefulWidget {
   @override
@@ -32,7 +38,31 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Schedule'),
+        title: SvgPicture.asset(
+          'assets/images/Logo.svg',
+          fit: BoxFit.cover,
+          height: 36.0,
+        ),
+        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications screen when button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: Icon(Icons.menu),
+            onPressed: () {
+              // Show menu options when button is pressed
+              _showMenu(context);
+            },
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -42,7 +72,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.all(16.0),
+                  padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -61,9 +91,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 16.0),
+                SizedBox(height: 10.0),
                 Container(
-                  height: 50.0,
+                  height: 40.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: _days.length,
@@ -107,12 +137,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.all(0.6),
-                          padding: EdgeInsets.all(20.0),
+                          margin: EdgeInsets.symmetric(horizontal: 3.0),
+                          padding: EdgeInsets.symmetric(horizontal: 16.0),
                           decoration: BoxDecoration(
-                            color:
-                                isSelected ? Colors.blue : Colors.transparent,
-                            borderRadius: BorderRadius.circular(16),
+                            borderRadius: BorderRadius.circular(18.0),
+                            color: isSelected
+                                ? Color.fromARGB(255, 248, 177, 170)
+                                : Colors.transparent,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -120,25 +151,22 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               Text(
                                 "$dayOfWeek",
                                 style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontWeight: isSelected
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    fontSize: isSelected ? 24 : 18),
+                                  color: const Color(0xFFEB5F52),
+                                  fontSize: 14.0,
+                                  fontWeight: FontWeight.bold,
+                                  //fontWeight: FontWeight.w500,
+                                ),
                               ),
-                              SizedBox(height: 8.0),
                               Text(
                                 '${day.day}',
                                 style: TextStyle(
-                                    color: isSelected
-                                        ? Colors.white
-                                        : Colors.black,
-                                    fontWeight: isSelected
-                                        ? FontWeight.bold
-                                        : FontWeight.normal,
-                                    fontSize: isSelected ? 24 : 18),
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.bold,
+                                  //fontWeight: FontWeight.w500,
+                                  color: (day == _currentIndex)
+                                      ? const Color(0xFFEB5F52)
+                                      : Colors.black,
+                                ),
                               ),
                             ],
                           ),
@@ -149,9 +177,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 ),
               ],
             ),
-          ),
-          SizedBox(
-            height: 16,
           ),
           Expanded(
             flex: 2,
@@ -165,7 +190,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     // Navigate to activity details page
                   },
                   child: Container(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Text(
@@ -178,7 +203,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             height: 100.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
-                              color: Colors.blue,
+                              color: const Color(0xFFEB5F52),
                             ),
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -205,8 +230,171 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               },
             ),
           ),
+          Expanded(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    'Reminders',
+                    style: TextStyle(
+                      fontSize: 24.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: 5,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        height: 50.0,
+                        margin: EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12.0),
+                          color: Colors.grey[200],
+                        ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              child: Text(
+                                '12:00 PM',
+                                style: TextStyle(
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
+                                child: Text(
+                                  'Reminder description',
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 16.0,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(
+                                Icons.delete_outline,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+// Delete reminder
+                              },
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
         ],
       ),
     );
   }
+}
+
+void _showMenu(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('Home'),
+              onTap: () {
+                // Navigate to home screen
+                Navigator.pop(context);
+                Navigator.pushReplacementNamed(context, '/home');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.playlist_add_circle_outlined),
+              title: Text('Destination'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.calendar_month),
+              title: Text('Schedule'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.groups),
+              title: Text('Clients'),
+              onTap: () {
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.feedback),
+              title: Text('Feedbacks'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/Feedbacks');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.settings),
+              title: Text('Settings'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+            ListTile(
+              leading: Icon(Icons.info),
+              title: Text('About'),
+              onTap: () {
+                // Navigate to about screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }

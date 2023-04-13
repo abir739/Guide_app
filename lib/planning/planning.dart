@@ -14,6 +14,7 @@ import 'package:guide_app/notification/notification.dart';
 
 import '../HelpScreen.dart';
 import '../SettingsScreen.dart';
+import '../destination/destination.dart';
 import '../users/client_list.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
 
@@ -452,18 +453,44 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 },
                               );
                             } else if (value == "modify") {
-                              // handle modify action
-                              // navigate to EditActivityScreen to edit the activity data
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) =>
-                                      EditActivityScreen(activity: index),
-                                ),
-                              ).then((value) {
-                                // refresh UI after returning from EditActivityScreen
-                                setState(() {});
-                              });
+                              showDialog(
+                                context: context,
+                                builder: (context) {
+                                  return AlertDialog(
+                                    title: Text('Alert Dialog'),
+                                    content:
+                                        Text('Do you really want to modify?'),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(
+                                              context); // close dialog
+                                          // navigate to EditActivityScreen to edit the activity data
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EditActivityScreen(
+                                                      activity: index),
+                                            ),
+                                          ).then((value) {
+                                            // refresh UI after returning from EditActivityScreen
+                                            setState(() {});
+                                          });
+                                        },
+                                        child: Text('Yes'),
+                                      ),
+                                      TextButton(
+                                        onPressed: () {
+                                          Navigator.pop(
+                                              context); // close dialog
+                                        },
+                                        child: Text('Close'),
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
                             }
                           },
                           itemBuilder: (context) => [
@@ -1028,16 +1055,17 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacementNamed(context, '/Liste des Plans');
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: Icon(Icons.playlist_add_circle_outlined),
+              title: Text('Destination'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/profile');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                );
               },
             ),
             ListTile(
