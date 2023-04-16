@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:guide_app/login_page.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'themes/colors.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp(homeScreen: LoginPage()));
 }
 

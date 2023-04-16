@@ -9,12 +9,14 @@ import 'package:guide_app/utils/icon_name.dart';
 //import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'call_API/plan_API.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
 import 'components/custom_textfield.dart';
 import 'components/custom_textfield_password.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -26,6 +28,8 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   late GoogleSignIn _googleSignIn;
+  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  bool _isSigningIn = false;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
@@ -46,20 +50,48 @@ class _LoginPageState extends State<LoginPage> {
     _googleSignIn = GoogleSignIn(
       scopes: [
         'email',
-        // Ajoutez les scopes supplémentaires ici selon vos besoins
+        // Add additional scopes here if needed
       ],
+      clientId:
+          '258473664377-jpcfl215149s6oqbatid26nvl5ro9a5s.apps.googleusercontent.com',
     );
   }
 
   Future<void> _handleSignIn() async {
+    setState(() {
+      _isSigningIn = true;
+    });
+
     try {
       final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
-      final GoogleSignInAuthentication? googleAuth =
-          await googleUser?.authentication;
+      if (googleUser == null) {
+        setState(() {
+          _isSigningIn = false;
+        });
+        return;
+      }
 
-      // Utilisez les informations de l'utilisateur et de l'authentification pour authentifier l'utilisateur dans votre application ici
+      final GoogleSignInAuthentication googleAuth =
+          await googleUser.authentication;
+      final AuthCredential credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth.accessToken,
+        idToken: googleAuth.idToken,
+      );
+
+      final User? user =
+          (await _firebaseAuth.signInWithCredential(credential)).user;
+
+      setState(() {
+        _isSigningIn = false;
+      });
+
+      // Use the user object to authenticate the user in your app here
     } catch (error) {
-      // Gérez les erreurs de connexion ici
+      setState(() {
+        _isSigningIn = false;
+      });
+
+      // Handle sign-in errors here
     }
   }
 
@@ -129,7 +161,10 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PlanningListPage(),
+                            //builder: (context) => PlanningListPage(),
+                            builder: (context) => PlanningScreen(
+                              planningId: 0,
+                            ),
                           ),
                         );
                       }
@@ -224,34 +259,36 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _getSocialMediaButton() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        BorderButtonV2(
-          preIcon: IconName.facebook,
-          iconSize: 30,
-          onTap: () {
-            _facebookLogin();
-          },
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        BorderButtonV2(
-          preIcon: IconName.google,
-          iconSize: 30,
-          onTap: _handleSignIn,
-        ),
-        SizedBox(
-          width: 20,
-        ),
-        BorderButtonV2(
-          preIcon: IconName.apple,
-          iconSize: 30,
-          onTap: () {},
-        )
-      ],
-    );
+    return _isSigningIn
+        ? CircularProgressIndicator()
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              BorderButtonV2(
+                preIcon: IconName.facebook,
+                iconSize: 30,
+                onTap: () {
+                  _facebookLogin();
+                },
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              BorderButtonV2(
+                preIcon: IconName.google,
+                iconSize: 30,
+                onTap: _handleSignIn,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+              BorderButtonV2(
+                preIcon: IconName.apple,
+                iconSize: 30,
+                onTap: () {},
+              )
+            ],
+          );
   }
 
   _facebookLogin() async {
