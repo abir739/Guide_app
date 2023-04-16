@@ -54,13 +54,23 @@ android {
         multiDexEnabled true
     }
 
+    /*signingConfig {
+        debug {
+            keyAlias 'myapp '
+            keyPassword 'android'
+            storeFile file('upload-keystore.jks')
+            storePassword 'android'
+
+        }
+    }
+
     buildTypes {
         release {
             // TODO: Add your own signing config for the release build.
             // Signing with the debug keys for now, so `flutter run --release` works.
             signingConfig signingConfigs.debug
         }
-    }
+    }*/
 }
 
 flutter {
@@ -69,4 +79,9 @@ flutter {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    //implementation 'com.facebook.android:facebook-android-sdk:[8,9)'
+      implementation 'com.facebook.android:facebook-android-sdk:latest.release'
+ implementation 'com.facebook.android:facebook-login:latest.release'
+//implementation 'com.android.support:multidex:1.0.3'
 }
+

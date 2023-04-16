@@ -1,28 +1,20 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
-import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:guide_app/NetworkHandler.dart';
 import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
-import 'package:guide_app/planning/planning.dart';
+//import 'package:guide_app/planning/planning.dart';
 //import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:permission_handler/permission_handler.dart';
-import 'package:quickalert/models/quickalert_type.dart';
-import 'package:quickalert/widgets/quickalert_dialog.dart';
 
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
 import 'components/custom_textfield.dart';
 import 'components/custom_textfield_password.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -32,24 +24,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late TextEditingController _usernameController;
-  late TextEditingController _passwordController;
-
-  bool? _checking = true;
-  String? _userData1;
-  String? _accessToken;
-  // GoogleSingInApi googole = new GoogleSingInApi();
-  GoogleSignIn _googleSignIn = GoogleSignIn(
-    scopes: [
-      'email',
-      'https://www.googleapis.com/auth/contacts.readonly',
-    ],
-  );
-
-  Map<String, dynamic>? _userData;
-
   final _formKey = GlobalKey<FormState>();
-  bool _isConnected = true;
+  late GoogleSignIn _googleSignIn;
+
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -58,81 +35,38 @@ class _LoginPageState extends State<LoginPage> {
   int selectedRadio = 0;
   TextEditingController forgetEmailController = TextEditingController();
   NetworkHandler networkHandler = NetworkHandler();
-  final storage = new FlutterSecureStorage();
-  // final facebookLogin = FacebookLogin();
+
   late String errorText;
   bool validate = false;
   bool circular = false;
 
-  Future<void> checkConnection() async {
-    InternetConnectionChecker().onStatusChange.listen((status) {
-      setState(() {
-        _isConnected = status == InternetConnectionStatus.connected;
-        if (!_isConnected) {
-          QuickAlert.show(
-              context: context,
-              title: 'No internet connection....',
-              text: 'Waiting For Connction...',
-              type: QuickAlertType.loading,
-              barrierDismissible: _isConnected);
-        } else {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => PlanningListPage()),
-          );
-        }
-      });
-    });
-    // setState(() => _isConnected = false);
+  @override
+  void initState() {
+    super.initState();
+    _googleSignIn = GoogleSignIn(
+      scopes: [
+        'email',
+        // Ajoutez les scopes supplémentaires ici selon vos besoins
+      ],
+    );
+  }
+
+  Future<void> _handleSignIn() async {
+    try {
+      final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      // Utilisez les informations de l'utilisateur et de l'authentification pour authentifier l'utilisateur dans votre application ici
+    } catch (error) {
+      // Gérez les erreurs de connexion ici
+    }
   }
 
   void setSelectedRadio(int val) {
     setState(() {
       selectedRadio = val;
     });
-  }
-
-  bool isSignUp = false;
-  var isLoading = false.obs;
-
-  // late AuthController authController;
-
-  void _requestPermission() async {
-    final status = await Permission.storage.request();
-    print(status);
-  }
-
-  @override
-  void initState() {
-    _usernameController = TextEditingController();
-    _passwordController = TextEditingController();
-    _requestPermission();
-    checkLogin();
-    super.initState();
-  }
-
-  void checkLogin() async {
-    String? token = await storage.read(key: "access_token");
-    if (token != null) {
-      setState(() {
-        print(token);
-        Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => PlanningListPage(),
-            ),
-            (route) => false);
-      });
-    } else {
-      // setState(() {
-      //  Navigator.pushAndRemoveUntil(
-      //       context,
-      //       MaterialPageRoute(
-      //         builder: (context) => LoginView(),
-      //       ),
-      //       (route) => false);
-      // });
-    }
   }
 
   @override
@@ -188,52 +122,6 @@ class _LoginPageState extends State<LoginPage> {
                   SizedBox(
                     height: 30,
                   ),
-                  /* CustomButtonWidget(
-              onTap: () async {
-                isLoading.value = true;
-
-                //Login Logic start here
-                if (formKey.currentState!.validate()) {
-                  Map<String, String> data = {
-                    "email": emailController.text,
-                    "password": passwordController.text,
-                  };
-                  var response =
-                      await networkHandler.post("/api/v1/auth/login", data);
-                  print('$response test1');
-
-                  if (response.statusCode == 200 ||
-                      response.statusCode == 201) {
-                    Map<String, dynamic> output = new Map<String, dynamic>.from(
-                        json.decode(response.body));
-                    print(output["access_token"]);
-
-                    await storage.write(
-                        key: "access_token", value: output["access_token"]);
-                    isLoading.value = false;
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => PlanningScreen(),
-                        ),
-                        (route) => false);
-                  } else {
-                    Map<String, dynamic> output = new Map<String, dynamic>.from(
-                        json.decode(response.body));
-                    print(output);
-                    validate = false;
-                    isLoading.value = false;
-                    errorText = output["message"];
-                    Get.snackbar('Warning', '$errorText',
-                        colorText: Colors.white,
-                        backgroundColor: Color.fromARGB(255, 33, 243, 54));
-                  }
-                } else {
-                  isLoading.value = false;
-                }
-              },
-              title: "Sign In",
-            ),*/
                   CustomButtonWidget(
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
@@ -352,7 +240,7 @@ class _LoginPageState extends State<LoginPage> {
         BorderButtonV2(
           preIcon: IconName.google,
           iconSize: 30,
-          onTap: () {},
+          onTap: _handleSignIn,
         ),
         SizedBox(
           width: 20,

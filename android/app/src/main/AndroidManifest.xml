@@ -9,6 +9,7 @@
 
 
 
+
     <application
         android:label="guide_app"
         android:name="${applicationName}"
@@ -49,5 +50,11 @@
         <meta-data
             android:name="flutterEmbedding"
             android:value="2" />
+        <meta-data
+                   android:name="com.facebook.sdk.ApplicationId"
+                   android:value="@string/facebook_app_id"/>
+        <meta-data 
+                   android:name="com.facebook.sdk.ClientToken"
+                   android:value="@string/facebook_client_token"/>
     </application>
 </manifest>

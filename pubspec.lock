@@ -170,10 +170,10 @@ packages:
     dependency: "direct main"
     description:
       name: flutter_login_facebook
-      sha256: "340595d5a386dde1695f31944993eff200ffc6c3d17ff76fa6c1283b6374c250"
+      sha256: "05ced7a4297a761859729c512727c0d25f01bd40c38a27e0c203f6b86be8d055"
       url: "https://pub.dev"
     source: hosted
-    version: "1.7.0"
+    version: "1.8.0"
   flutter_plugin_android_lifecycle:
     dependency: transitive
     description:
