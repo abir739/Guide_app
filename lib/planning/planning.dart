@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:guide_app/planning/shedule.dart';
 //import 'package:guide_app/planning/shedulee.dart';
 import 'package:guide_app/planning/guide_plan.dart';
+import 'package:guide_app/planning/planing_list.dart';
 //import 'package:guide_app/planning/shedule_test.dart';
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
@@ -14,7 +15,7 @@ import 'package:guide_app/notification/notification.dart';
 
 import '../HelpScreen.dart';
 import '../SettingsScreen.dart';
-import '../destination/destination.dart';
+import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
 import '../users/client_list.dart';
 //import 'package:guide_app/activity/newactivity_test.dart';
@@ -183,6 +184,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
   DateTime _startDate = DateTime.now().subtract(Duration(days: 3));
   DateTime _endDate = DateTime.now().add(Duration(days: 20));
   List<DateTime> _days = [];
+  String _selectedStatus = 'Pending';
+  List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
   int _currentIndex = 0;
 
   @override
@@ -244,7 +247,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
       logoPath: 'assets/images/hottt.svg',
       symbolName: 'Royal Azur Hotel Thalassa',
       photoPath:
-          'https://fwk.resabo.com/cr.fwk/images/hotels/Hotel-8905-20230102-095053.jpg',
+          'https://cdn2.tqsan.com/booking/royal-azur-thalasso-golf/Hotel-783-20170607-093132.jpg',
       place: 'Hammamet, Tunisie Station touristique',
       description:
           'L’Hôtel Royal Azur Thalassa propose une de?couverte Tunisienne à travers une déambulation dans ses espaces à caractère culturel profond.',
@@ -358,8 +361,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
     );
   }*/
   List<Widget> _buildBoxes() {
-    String _selectedStatus = 'Pending';
-    List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
+    //String _selectedStatus = 'Pending';
+    //List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
 
     // List of boxes to be built dynamically
     List<Widget> boxes = [];
@@ -1058,8 +1061,10 @@ void _showMenu(BuildContext context) {
               title: Text('Home'),
               onTap: () {
                 // Navigate to home screen
-                Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, '/Liste des Plans');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                );
               },
             ),
             ListTile(

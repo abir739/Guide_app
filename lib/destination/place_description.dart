@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import '../notification/notification.dart';
 import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
-import 'destination.dart';
+import 'destination_test.dart';
 
 class PlaceDescriptionScreen extends StatelessWidget {
   final Map<String, dynamic> place;

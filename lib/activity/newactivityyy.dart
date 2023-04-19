@@ -318,12 +318,33 @@ class _NewActivityState extends State<NewActivity> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
+                      // Save the new activity
                       _formKey.currentState!.save();
-                      // Save the new work
-                      if (_isNotificationPressed) {
-                        // Send a notification
-                      }
+
+                      // Do something with the form data, e.g. send to a server
+                      print(_activityName);
+                      print(_dateTime.toString());
+                      print(_place);
+
+                      // Navigate back to the previous screen
                       Navigator.of(context).pop();
+
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("New activity created"),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text("OK"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     }
                   },
                   style: ElevatedButton.styleFrom(
@@ -344,7 +365,29 @@ class _NewActivityState extends State<NewActivity> {
                 const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
-                    //annuler la création de new activity
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text("Are you sure you want to cancel?"),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                              child: Text("Yes"),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.grey[300],

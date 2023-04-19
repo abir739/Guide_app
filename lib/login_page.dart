@@ -161,10 +161,10 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            //builder: (context) => PlanningListPage(),
-                            builder: (context) => PlanningScreen(
+                            builder: (context) => PlanningListPage(),
+                            /*builder: (context) => PlanningScreen(
                               planningId: 0,
-                            ),
+                            ),*/
                           ),
                         );
                       }

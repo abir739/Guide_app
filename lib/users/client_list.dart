@@ -3,7 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
 
+import '../destination/destination_test.dart';
 import '../models/users_model.dart';
+import '../planning/planing_list.dart';
 import '../planning/shedule.dart';
 import '../users/client_profile.dart';
 import '../notification/notification.dart';
@@ -227,17 +229,20 @@ void _showMenu(BuildContext context) {
               title: Text('Home'),
               onTap: () {
                 // Navigate to home screen
-                Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                );
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: Icon(Icons.playlist_add_circle_outlined),
+              title: Text('Destination'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/profile');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                );
               },
             ),
             ListTile(

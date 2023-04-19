@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/planning/planing_list.dart';
 
 //import '../destination/destination.dart';
 import '../destination/destination_test.dart';
@@ -330,8 +331,10 @@ void _showMenu(BuildContext context) {
               title: Text('Home'),
               onTap: () {
                 // Navigate to home screen
-                Navigator.pop(context);
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                );
               },
             ),
             ListTile(
