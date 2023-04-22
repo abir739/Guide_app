@@ -9,6 +9,8 @@ import 'package:guide_app/utils/icon_name.dart';
 //import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
 
+import 'API_ous/Myhomepage.dart';
+import 'API_ous/Myhomepagetest.dart';
 import 'call_API/plan_API.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
@@ -161,10 +163,12 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PlanningListPage(),
-                            /*builder: (context) => PlanningScreen(
-                              planningId: 0,
-                            ),*/
+                            //builder: (context) => PlanningListPage(),
+                            //builder: (context) => MyHomePagetest(),
+                            builder: (context) => PlanningScreen(
+                              planningId:
+                                  "3aa7fdfe-1902-4f93-8669-d1b384903b39",
+                            ),
                           ),
                         );
                       }

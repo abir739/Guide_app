@@ -57,6 +57,11 @@ dependencies:
   flutter_login_facebook: ^1.6.2
   firebase_auth: ^4.2.2
   json_annotation: ^4.8.0
+  lottie: ^1.4.3
+  provider: ^6.0.5
+  sidebarx: ^0.15.0
+  flutter_animated_icons: ^1.0.1
+  socket_io_client: ^2.0.1
 
 dev_dependencies:
   flutter_test:
