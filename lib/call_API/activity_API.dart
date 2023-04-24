@@ -14,9 +14,11 @@ class PlanningScreen extends StatefulWidget {
 }
 
 class _PlanningScreenState extends State<PlanningScreen> {
-  late List<DateTime> days;
+  //late List<DateTime> days;
+  late List<DateTime> days = [];
+
   late Planning planning;
-  late List<Map<String, dynamic>> activities;
+  late List<Map<String, dynamic>> activities = [];
 
   @override
   void initState() {
@@ -33,45 +35,49 @@ class _PlanningScreenState extends State<PlanningScreen> {
       }
     }
 
-    // ...
+    fetchPlanning(widget.planningId).then((planning) {
+      // Assign the planning result to the planning field
+      setState(() {
+        this.planning = planning;
+      });
 
-    // Retrieve the activities data from the API
-    Future<List<Activity>> fetchActivities() async {
-      final response = await http.get(Uri.parse(
-          'https://api.zenify-trip.continuousnet.com/api/activities'));
-      if (response.statusCode == 200) {
-        final List<dynamic> activitiesJson = jsonDecode(response.body);
-        return activitiesJson
-            .map((activityJson) => Activity.fromJson(activityJson))
-            .toList();
-      } else {
-        throw Exception('Failed to load activities');
+      // Retrieve the activities data from the API
+      Future<List<Activity>> fetchActivities() async {
+        final response = await http.get(Uri.parse(
+            'https://api.zenify-trip.continuousnet.com/api/activities'));
+        if (response.statusCode == 200) {
+          final List<dynamic> activitiesJson = jsonDecode(response.body);
+          return activitiesJson
+              .map((activityJson) => Activity.fromJson(activityJson))
+              .toList();
+        } else {
+          throw Exception('Failed to load activities');
+        }
       }
-    }
 
-    // ...
+      fetchActivities().then((activities) {
+        // Generate the list of days from the start day to the end day of the planning
+        days = [];
+        DateTime currentDay = planning.startDate;
+        while (currentDay.isBefore(planning.endDate)) {
+          days.add(currentDay);
+          currentDay = currentDay.add(Duration(days: 1));
+        }
 
-    // Generate the list of days from the start day to the end day of the planning
-
-    days = [];
-    DateTime currentDay = planning.startDate;
-    while (currentDay.isBefore(planning.endDate)) {
-      days.add(currentDay);
-      currentDay = currentDay.add(Duration(days: 1));
-    }
-
-    // Generate the list of activities for each day
-    activities = [];
-    for (DateTime day in days) {
-      List<Map<String, dynamic>> activitiesForDay =
-          activities.where((activity) {
-        DateTime activityDate = DateTime.parse(activity['departureDate']);
-        return activityDate.year == day.year &&
-            activityDate.month == day.month &&
-            activityDate.day == day.day;
-      }).toList();
-      activities.add({'date': day, 'activities': activitiesForDay});
-    }
+        // Generate the list of activities for each day
+        this.activities = [];
+        for (DateTime day in days) {
+          List<Activity> activitiesForDay = activities.where((activity) {
+            DateTime activityDate =
+                DateTime.parse(activity.departureDate.toString());
+            return activityDate.year == day.year &&
+                activityDate.month == day.month &&
+                activityDate.day == day.day;
+          }).toList();
+          this.activities.add({'date': day, 'activities': activitiesForDay});
+        }
+      });
+    });
   }
 
   @override
