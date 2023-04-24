@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class PlanningScreen extends StatefulWidget {
-  final int planningId;
+  final String planningId;
 
   const PlanningScreen({Key? key, required this.planningId}) : super(key: key);
 

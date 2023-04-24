@@ -11,7 +11,8 @@ import 'package:flutter_svg/svg.dart';
 
 import 'API_ous/Myhomepage.dart';
 import 'API_ous/Myhomepagetest.dart';
-import 'call_API/plan_API.dart';
+//import 'call_API/plan_API.dart';
+import 'call_API/activity_API.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
@@ -163,12 +164,16 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            //builder: (context) => PlanningListPage(),
-                            //builder: (context) => MyHomePagetest(),
                             builder: (context) => PlanningScreen(
                               planningId:
-                                  "3aa7fdfe-1902-4f93-8669-d1b384903b39",
+                                  '3aa7fdfe-1902-4f93-8669-d1b384903b39',
                             ),
+                            //builder: (context) => PlanningListPage(),
+                            //builder: (context) => MyHomePagetest(),
+                            /* builder: (context) => PlanningScreen(
+                              planningId:
+                                  "3aa7fdfe-1902-4f93-8669-d1b384903b39",
+                            ),*/
                           ),
                         );
                       }
