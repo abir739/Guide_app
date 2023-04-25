@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:guide_app/NetworkHandler.dart';
-import 'package:guide_app/planning/planing_list.dart';
+//import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
@@ -9,10 +9,12 @@ import 'package:guide_app/utils/icon_name.dart';
 //import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
 
-import 'API_ous/Myhomepage.dart';
-import 'API_ous/Myhomepagetest.dart';
+//import 'API_ous/Myhomepage.dart';
+//import 'API_ous/Myhomepagetest.dart';
 //import 'call_API/plan_API.dart';
-import 'call_API/activity_API.dart';
+//import 'call_API/activity_API.dart';
+//import 'View/planning.dart';
+import 'View/planning_test.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
