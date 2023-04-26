@@ -1,12 +1,9 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:guide_app/modele/activity_model.dart';
-import 'package:guide_app/modele/planning_model.dart';
-import 'package:guide_app/modele/planningmainModel.dart';
-import 'package:guide_app/modele/plannings.dart';
 
-import 'listPlannig.dart';
+import '../ViewModel/planning_model.dart';
+
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -21,8 +18,13 @@ class HTTPHandlerplaning {
     String? token = await storage.read(key: "access_token");
     List<PlanningMainModel> planingList = [];
     url = formater(url);
-final respond = await http
-        .get(headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlY2I1ZjJiLTZiNWMtNDk4OS1hNzQ3LWIyOWUzODgyMTZlOSIsInN1YiI6IjFlY2I1ZjJiLTZiNWMtNDk4OS1hNzQ3LWIyOWUzODgyMTZlOSIsInVzZXJuYW1lIjoic2E3Ym9vY2giLCJlbWFpbCI6InNhN2Jvb2NoQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbmlzdHJhdG9yIiwiZmlyc3ROYW1lIjoiU2FoYmkiLCJsYXN0TmFtZSI6IktoYWxmYWxsYWgiLCJleHBpcmVzIjoxNjgyNjA2Mjg5LCJjcmVhdGVkIjoxNjgyNTE5ODg5LCJpYXQiOjE2ODI1MTk4ODksImV4cCI6MTY4MjYwNjI4OX0.WW8Z22w3ZU921Rm-pJFeV9clWzldPMRq7q-ps2S2-8E"}, Uri.parse(url));
+    // final respond = await http.get(headers: {
+    //   "Authorization":
+    //       ""
+    // }, Uri.parse(url));
+     final respond = await http
+        .get(headers: {"Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjFlY2I1ZjJiLTZiNWMtNDk4OS1hNzQ3LWIyOWUzODgyMTZlOSIsInN1YiI6IjFlY2I1ZjJiLTZiNWMtNDk4OS1hNzQ3LWIyOWUzODgyMTZlOSIsInVzZXJuYW1lIjoic2E3Ym9vY2giLCJlbWFpbCI6InNhN2Jvb2NoQGdtYWlsLmNvbSIsInJvbGUiOiJBZG1pbmlzdHJhdG9yIiwiZmlyc3ROYW1lIjoiU2FoYmkiLCJsYXN0TmFtZSI6IktoYWxmYWxsYWgiLCJleHBpcmVzIjoxNjgyNjAyMTMzLCJjcmVhdGVkIjoxNjgyNTE1NzMzLCJpYXQiOjE2ODI1MTU3MzMsImV4cCI6MTY4MjYwMjEzM30.kMPJF7rEhKr37qL4VaUCpyGaAH9ytRPKnzHv7YEkGbc"}, Uri.parse(url));
+    print(respond.statusCode);
     if (respond.statusCode == 200) {
       // If the server did return a 200 OK response,
       // then parse the JSON.
@@ -57,9 +59,11 @@ final respond = await http
   Future<DateTime> fetchtime(String url) async {
     List<PlanningMainModel> planingList = [];
     url = formater(url);
-    String? token = await storage.read(key: "access_token");
-    final respond =
-        await http.get(headers: {"Authorization": "$token"}, Uri.parse(url));
+String? token = await storage.read(key: "access_token");
+    final respond = await http.get(headers: {
+      "Authorization":
+          "$token"
+    }, Uri.parse(url));
     print(respond.statusCode);
     if (respond.statusCode == 200) {
       // If the server did return a 200 OK response,

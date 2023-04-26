@@ -1,4 +1,10 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
 part of 'activityTempModel.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
 
 ActivityTemplate _$ActivityTemplateFromJson(Map<String, dynamic> json) =>
     ActivityTemplate(

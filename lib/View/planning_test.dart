@@ -23,7 +23,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Future<void> _fetchData() async {
     final response = await http.get(
       Uri.parse(
-          'https://api.zenify-trip.continuousnet.com/api/plannings/${widget.planningId}'),
+          'https://api.zenify-trip.continuousnet.com/api/plannings'),
     );
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);

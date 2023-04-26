@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_login_facebook/flutter_login_facebook.dart';
 import 'package:guide_app/NetworkHandler.dart';
-//import 'package:guide_app/planning/planing_list.dart';
+import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
@@ -14,7 +14,8 @@ import 'package:flutter_svg/svg.dart';
 //import 'call_API/plan_API.dart';
 //import 'call_API/activity_API.dart';
 //import 'View/planning.dart';
-import 'View/planning_test.dart';
+//import 'View/planning_test.dart';
+import 'activity/test_planning.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
@@ -166,10 +167,11 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => PlanningScreen(
+                            builder: (context) => Planingtest(),
+                            /*builder: (context) => PlanningScreen(
                               planningId:
                                   '3aa7fdfe-1902-4f93-8669-d1b384903b39',
-                            ),
+                            ),*/
                             //builder: (context) => PlanningListPage(),
                             //builder: (context) => MyHomePagetest(),
                             /* builder: (context) => PlanningScreen(
