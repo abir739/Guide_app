@@ -5,7 +5,8 @@ import '../notification/notification.dart';
 import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
 import 'comment.dart';
-import 'reaction.dart';
+//import 'reaction.dart';
+import 'reaction_test.dart';
 import 'destination_test.dart';
 import 'package:url_launcher/url_launcher.dart';
 
