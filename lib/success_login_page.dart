@@ -26,7 +26,7 @@ class _SuccessLoginPageState extends State<SuccessLoginPage> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("FACEBOOK SIGNED IN SUCCESSFULLY", style: TextStyle(fontWeight: FontWeight.w600,fontSize: 15),),
+        title: const Text("FACEBOOK SIGNED IN SUCCESSFULLY", style: TextStyle(fontWeight: FontWeight.w600,fontSize: 15),),
       ),
       body: _buildBody(),
     );
@@ -43,26 +43,26 @@ class _SuccessLoginPageState extends State<SuccessLoginPage> {
               imageUrl:  widget.profileImage,
               progressIndicatorBuilder: (context, url, downloadProgress) => 
                       CircularProgressIndicator(value: downloadProgress.progress),
-              errorWidget: (context, url, error) => Icon(Icons.error),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
-        SizedBox(height: 10,),
-        Text(widget.fbName, style: TextStyle(
+        const SizedBox(height: 10,),
+        Text(widget.fbName, style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600
         ),), //display name of signed in account
-        SizedBox(height: 10,),
-        Text(widget.fbId, style: TextStyle(
+        const SizedBox(height: 10,),
+        Text(widget.fbId, style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600
         ),), //display id of signed in account
-        SizedBox(height: 10,),
-        Text(widget.fbEmail, style: TextStyle(
+        const SizedBox(height: 10,),
+        Text(widget.fbEmail, style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600
         ),), 
-        SizedBox(height: 10,),
-        Text(widget.fbAccessToken, style: TextStyle(
+        const SizedBox(height: 10,),
+        Text(widget.fbAccessToken, style: const TextStyle(
           fontSize: 15,
           fontWeight: FontWeight.w600
         ),), 

@@ -50,7 +50,7 @@ class _NewActivityState extends State<NewActivity> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -59,7 +59,7 @@ class _NewActivityState extends State<NewActivity> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'New Activity',
                   style: TextStyle(
                     fontSize: 27.0,
@@ -81,7 +81,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.alarm_rounded,
                     size: 18,
                   ),
@@ -98,7 +98,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.location_city,
                     size: 18,
                   ),
@@ -123,11 +123,11 @@ class _NewActivityState extends State<NewActivity> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
+                    padding: const EdgeInsets.all(16.0),
+                    child: const Column(
                       children: [
                         Icon(Icons.cloud_upload),
-                        const SizedBox(height: 8.0),
+                        SizedBox(height: 8.0),
                         Text('Upload a File or an Image'),
                       ],
                     ),
@@ -141,24 +141,24 @@ class _NewActivityState extends State<NewActivity> {
                   ),
                 ],
                 const SizedBox(height: 16.0),
-                Text(
+                const Text(
                   'Place',
                   style: TextStyle(fontSize: 18.0),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 TextFormField(
                   controller: placeController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter a place',
                     border: OutlineInputBorder(),
                   ),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     launchMaps(placeController.text);
                   },
-                  child: Text('Open Maps to search for a place'),
+                  child: const Text('Open Maps to search for a place'),
                 ),
                 const SizedBox(height: 16.0),
                 ElevatedButton(
@@ -171,12 +171,12 @@ class _NewActivityState extends State<NewActivity> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 180, 58, 105),
+                    backgroundColor: const Color.fromARGB(255, 180, 58, 105),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Créer',
                     style: TextStyle(
                       fontSize: 16.0,
@@ -191,12 +191,12 @@ class _NewActivityState extends State<NewActivity> {
                     //annuler la création de new activity
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
+                    backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Annuler',
                     style: TextStyle(
                       fontSize: 16.0,

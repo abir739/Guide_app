@@ -6,12 +6,14 @@ import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
 
 class DestinationScreen extends StatefulWidget {
+  const DestinationScreen({super.key});
+
   @override
   _DestinationScreenState createState() => _DestinationScreenState();
 }
 
 class _DestinationScreenState extends State<DestinationScreen> {
-  List<String> _categories = [
+  final List<String> _categories = [
     "Museums",
     "Mountains",
     "Forests",
@@ -19,7 +21,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
     "Amusement Parks",
   ];
 
-  List<Map<String, dynamic>> _places = [
+  final List<Map<String, dynamic>> _places = [
     {
       "name": "Museum of Modern Art",
       "image":
@@ -50,7 +52,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
 
   List<Map<String, dynamic>> _filteredPlaces = [];
 
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
 
   @override
   void initState() {
@@ -82,20 +84,20 @@ class _DestinationScreenState extends State<DestinationScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -106,7 +108,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -126,11 +128,11 @@ class _DestinationScreenState extends State<DestinationScreen> {
               ],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Container(
             child: TextField(
               controller: _searchController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 hintText: "Search for a destination",
                 prefixIcon: Icon(Icons.search),
               ),
@@ -145,13 +147,13 @@ class _DestinationScreenState extends State<DestinationScreen> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Padding(
-                      padding: EdgeInsets.only(left: 16, top: 16),
+                      padding: const EdgeInsets.only(left: 16, top: 16),
                       child: Text(
                         _categories[index],
-                        style: TextStyle(fontSize: 18),
+                        style: const TextStyle(fontSize: 18),
                       ),
                     ),
-                    SizedBox(height: 8),
+                    const SizedBox(height: 8),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
@@ -159,7 +161,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                             .map((place) => GestureDetector(
                                   onTap: () {},
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 16),
+                                    padding: const EdgeInsets.only(left: 16),
                                     child: SizedBox(
                                       width: 150,
                                       child: Column(
@@ -175,13 +177,13 @@ class _DestinationScreenState extends State<DestinationScreen> {
                                               fit: BoxFit.cover,
                                             ),
                                           ),
-                                          SizedBox(height: 8),
+                                          const SizedBox(height: 8),
                                           Text(
                                             place["name"],
-                                            style: TextStyle(
+                                            style: const TextStyle(
                                                 fontWeight: FontWeight.bold),
                                           ),
-                                          SizedBox(height: 4),
+                                          const SizedBox(height: 4),
                                           Text(
                                             place["price"],
                                             style: TextStyle(
@@ -195,7 +197,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                             .toList(),
                       ),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                   ],
                 );
               },
@@ -213,7 +215,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -224,8 +226,8 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
@@ -233,39 +235,39 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -273,8 +275,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -282,8 +284,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

@@ -23,8 +23,7 @@ class BorderButtonV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        fixedSize: Size(70, 60),
-        primary: white,
+        fixedSize: const Size(70, 60), backgroundColor: white,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
             side: BorderSide(width: 1, color: lineBorderColor)),
@@ -36,7 +35,7 @@ class BorderButtonV2 extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           (checkIsNullValue(preIcon))
-              ? SizedBox()
+              ? const SizedBox()
               : Padding(
                   padding: EdgeInsets.only(
                       right: (checkIsNullValue(title)) ? 0 : 10),
@@ -47,11 +46,11 @@ class BorderButtonV2 extends StatelessWidget {
                   ),
                 ),
           Text(title,
-              style: TextStyle(
+              style: const TextStyle(
                 color: primary,
               )),
           (checkIsNullValue(icon))
-              ? SizedBox()
+              ? const SizedBox()
               : Padding(
                   padding:
                       EdgeInsets.only(left: (checkIsNullValue(title)) ? 0 : 10),

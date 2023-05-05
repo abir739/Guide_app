@@ -6,15 +6,17 @@ import '../notification/notification.dart';
 import '../users/client_list.dart';
 
 class ScheduleScreen extends StatefulWidget {
+  const ScheduleScreen({super.key});
+
   @override
   _ScheduleScreenState createState() => _ScheduleScreenState();
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  DateTime startDate = DateTime.now().subtract(Duration(days: 3));
-  DateTime endDate = DateTime.now().add(Duration(days: 20));
-  List<DateTime> _days = [];
-  int _currentIndex = 0;
+  DateTime startDate = DateTime.now().subtract(const Duration(days: 3));
+  DateTime endDate = DateTime.now().add(const Duration(days: 20));
+  final List<DateTime> _days = [];
+  final int _currentIndex = 0;
 
   @override
   void initState() {
@@ -36,20 +38,20 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -60,7 +62,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.all(16.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -80,7 +82,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               ],
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
@@ -90,7 +92,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   DayCard(
                     day: day,
                     isSelected: _currentIndex == _days.indexOf(day),
-                    schedule: [], // temporary empty schedule
+                    schedule: const [], // temporary empty schedule
                   ),
               ],
             ),
@@ -106,7 +108,7 @@ class DayCard extends StatefulWidget {
   final bool isSelected;
   final List<Activity> schedule;
 
-  DayCard({
+  const DayCard({super.key, 
     required this.day,
     this.isSelected = false,
     required this.schedule,
@@ -130,8 +132,8 @@ class _DayCardState extends State<DayCard> {
         );
       },
       child: Container(
-        margin: EdgeInsets.all(8.0),
-        padding: EdgeInsets.all(16.0),
+        margin: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
           color: widget.isSelected ? Colors.blue : Colors.white,
           borderRadius: BorderRadius.circular(16.0),
@@ -139,7 +141,7 @@ class _DayCardState extends State<DayCard> {
             BoxShadow(
               color: Colors.grey.withOpacity(0.3),
               blurRadius: 4.0,
-              offset: Offset(2.0, 2.0),
+              offset: const Offset(2.0, 2.0),
             ),
           ],
         ),
@@ -154,7 +156,7 @@ class _DayCardState extends State<DayCard> {
                     widget.isSelected ? FontWeight.bold : FontWeight.normal,
               ),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Text(
               DateFormat('d').format(widget.day),
               style: TextStyle(
@@ -176,7 +178,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -187,8 +189,8 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
@@ -196,8 +198,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -205,29 +207,29 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -235,8 +237,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -244,8 +246,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);
@@ -261,7 +263,7 @@ void _showMenu(BuildContext context) {
 
 class ScheduleDay extends StatelessWidget {
   final DateTime selectedDay;
-  ScheduleDay({required this.selectedDay});
+  const ScheduleDay({super.key, required this.selectedDay});
 
   @override
   Widget build(BuildContext context) {
@@ -291,15 +293,15 @@ class ScheduleDay extends StatelessWidget {
 
           return Column(
             children: [
-              SizedBox(height: 8.0),
+              const SizedBox(height: 8.0),
               Row(
                 children: [
-                  SizedBox(width: 8.0),
+                  const SizedBox(width: 8.0),
                   Text(
                     DateFormat('h:mm a').format(activity.time),
-                    style: TextStyle(fontSize: 16.0),
+                    style: const TextStyle(fontSize: 16.0),
                   ),
-                  SizedBox(width: 8.0),
+                  const SizedBox(width: 8.0),
                   Expanded(
                     child: Container(
                       height: height,
@@ -308,15 +310,15 @@ class ScheduleDay extends StatelessWidget {
                         borderRadius: BorderRadius.circular(8.0),
                       ),
                       child: Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           activity.description,
-                          style: TextStyle(fontSize: 16.0),
+                          style: const TextStyle(fontSize: 16.0),
                         ),
                       ),
                     ),
                   ),
-                  SizedBox(width: 8.0),
+                  const SizedBox(width: 8.0),
                 ],
               ),
             ],
@@ -356,7 +358,7 @@ List<Activity> exampleActivities = [
     id: '1',
     name: 'Yoga',
     time: DateTime(2023, 4, 11, 9, 0),
-    duration: Duration(hours: 1),
+    duration: const Duration(hours: 1),
     description: 'A relaxing yoga class',
     location: 'Yoga Studio',
   ),
@@ -364,7 +366,7 @@ List<Activity> exampleActivities = [
     id: '2',
     name: 'Lunch',
     time: DateTime(2023, 4, 11, 12, 0),
-    duration: Duration(minutes: 30),
+    duration: const Duration(minutes: 30),
     description: 'A quick lunch break',
     location: 'Cafeteria',
   ),
@@ -372,7 +374,7 @@ List<Activity> exampleActivities = [
     id: '3',
     name: 'Meeting',
     time: DateTime(2023, 4, 11, 14, 0),
-    duration: Duration(hours: 2),
+    duration: const Duration(hours: 2),
     description: 'A team meeting to discuss project updates',
     location: 'Conference Room',
   ),
@@ -380,7 +382,7 @@ List<Activity> exampleActivities = [
     id: '4',
     name: 'Gym',
     time: DateTime(2023, 4, 11, 18, 0),
-    duration: Duration(hours: 1, minutes: 30),
+    duration: const Duration(hours: 1, minutes: 30),
     description: 'A workout session at the gym',
     location: 'Gym',
   ),
@@ -388,7 +390,7 @@ List<Activity> exampleActivities = [
     id: '5',
     name: 'Dinner',
     time: DateTime(2023, 4, 11, 20, 0),
-    duration: Duration(hours: 1),
+    duration: const Duration(hours: 1),
     description: 'A nice dinner at a restaurant',
     location: 'Restaurant',
   ),

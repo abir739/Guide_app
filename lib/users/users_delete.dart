@@ -8,6 +8,8 @@ import '../notification/notification.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 
 class ClientScreen extends StatefulWidget {
+  const ClientScreen({super.key});
+
   @override
   _ClientScreenState createState() => _ClientScreenState();
 }
@@ -47,20 +49,20 @@ class _ClientScreenState extends State<ClientScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -87,25 +89,25 @@ class _ClientScreenState extends State<ClientScreen> {
         onClose: () => print('DIAL CLOSED'), //action when menu closes
 
         elevation: 8.0, //shadow elevation of button
-        shape: CircleBorder(), //shape of button
+        shape: const CircleBorder(), //shape of button
 
         children: [
           SpeedDialChild(
             //speed dial child
-            child: Icon(Icons.accessibility),
+            child: const Icon(Icons.accessibility),
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
             label: 'Add Client',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => print('FIRST CHILD'),
             onLongPress: () => print('FIRST CHILD LONG PRESS'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.delete_forever),
+            child: const Icon(Icons.delete_forever),
             backgroundColor: Colors.blue,
             foregroundColor: Colors.white,
             label: 'Delete Client',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () {
               // Get the selected users from the list
               List<User> selectedUsers = [];
@@ -131,11 +133,11 @@ class _ClientScreenState extends State<ClientScreen> {
             onLongPress: () => print('Delete Client'),
           ),
           SpeedDialChild(
-            child: Icon(Icons.calendar_today),
+            child: const Icon(Icons.calendar_today),
             foregroundColor: Colors.white,
             backgroundColor: Colors.green,
             label: 'Add a Program',
-            labelStyle: TextStyle(fontSize: 18.0),
+            labelStyle: const TextStyle(fontSize: 18.0),
             onTap: () => print('THIRD CHILD'),
             onLongPress: () => print('THIRD CHILD LONG PRESS'),
           ),
@@ -145,8 +147,8 @@ class _ClientScreenState extends State<ClientScreen> {
       ),
       body: Column(
         children: [
-          SizedBox(height: 10.0),
-          Text(
+          const SizedBox(height: 10.0),
+          const Text(
             'Liste de passagers',
             style: TextStyle(
               fontSize: 27.0,
@@ -174,7 +176,7 @@ class _ClientScreenState extends State<ClientScreen> {
                       title: Text('${user.firstName} ${user.lastName}'),
                       subtitle: Text('ID: ${user.id}'),
                       trailing:
-                          user.isSelected ? Icon(Icons.check_circle) : null,
+                          user.isSelected ? const Icon(Icons.check_circle) : null,
                     ),
                   ),
                 );
@@ -193,7 +195,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -204,8 +206,8 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
@@ -213,8 +215,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text('Profile'),
+              leading: const Icon(Icons.person),
+              title: const Text('Profile'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -222,8 +224,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -231,19 +233,19 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -251,8 +253,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -260,8 +262,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

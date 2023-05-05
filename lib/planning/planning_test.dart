@@ -6,14 +6,16 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
 class PlanningScreen extends StatefulWidget {
+  const PlanningScreen({super.key});
+
   @override
   _PlanningScreenState createState() => _PlanningScreenState();
 }
 
 class _PlanningScreenState extends State<PlanningScreen> {
-  DateTime _startDate = DateTime.now().subtract(Duration(days: 3));
-  DateTime _endDate = DateTime.now().add(Duration(days: 20));
-  List<DateTime> _days = [];
+  final DateTime _startDate = DateTime.now().subtract(const Duration(days: 3));
+  final DateTime _endDate = DateTime.now().add(const Duration(days: 20));
+  final List<DateTime> _days = [];
   int _currentIndex = 0;
 
   @override
@@ -59,10 +61,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
         });
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: const EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
           color: isSelected
-              ? Color.fromARGB(255, 241, 210, 231)
+              ? const Color.fromARGB(255, 241, 210, 231)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -81,7 +83,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   }
 
   Widget _buildDaysList() {
-    return Container(
+    return SizedBox(
       height: 50.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -131,17 +133,17 @@ class _PlanningScreenState extends State<PlanningScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Planning 1',
                   style: TextStyle(
                     fontSize: 27.0,
@@ -158,8 +160,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       color: Colors.grey[300],
                     ),
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                    child: Row(
+                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                    child: const Row(
                       children: [
                         Icon(
                           Icons.edit,
@@ -181,10 +183,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               '${DateFormat('MMM d, y').format(_startDate)} ~ ${DateFormat('MMM d, y').format(_endDate)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -196,7 +198,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
               itemCount: _days.length,
               itemBuilder: (BuildContext context, int index) {
                 if (_currentIndex != index) {
-                  return SizedBox.shrink();
+                  return const SizedBox.shrink();
                 }
                 final random = Random();
                 final numberOfBoxes = random.nextInt(8) + 3;
@@ -211,7 +213,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                     );
                     return Container(
                       height: 240.0,
-                      margin: EdgeInsets.all(16.0),
+                      margin: const EdgeInsets.all(16.0),
                       decoration: BoxDecoration(
                         color: color,
                         borderRadius: BorderRadius.circular(8.0),

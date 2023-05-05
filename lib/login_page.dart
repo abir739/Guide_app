@@ -15,7 +15,6 @@ import 'package:flutter_svg/svg.dart';
 //import 'call_API/activity_API.dart';
 //import 'View/planning.dart';
 //import 'View/planning_test.dart';
-import 'activity/test_planning.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
@@ -34,7 +33,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formKey = GlobalKey<FormState>();
   late GoogleSignIn _googleSignIn;
-  FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   bool _isSigningIn = false;
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
@@ -118,7 +117,7 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   PreferredSize _buildAppbar() {
-    return PreferredSize(
+    return const PreferredSize(
       preferredSize: Size.fromHeight(50),
       child: CustomAppBar(
         leftWidget: SizedBox(),
@@ -129,7 +128,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _buildBody() {
     return SingleChildScrollView(
-      padding: EdgeInsets.only(left: 15, right: 15, top: 30),
+      padding: const EdgeInsets.only(left: 15, right: 15, top: 30),
       child: Form(
         child: Column(
           children: [
@@ -144,7 +143,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const Text(" Welcome to Zenify app!",
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500)),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             Form(
@@ -153,11 +152,11 @@ class _LoginPageState extends State<LoginPage> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   _getEmailTextField(),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   _getPasswordTextField(),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   CustomButtonWidget(
@@ -167,12 +166,12 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => Planingtest(),
+                            //builder: (context) => Planingtest(),
                             /*builder: (context) => PlanningScreen(
                               planningId:
                                   '3aa7fdfe-1902-4f93-8669-d1b384903b39',
                             ),*/
-                            //builder: (context) => PlanningListPage(),
+                            builder: (context) => const PlanningListPage(),
                             //builder: (context) => MyHomePagetest(),
                             /* builder: (context) => PlanningScreen(
                               planningId:
@@ -187,15 +186,15 @@ class _LoginPageState extends State<LoginPage> {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             _getForgetPassword(),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             _getTextOnLineDivider(),
-            SizedBox(
+            const SizedBox(
               height: 50,
             ),
             _getSocialMediaButton()
@@ -206,15 +205,15 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildBottomNavigationBar() {
-    return Container(
+    return SizedBox(
         height: 100,
         child: Center(
           child: Text.rich(TextSpan(children: [
             TextSpan(
                 text: "Don't have an account?",
                 style: TextStyle(color: primary.withOpacity(0.5))),
-            TextSpan(text: "  "),
-            TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
+            const TextSpan(text: "  "),
+            const TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
           ])),
         ));
   }
@@ -252,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        child: Text("Forgot Password", style: TextStyle(color: primary)),
+        child: const Text("Forgot Password", style: TextStyle(color: primary)),
       ),
     );
   }
@@ -263,9 +262,9 @@ class _LoginPageState extends State<LoginPage> {
       children: [
         Divider(color: lineBorderColor, thickness: 1),
         Container(
-          padding: EdgeInsets.only(left: 20, right: 20),
+          padding: const EdgeInsets.only(left: 20, right: 20),
           color: white,
-          child: Text("Or Login With"),
+          child: const Text("Or Login With"),
         )
       ],
     );
@@ -273,7 +272,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _getSocialMediaButton() {
     return _isSigningIn
-        ? CircularProgressIndicator()
+        ? const CircularProgressIndicator()
         : Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -284,7 +283,7 @@ class _LoginPageState extends State<LoginPage> {
                   _facebookLogin();
                 },
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               BorderButtonV2(
@@ -292,7 +291,7 @@ class _LoginPageState extends State<LoginPage> {
                 iconSize: 30,
                 onTap: _handleSignIn,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 20,
               ),
               BorderButtonV2(

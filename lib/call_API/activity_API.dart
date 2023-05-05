@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 class PlanningScreen extends StatefulWidget {
   final String planningId;
 
-  PlanningScreen({required this.planningId});
+  const PlanningScreen({super.key, required this.planningId});
 
   @override
   _PlanningScreenState createState() => _PlanningScreenState();
@@ -61,7 +61,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
         DateTime currentDay = planning.startDate;
         while (currentDay.isBefore(planning.endDate)) {
           days.add(currentDay);
-          currentDay = currentDay.add(Duration(days: 1));
+          currentDay = currentDay.add(const Duration(days: 1));
         }
 
         // Generate the list of activities for each day
@@ -84,12 +84,12 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planning'),
+        title: const Text('Planning'),
       ),
       body: Column(
         children: [
           // Horizontal list of days
-          Container(
+          SizedBox(
             height: 50,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -109,7 +109,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                     child: Center(
                       child: Text(
                         DateFormat('EEE, d MMM').format(days[index]),
-                        style: TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 16),
                       ),
                     ),
                   ),
@@ -126,18 +126,18 @@ class _PlanningScreenState extends State<PlanningScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(8),
                       child: Text(
                         DateFormat('EEE, d MMM')
                             .format(activities[index]['date']),
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontSize: 18, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    Divider(),
+                    const Divider(),
                     ListView.builder(
                       shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
+                      physics: const NeverScrollableScrollPhysics(),
                       itemCount: activities[index]['activities'].length,
                       itemBuilder: (BuildContext context, int index2) {
                         Map<String, dynamic> activity =

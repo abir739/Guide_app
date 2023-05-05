@@ -5,6 +5,8 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
 class NotificationsScreen extends StatefulWidget {
+  const NotificationsScreen({super.key});
+
   @override
   _NotificationsScreenState createState() => _NotificationsScreenState();
 }
@@ -12,7 +14,7 @@ class NotificationsScreen extends StatefulWidget {
 class _NotificationsScreenState extends State<NotificationsScreen> {
   late List<NotificationModel> notifications;
 //final formattedTimestamp = formatTimestamp(timestamp).toString();
-  final timestamp = DateTime.now().subtract(Duration(minutes: 30));
+  final timestamp = DateTime.now().subtract(const Duration(minutes: 30));
 
   String formatTimestamp(DateTime dateTime) {
     final now = DateTime.now();
@@ -55,23 +57,23 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'Notifications',
           style: TextStyle(
             color: Color.fromARGB(255, 38, 6, 39),
           ),
         ),
-        backgroundColor: Color.fromARGB(
+        backgroundColor: const Color.fromARGB(
             255, 207, 207, 219), // Set the background color to #4F46E5
 
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -93,7 +95,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     color: Colors.grey.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  margin: EdgeInsets.all(10),
+                  margin: const EdgeInsets.all(10),
                   child: ListTile(
                     leading: CircleAvatar(
                       backgroundImage:
@@ -104,15 +106,15 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                         Text('${notifications[index].senderName} - '),
                         Container(
                           padding:
-                              EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                              const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 163, 97, 175)
+                            color: const Color.fromARGB(255, 163, 97, 175)
                                 .withOpacity(0.2),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: Text(
-                            '${notifications[index].senderType}',
-                            style: TextStyle(
+                            notifications[index].senderType,
+                            style: const TextStyle(
                               color: Colors.purple,
                             ),
                           ),
@@ -122,9 +124,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                     subtitle: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        SizedBox(height: 8),
-                        Text('${notifications[index].time}'),
-                        SizedBox(height: 16),
+                        const SizedBox(height: 8),
+                        Text(notifications[index].time),
+                        const SizedBox(height: 16),
                         Row(
                           children: [
                             CircleAvatar(
@@ -133,41 +135,41 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                               radius:
                                   40, // set the radius to half of the width and height
                             ),
-                            SizedBox(height: 10),
+                            const SizedBox(height: 10),
                             Text(
                               ' ${notifications[index].messageType}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         Text(
-                          '${notifications[index].address}',
-                          style: TextStyle(
+                          notifications[index].address,
+                          style: const TextStyle(
                             color: Colors.black,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text('${notifications[index].activityTime}'),
-                            SizedBox(
+                            Text(notifications[index].activityTime),
+                            const SizedBox(
                                 width:
                                     100), // Add some space between the buttons
                             TextButton(
                               onPressed: () {
                                 // Handle the "Accept" button press
                               },
-                              child: Text('Rejouer',
-                                  style: TextStyle(color: Colors.white)),
                               style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all<Color>(
-                                        Color.fromARGB(255, 190, 39, 102)),
+                                        const Color.fromARGB(255, 190, 39, 102)),
                               ),
+                              child: const Text('Rejouer',
+                                  style: TextStyle(color: Colors.white)),
                             )
                           ],
                         ),
@@ -209,7 +211,7 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                 );
               },
             )
-          : Center(
+          : const Center(
               child: CircularProgressIndicator(),
             ),
     );

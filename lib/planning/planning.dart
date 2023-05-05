@@ -10,11 +10,8 @@ import 'package:guide_app/planning/planing_list.dart';
 //import 'package:guide_app/planning/shedule_test.dart';
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
-import 'package:guide_app/planning/Add_Client.dart';
 import 'package:guide_app/notification/notification.dart';
 
-import '../HelpScreen.dart';
-import '../SettingsScreen.dart';
 import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
 import '../users/client_list.dart';
@@ -54,7 +51,7 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Activity"),
+        title: const Text("Edit Activity"),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -63,42 +60,42 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Name",
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _timeController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Time",
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _priceController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Price",
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _placeController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Place",
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _commentController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Comment",
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _descriptionController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: "Description",
               ),
             ),
@@ -115,7 +112,7 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
           widget.activity.description = _descriptionController.text;
           Navigator.pop(context);
         },
-        child: Icon(Icons.save),
+        child: const Icon(Icons.save),
       ),
     );
   }
@@ -126,19 +123,19 @@ void showDialogForModify(BuildContext context, Function() onConfirm) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
-        title: Text("Modify Confirmation"),
-        content: Text("Are you sure you want to modify this activity?"),
+        title: const Text("Modify Confirmation"),
+        content: const Text("Are you sure you want to modify this activity?"),
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: Text("CANCEL"),
+            child: const Text("CANCEL"),
           ),
           TextButton(
             onPressed: () {
               onConfirm();
               Navigator.pop(context);
             },
-            child: Text("MODIFY"),
+            child: const Text("MODIFY"),
           ),
         ],
       );
@@ -175,17 +172,17 @@ class Activity {
 class PlanningScreen extends StatefulWidget {
   final Planning planning;
 
-  const PlanningScreen(this.planning);
+  const PlanningScreen(this.planning, {super.key});
   @override
   _PlanningScreenState createState() => _PlanningScreenState();
 }
 
 class _PlanningScreenState extends State<PlanningScreen> {
-  DateTime _startDate = DateTime.now().subtract(Duration(days: 3));
-  DateTime _endDate = DateTime.now().add(Duration(days: 20));
-  List<DateTime> _days = [];
+  final DateTime _startDate = DateTime.now().subtract(const Duration(days: 3));
+  final DateTime _endDate = DateTime.now().add(const Duration(days: 20));
+  final List<DateTime> _days = [];
   String _selectedStatus = 'Pending';
-  List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
+  final List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
   int _currentIndex = 0;
 
   @override
@@ -312,10 +309,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
         });
       },
       child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 5.0),
+        margin: const EdgeInsets.symmetric(horizontal: 5.0),
         decoration: BoxDecoration(
           color: isSelected
-              ? Color.fromARGB(255, 241, 210, 231)
+              ? const Color.fromARGB(255, 241, 210, 231)
               : Colors.transparent,
           borderRadius: BorderRadius.circular(8.0),
         ),
@@ -334,7 +331,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   }
 
   Widget _buildDaysList() {
-    return Container(
+    return SizedBox(
       height: 50.0,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
@@ -402,8 +399,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
               color: boxColor.withOpacity(0.6),
               borderRadius: BorderRadius.circular(8.0),
             ),
-            margin: EdgeInsets.all(10),
-            padding: EdgeInsets.all(10),
+            margin: const EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -412,17 +409,17 @@ class _PlanningScreenState extends State<PlanningScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    SizedBox(height: 4),
+                    const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
-                          "${index.time}",
-                          style: TextStyle(fontSize: 18),
+                          index.time,
+                          style: const TextStyle(fontSize: 18),
                         ),
-                        SizedBox(width: 170.0),
-                        Icon(Icons.notifications),
-                        SizedBox(width: 6.0),
+                        const SizedBox(width: 170.0),
+                        const Icon(Icons.notifications),
+                        const SizedBox(width: 6.0),
                         PopupMenuButton(
                           onSelected: (value) {
                             if (value == "delete") {
@@ -430,9 +427,9 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('Alert Dialog'),
+                                    title: const Text('Alert Dialog'),
                                     content:
-                                        Text('Do you really want to delete?'),
+                                        const Text('Do you really want to delete?'),
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
@@ -446,14 +443,14 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                           Navigator.pop(
                                               context); // close dialog
                                         },
-                                        child: Text('Yes'),
+                                        child: const Text('Yes'),
                                       ),
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(
                                               context); // close dialog
                                         },
-                                        child: Text('Close'),
+                                        child: const Text('Close'),
                                       ),
                                     ],
                                   );
@@ -464,9 +461,9 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 context: context,
                                 builder: (context) {
                                   return AlertDialog(
-                                    title: Text('Alert Dialog'),
+                                    title: const Text('Alert Dialog'),
                                     content:
-                                        Text('Do you really want to modify?'),
+                                        const Text('Do you really want to modify?'),
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
@@ -485,14 +482,14 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                             setState(() {});
                                           });
                                         },
-                                        child: Text('Yes'),
+                                        child: const Text('Yes'),
                                       ),
                                       TextButton(
                                         onPressed: () {
                                           Navigator.pop(
                                               context); // close dialog
                                         },
-                                        child: Text('Close'),
+                                        child: const Text('Close'),
                                       ),
                                     ],
                                   );
@@ -501,7 +498,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             }
                           },
                           itemBuilder: (context) => [
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "delete",
                               child: Row(
                                 children: [
@@ -511,7 +508,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 ],
                               ),
                             ),
-                            PopupMenuItem(
+                            const PopupMenuItem(
                               value: "modify",
                               child: Row(
                                 children: [
@@ -522,15 +519,15 @@ class _PlanningScreenState extends State<PlanningScreen> {
                               ),
                             ),
                           ],
-                          child: Icon(Icons.more_vert),
+                          child: const Icon(Icons.more_vert),
                         ),
                       ],
                     ),
-                    SizedBox(height: 14),
+                    const SizedBox(height: 14),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: 14),
+                        const SizedBox(height: 14),
                         ClipOval(
                           child: SvgPicture.asset(
                             index.logoPath,
@@ -538,19 +535,19 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             height: 40.0,
                           ),
                         ),
-                        SizedBox(width: 8, height: 16),
+                        const SizedBox(width: 8, height: 16),
                         Text(
                           index.name,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 17, fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 4,
                           width: 79,
                         ),
                         Container(
                           decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 221, 216, 216),
+                            color: const Color.fromARGB(255, 221, 216, 216),
                             borderRadius: BorderRadius.circular(10),
                           ),
                           child: DropdownButton<String>(
@@ -574,7 +571,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        SizedBox(height: 20),
+                        const SizedBox(height: 20),
                         ClipOval(
                           child: Image.network(
                             index.photoPath,
@@ -583,10 +580,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(width: 6, height: 80),
+                        const SizedBox(width: 6, height: 80),
                         Text(
                           index.symbolName,
-                          style: TextStyle(
+                          style: const TextStyle(
                               fontSize: 13, fontWeight: FontWeight.bold),
                         ),
                       ],
@@ -602,10 +599,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             fit: BoxFit.cover,
                           ),
                         ),
-                        SizedBox(height: 26, width: 10),
+                        const SizedBox(height: 26, width: 10),
                         Text(
                           index.place,
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Color.fromARGB(255, 8, 8, 8),
                             fontStyle: FontStyle.italic,
                           ),
@@ -631,17 +628,17 @@ class _PlanningScreenState extends State<PlanningScreen> {
     // Generate a list of boxes with different colors and contents
     List<Widget> boxes = _buildBoxes();
     return Container(
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Expanded(
             child: ListView.builder(
               itemCount: boxes.length,
               itemBuilder: (BuildContext context, int index) {
                 return Padding(
-                  padding: EdgeInsets.symmetric(vertical: 5.0),
+                  padding: const EdgeInsets.symmetric(vertical: 5.0),
                   child: boxes[index],
                   //),
                 );
@@ -657,7 +654,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Widget build(BuildContext context) {
     final start = DateFormat("MMM dd, yyyy").format(_startDate);
     final end = DateFormat("MMM dd, yyyy").format(_endDate);
-    List<String> _works = [
+    List<String> works = [
       'Work 1',
       'Work 2',
       'Work 3',
@@ -673,20 +670,20 @@ class _PlanningScreenState extends State<PlanningScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -698,11 +695,11 @@ class _PlanningScreenState extends State<PlanningScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(10.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
+                const Text(
                   'Planning ',
                   style: TextStyle(
                     fontSize: 27.0,
@@ -716,31 +713,31 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       builder: (context) {
                         return Container(
                           height: MediaQuery.of(context).size.height * 0.6,
-                          padding: EdgeInsets.all(20.0),
+                          padding: const EdgeInsets.all(20.0),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
+                              const Text(
                                 'Modify Activities',
                                 style: TextStyle(
                                   fontSize: 24.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(height: 20.0),
+                              const SizedBox(height: 20.0),
                               Expanded(
                                 child: ListView.builder(
                                   itemCount: activities.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
                                       padding:
-                                          EdgeInsets.symmetric(vertical: 10.0),
+                                          const EdgeInsets.symmetric(vertical: 10.0),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           // Handle the button press
                                         },
                                         style: ElevatedButton.styleFrom(
-                                          primary: Colors.grey[300],
+                                          backgroundColor: Colors.grey[300],
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
                                                 BorderRadius.circular(10.0),
@@ -753,10 +750,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                               width: 40.0,
                                               height: 40.0,
                                             ),
-                                            SizedBox(width: 16.0),
+                                            const SizedBox(width: 16.0),
                                             Text(
                                               activities[index].name,
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                 fontSize: 16.0,
                                                 fontWeight: FontWeight.bold,
                                                 color: Colors.black,
@@ -769,7 +766,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                   },
                                 ),
                               ),
-                              SizedBox(height: 20.0),
+                              const SizedBox(height: 20.0),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -779,11 +776,11 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                       // Handle the button press
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => NewActivity(),
+                                          builder: (context) => const NewActivity(),
                                         ),
                                       );
                                     },
-                                    child: Text('Ajouter autre'),
+                                    child: const Text('Ajouter autre'),
                                   ),
                                   Row(
                                     children: [
@@ -791,14 +788,14 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                         onPressed: () {
                                           // Handle the button press
                                         },
-                                        child: Text('Enregistrer'),
+                                        child: const Text('Enregistrer'),
                                       ),
-                                      SizedBox(width: 10.0),
+                                      const SizedBox(width: 10.0),
                                       ElevatedButton(
                                         onPressed: () {
                                           Navigator.pop(context);
                                         },
-                                        child: Text('Annuler'),
+                                        child: const Text('Annuler'),
                                       ),
                                     ],
                                   ),
@@ -816,8 +813,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       color: Colors.grey[300],
                     ),
                     padding:
-                        EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
-                    child: Row(
+                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                    child: const Row(
                       children: [
                         Icon(
                           Icons.edit,
@@ -839,10 +836,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: Text(
               '${DateFormat('MMM d, y').format(_startDate)} ~ ${DateFormat('MMM d, y').format(_endDate)}',
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 16.0,
                 fontWeight: FontWeight.bold,
               ),
@@ -869,7 +866,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
 class BoxDescriptionPage extends StatelessWidget {
   final Activity activity;
 
-  BoxDescriptionPage({required this.activity});
+  const BoxDescriptionPage({super.key, required this.activity});
 
   @override
   Widget build(BuildContext context) {
@@ -877,14 +874,14 @@ class BoxDescriptionPage extends StatelessWidget {
       appBar: AppBar(
         title: Text(
           activity.name,
-          style: TextStyle(
+          style: const TextStyle(
             color: Color.fromARGB(255, 38, 6, 39),
           ),
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: Container(
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
 
         //child: SingleChildScrollView(
         child: Column(
@@ -892,44 +889,44 @@ class BoxDescriptionPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Image.network(activity.photoPath),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             /* Text(place.time),*/
 
             Row(
               children: [
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
+                    color: const Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     activity.time,
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 39, 41, 176),
                     ),
                   ),
                 ),
-                SizedBox(width: 146),
+                const SizedBox(width: 146),
                 Container(
-                  padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
+                    color: const Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     'Price : ${activity.price}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color.fromARGB(255, 39, 41, 176),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               activity.symbolName,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             /*SizedBox(height: 8),
           Text(place.address),*/
@@ -943,47 +940,47 @@ class BoxDescriptionPage extends StatelessWidget {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(height: 8, width: 6),
+                const SizedBox(height: 8, width: 6),
                 Text(
                   activity.place,
-                  style: TextStyle(
+                  style: const TextStyle(
                     color: Color.fromARGB(255, 8, 8, 8),
                     fontStyle: FontStyle.italic,
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
-            Divider(
+            const SizedBox(height: 16.0),
+            const Divider(
               color: Color.fromARGB(255, 189, 184, 184),
               thickness: 2.0,
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               "Description",
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(activity.description),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Accept", style: TextStyle(color: Colors.white)),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 252, 56, 121)),
+                        const Color.fromARGB(255, 252, 56, 121)),
                   ),
+                  child: const Text("Accept", style: TextStyle(color: Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {},
-                  child: Text("Decline", style: TextStyle(color: Colors.black)),
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all<Color>(
-                        Color.fromARGB(255, 214, 208, 208)),
+                        const Color.fromARGB(255, 214, 208, 208)),
                   ),
+                  child: const Text("Decline", style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -1046,7 +1043,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -1057,50 +1054,50 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -1108,8 +1105,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -1117,8 +1114,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

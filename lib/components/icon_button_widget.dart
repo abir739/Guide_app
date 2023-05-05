@@ -20,9 +20,9 @@ class IconButtonWidget extends StatelessWidget {
       onTap :onTap,
       borderRadius: BorderRadius.circular(100),
       child: Padding(
-        padding: EdgeInsets.all(5),
+        padding: const EdgeInsets.all(5),
         child: Container(
-          padding: EdgeInsets.all(6),
+          padding: const EdgeInsets.all(6),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             color: color

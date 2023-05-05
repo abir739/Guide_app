@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class PlanningScreen extends StatefulWidget {
   final String planningId;
 
-  PlanningScreen({required this.planningId});
+  const PlanningScreen({super.key, required this.planningId});
 
   @override
   _PlanningScreenState createState() => _PlanningScreenState();
@@ -41,11 +41,11 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planning'),
+        title: const Text('Planning'),
       ),
       // ignore: unnecessary_null_comparison
       body: days == null
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: days.length,
@@ -55,21 +55,21 @@ class _PlanningScreenState extends State<PlanningScreen> {
                   onTap: () {
                     // Navigate to the day's page
                   },
-                  child: Container(
+                  child: SizedBox(
                     width: 100,
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
                           '${day.day}',
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Text(
                           '${day.month}',
-                          style: TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 16),
                         ),
                       ],
                     ),

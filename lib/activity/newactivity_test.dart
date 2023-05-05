@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -60,7 +59,7 @@ class _NewActivityState extends State<NewActivity> {
   late String _activityName;
   late String _activityDescription;
   File? _imageFile;
-  bool _pressed = false;
+  final bool _pressed = false;
   bool _isNotificationPressed = false; // Define the variable here
   late FlutterLocalNotificationsPlugin _flutterLocalNotificationsPlugin;
 
@@ -83,7 +82,7 @@ class _NewActivityState extends State<NewActivity> {
     _getSavedPlace();
     _flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
     var initializationSettingsAndroid =
-        AndroidInitializationSettings('app_icon');
+        const AndroidInitializationSettings('app_icon');
     var initializationSettingsIOS = IOSInitializationSettings(
         onDidReceiveLocalNotification: (id, title, body, payload) async {});
     var initializationSettings = InitializationSettings(
@@ -102,7 +101,7 @@ class _NewActivityState extends State<NewActivity> {
   }
 
   void _sendNotification() async {
-    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
       'channel_id',
       'channel_name',
       'channel_description',
@@ -111,7 +110,7 @@ class _NewActivityState extends State<NewActivity> {
       ticker: 'ticker',
       icon: 'app_icon',
     );
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    var iOSPlatformChannelSpecifics = const IOSNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
       android: androidPlatformChannelSpecifics,
       iOS: iOSPlatformChannelSpecifics,
@@ -160,7 +159,7 @@ class _NewActivityState extends State<NewActivity> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -169,7 +168,7 @@ class _NewActivityState extends State<NewActivity> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'New Activity',
                   style: TextStyle(
                     fontSize: 27.0,
@@ -195,7 +194,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.alarm_rounded,
                     size: 18,
                   ),
@@ -217,7 +216,7 @@ class _NewActivityState extends State<NewActivity> {
                     labelText: 'Place',
                     hintText: 'Search for a place',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: () async {
                         final String mapsUrl =
                             'https://www.google.com/maps/search/?api=1&query=${placeController.text}';
@@ -241,14 +240,14 @@ class _NewActivityState extends State<NewActivity> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // submit form
                     }
                   },
-                  child: Text('Save'),
+                  child: const Text('Save'),
                 ),
                 const SizedBox(height: 16.0),
                 GestureDetector(
@@ -263,11 +262,11 @@ class _NewActivityState extends State<NewActivity> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
+                    padding: const EdgeInsets.all(16.0),
+                    child: const Column(
                       children: [
                         Icon(Icons.cloud_upload),
-                        const SizedBox(height: 8.0),
+                        SizedBox(height: 8.0),
                         Text('Upload a File or an Image'),
                       ],
                     ),
@@ -283,7 +282,7 @@ class _NewActivityState extends State<NewActivity> {
                 const SizedBox(height: 16.0),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Notification',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -304,7 +303,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.attach_money_outlined,
                     size: 18,
                   ),
@@ -332,12 +331,12 @@ class _NewActivityState extends State<NewActivity> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 180, 58, 105),
+                    backgroundColor: const Color.fromARGB(255, 180, 58, 105),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Créer',
                     style: TextStyle(
                       fontSize: 16.0,
@@ -352,12 +351,12 @@ class _NewActivityState extends State<NewActivity> {
                     //annuler la création de new activity
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
+                    backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Annuler',
                     style: TextStyle(
                       fontSize: 16.0,

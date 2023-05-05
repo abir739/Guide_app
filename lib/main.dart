@@ -7,12 +7,12 @@ import 'themes/colors.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  runApp(MyApp(homeScreen: LoginPage()));
+  runApp(const MyApp(homeScreen: LoginPage()));
 }
 
 class MyApp extends StatefulWidget {
   final Widget? homeScreen;
-  MyApp({this.homeScreen});
+  const MyApp({super.key, this.homeScreen});
   @override
   _MyAppState createState() => _MyAppState();
 }
@@ -23,20 +23,20 @@ class _MyAppState extends State<MyApp> {
     return GestureDetector(
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: this.widget.homeScreen,
+        home: widget.homeScreen,
         theme: ThemeData(
           fontFamily: 'Poppins',
           primaryColor: primary,
           scaffoldBackgroundColor: white,
           colorScheme: ThemeData().colorScheme.copyWith(primary: primary),
-          bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          bottomNavigationBarTheme: const BottomNavigationBarThemeData(
             elevation: 0.0,
             backgroundColor: white,
             selectedLabelStyle: TextStyle(color: primary),
             showSelectedLabels: true,
             selectedItemColor: primary,
           ),
-          appBarTheme: AppBarTheme(
+          appBarTheme: const AppBarTheme(
               elevation: 0.0,
               backgroundColor: white,
               titleTextStyle: TextStyle(

@@ -8,6 +8,8 @@ import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
 
 class DestinationScreen extends StatefulWidget {
+  const DestinationScreen({super.key});
+
   @override
   _DestinationScreenState createState() => _DestinationScreenState();
 }
@@ -25,8 +27,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
 
   final List<Map<String, dynamic>> _places = [
     {
+      "id": "1",
       "name": "Museum of Natural History",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0f/b9.jpg",
       "price": "\$10",
@@ -34,8 +49,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "2",
       "name": "Museum of Bardo",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://static.lpnt.fr/images/2015/03/18/3131691-jpg_2781378_1000x667.jpg",
       "price": "\$40",
@@ -43,8 +71,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "3",
       "name": "Museum of Modern Art",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://historiadeldisseny.org/web/wp-content/uploads/FHD_Recursos_museu_MoMa.jpg",
       "price": "\$20",
@@ -52,8 +93,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "4",
       "name": "Museum of Natural History",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://media.tacdn.com/media/attractions-splice-spp-674x446/06/70/0f/b9.jpg",
       "price": "\$10",
@@ -61,8 +115,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "5",
       "name": "Museum of Bardo",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://static.lpnt.fr/images/2015/03/18/3131691-jpg_2781378_1000x667.jpg",
       "price": "\$40",
@@ -70,8 +137,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "6",
       "name": "Museum of Modern Art",
       "category": "Museums",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://historiadeldisseny.org/web/wp-content/uploads/FHD_Recursos_museu_MoMa.jpg",
       "price": "\$20",
@@ -79,8 +159,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "7",
       "name": "Rocky Mountains",
       "category": "Mountains",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://i.natgeofe.com/n/11e30e6f-6fd8-4755-9647-0df41738713a/92565_3x2.jpg",
       "price": "\$50",
@@ -88,8 +181,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "8",
       "name": "Blue Mountain",
       "category": "Mountains",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://img.traveltriangle.com/blog/wp-content/uploads/2018/12/Blue-Mountains-In-Australia.jpg",
       "price": "\$20",
@@ -97,23 +203,62 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "10",
       "name": "Rocky Mountains",
       "category": "Mountains",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://www.meganstarr.com/wp-content/uploads/2020/11/Moraine-Lake-in-Banff-Canada.jpg",
       "price": "\$40",
     },
     {
+      "id": "1456",
       "name": "Yellowstone National Park",
       "category": "Forests",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image": "https://picsum.photos/200",
       "price": "\$15",
       'description':
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "156489",
       "name": "Coco Beach Bizerte",
       "category": "Beaches",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://media-cdn.tripadvisor.com/media/photo-s/1d/7f/09/01/lacasadecocotn.jpg",
       "price": "\$25",
@@ -121,8 +266,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "2651",
       "name": "Waikiki Beach",
       "category": "Beaches",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://www.hawaiiactivities.com/travelguide/wp-content/uploads/WaikikiBeach_Aerial_DiamondHead_Oahu_Hawaii_shutterstock_684224887.png",
       "price": "\$25",
@@ -130,8 +288,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           'Mount Everest is Earth\'s highest mountain above sea level, located in the Mahalangur Himal sub-range of the Himalayas. The China–Nepal border runs across its summit point. The current official elevation of 8,848 m (29,029 ft), recognized by China and Nepal, was established by a 1955 Indian survey and subsequently confirmed by a Chinese survey in 1975.',
     },
     {
+      "id": "1dsmssh",
       "name": "Disneyland",
       "category": "Amusement Parks",
+      'comments': [
+        {
+          'author': 'John Doe',
+          'text': 'This park is amazing!',
+          'timestamp': DateTime.now(),
+        },
+        {
+          'author': 'Jane Smith',
+          'text': 'I love spending my weekends here.',
+          'timestamp': DateTime.now(),
+        },
+      ],
       "image":
           "https://media.vogue.fr/photos/5e96df03c685e90008104f1d/1:1/w_875,h_875,c_limit/disney.jpg",
       "price": "\$50",
@@ -170,20 +341,21 @@ class _DestinationScreenState extends State<DestinationScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -194,8 +366,8 @@ class _DestinationScreenState extends State<DestinationScreen> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 18, vertical: 5),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18, vertical: 5),
             //padding: EdgeInsets.all(16),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,22 +387,22 @@ class _DestinationScreenState extends State<DestinationScreen> {
               ],
             ),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Container(
             child: TextField(
               controller: _searchController,
               onChanged: _filterPlaces,
               decoration: InputDecoration(
                 hintText: 'Search destinations...',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                 ),
               ),
             ),
           ),
-          SizedBox(height: 16),
-          Container(
+          const SizedBox(height: 16),
+          SizedBox(
             height: 80,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
@@ -246,12 +418,12 @@ class _DestinationScreenState extends State<DestinationScreen> {
                     });
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 8),
+                    margin: const EdgeInsets.symmetric(horizontal: 8),
                     width: 80,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
                           blurRadius: 5,
@@ -264,12 +436,12 @@ class _DestinationScreenState extends State<DestinationScreen> {
                       children: [
                         Text(
                           _categories[index]['icon']!,
-                          style: TextStyle(fontSize: 24),
+                          style: const TextStyle(fontSize: 24),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Text(
                           _categories[index]['name']!,
-                          style: TextStyle(fontSize: 12),
+                          style: const TextStyle(fontSize: 12),
                         ),
                       ],
                     ),
@@ -278,7 +450,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
               },
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           Expanded(
             child: ListView.builder(
               itemCount: _filteredPlaces.length,
@@ -294,12 +466,13 @@ class _DestinationScreenState extends State<DestinationScreen> {
                     );
                   },
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    padding: EdgeInsets.all(16),
+                    margin:
+                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
+                      boxShadow: const [
                         BoxShadow(
                           color: Colors.grey,
                           blurRadius: 5,
@@ -321,19 +494,19 @@ class _DestinationScreenState extends State<DestinationScreen> {
                             ),
                           ),
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
                                 _filteredPlaces[index]['name'],
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontSize: 18,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
                                 "Price is: " + _filteredPlaces[index]['price'],
                                 style: TextStyle(color: Colors.grey[600]),
@@ -360,7 +533,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -371,8 +544,8 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
@@ -380,39 +553,41 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -420,8 +595,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -429,8 +604,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

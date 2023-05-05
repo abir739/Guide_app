@@ -14,8 +14,8 @@ class PlanningScreen extends StatefulWidget {
 class _PlanningScreenState extends State<PlanningScreen> {
   List<dynamic> _planningList = [];
   List<dynamic> _activityList = [];
-  List<dynamic> _activityTemplateList = [];
-  List<dynamic> _activityCategoryList = [];
+  final List<dynamic> _activityTemplateList = [];
+  final List<dynamic> _activityCategoryList = [];
 
   Future<List<dynamic>> _fetchPlanningData() async {
     var response = await http.get(
@@ -76,7 +76,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
         _planningList = data[0];
         _activityList = data[1];
       });
-      _activityList.forEach((activity) {
+      for (var activity in _activityList) {
         _fetchActivityTemplateData(activity['activityTemplateId'])
             .then((activityTemplate) {
           setState(() {
@@ -91,7 +91,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
             });
           });
         });
-      });
+      }
     });
   }
 
@@ -99,7 +99,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planning Screen'),
+        title: const Text('Planning Screen'),
       ),
       body: ListView.builder(
         itemCount: _activityList.length,
@@ -123,40 +123,40 @@ class _PlanningScreenState extends State<PlanningScreen> {
                     children: [
                       Text(
                         activityTemplate['name'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 18.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       Text(
                         activityTemplate['shortDescription'],
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                         ),
                       ),
-                      SizedBox(height: 10.0),
+                      const SizedBox(height: 10.0),
                       Text(
                         'Duration: ${activityTemplate['durationHours']} hours',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontSize: 16.0,
                         ),
                       ),
-                      SizedBox(height: 10.0),
-                      Text(
+                      const SizedBox(height: 10.0),
+                      const Text(
                         'Activity Categories:',
                         style: TextStyle(
                           fontSize: 16.0,
                         ),
                       ),
-                      SizedBox(height: 5.0),
+                      const SizedBox(height: 5.0),
                       FutureBuilder<List<dynamic>>(
                         future: getActivityCategories(
                             activityTemplate['activityCategories']),
                         builder: (context, snapshot) {
                           if (snapshot.connectionState ==
                               ConnectionState.waiting) {
-                            return CircularProgressIndicator();
+                            return const CircularProgressIndicator();
                           } else if (snapshot.hasError) {
                             return Text('Error: ${snapshot.error}');
                           } else {

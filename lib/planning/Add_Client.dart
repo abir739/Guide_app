@@ -1,15 +1,13 @@
-import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import '../NetworkHandler.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:guide_app/models/activity_http_handler.dart';
 
 class AddClientScreen extends StatefulWidget {
+  const AddClientScreen({super.key});
+
   @override
   _AddClientScreenState createState() => _AddClientScreenState();
 }
@@ -20,7 +18,7 @@ class _AddClientScreenState extends State<AddClientScreen> {
   final _prenameController = TextEditingController();
   final _telephoneController = TextEditingController();
   final _passportController = TextEditingController();
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   NetworkHandler networkHandler = NetworkHandler();
 
   late String clientName;
@@ -72,14 +70,14 @@ class _AddClientScreenState extends State<AddClientScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [],
-        backgroundColor: Color.fromRGBO(212, 5, 5, 0.976),
-        title: Text("Add Client "),
+        actions: const [],
+        backgroundColor: const Color.fromRGBO(212, 5, 5, 0.976),
+        title: const Text("Add Client "),
       ),
       body: Form(
         key: _formKey,
         child: Padding(
-          padding: EdgeInsets.all(20),
+          padding: const EdgeInsets.all(20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -89,7 +87,7 @@ class _AddClientScreenState extends State<AddClientScreen> {
                 decoration: InputDecoration(
                   labelText: 'Name',
                   hintText: 'Enter your name',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -104,13 +102,13 @@ class _AddClientScreenState extends State<AddClientScreen> {
                   clientName = value!;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextFormField(
                 controller: _prenameController,
                 decoration: InputDecoration(
                   labelText: 'Prename',
                   hintText: 'Enter your prename',
-                  prefixIcon: Icon(Icons.person),
+                  prefixIcon: const Icon(Icons.person),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -125,14 +123,14 @@ class _AddClientScreenState extends State<AddClientScreen> {
                   clientPrename = value!;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextFormField(
                 controller: _telephoneController,
                 keyboardType: TextInputType.phone,
                 decoration: InputDecoration(
                   labelText: 'Telephone',
                   hintText: 'Enter your telephone number',
-                  prefixIcon: Icon(Icons.phone),
+                  prefixIcon: const Icon(Icons.phone),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -147,13 +145,13 @@ class _AddClientScreenState extends State<AddClientScreen> {
                   clientTelephone = value!;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               TextFormField(
                 controller: _passportController,
                 decoration: InputDecoration(
                   labelText: 'Passport',
                   hintText: 'Enter your passport number',
-                  prefixIcon: Icon(Icons.credit_card),
+                  prefixIcon: const Icon(Icons.credit_card),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -168,21 +166,21 @@ class _AddClientScreenState extends State<AddClientScreen> {
                   clientPassport = value!;
                 },
               ),
-              SizedBox(height: 30),
+              const SizedBox(height: 30),
               ElevatedButton(
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(Colors.red),
                   textStyle: MaterialStateProperty.all<TextStyle>(
-                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                     RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(18.0),
-                      side: BorderSide(color: Colors.blue),
+                      side: const BorderSide(color: Colors.blue),
                     ),
                   ),
                 ),
-                child: Text('Save'),
+                child: const Text('Save'),
                 onPressed: () async {
                   /*
                   if (_formKey.currentState!.validate()) {

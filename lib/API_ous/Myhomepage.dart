@@ -1,17 +1,12 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:provider/provider.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:flutter_animated_icons/flutter_animated_icons.dart';
 //import 'package:guide_app/Secreen/AddHotel.dart';
 //import 'package:guide_app/Secreen/GenerateQRPage.dart';
 
@@ -29,15 +24,12 @@ import 'package:guide_app/modele/item.dart';
 import 'package:guide_app/modele/plannings.dart';
 
 //import '../Provider/theme_provider.dart';
-import '../main.dart';
 import '../modele/http_Activity_handler.dart';
 import '../modele/image_model.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_animated_icons/icons8.dart';
-import 'package:flutter_animated_icons/useanimations.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 class MyHomePage extends StatefulWidget {
   final GoogleSignInAccount? user;
@@ -67,7 +59,7 @@ IO.Socket socket = IO.io('ws://192.168.1.12:3000', <String, dynamic>{
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String selectedOption = 'Option 1';
-  List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
+  final List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
   List<String> selectedItemValue = <String>[
     'Option 1',
     'Option 2',
@@ -94,27 +86,27 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   late final List<String> notificationsid = [];
   final List<notif> not = [];
   final List<Color> _colors = [
-    Color.fromARGB(130, 253, 148, 141),
-    Color.fromARGB(255, 158, 207, 248),
-    Color.fromARGB(255, 231, 168, 75),
-    Color.fromARGB(151, 239, 153, 254),
-    Color.fromARGB(165, 171, 252, 174),
+    const Color.fromARGB(130, 253, 148, 141),
+    const Color.fromARGB(255, 158, 207, 248),
+    const Color.fromARGB(255, 231, 168, 75),
+    const Color.fromARGB(151, 239, 153, 254),
+    const Color.fromARGB(165, 171, 252, 174),
   ];
 
   late Color _backgroundColors;
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   late TabController _tabController;
   late DateTime _selectedDay;
   late DateTime _selectedDay2;
-  late int _selectedDaylast = 0;
+  late final int _selectedDaylast = 0;
   late List<DateTime>? days = [
     DateTime.now(),
-    DateTime.now().add(Duration(days: 1)),
-    DateTime.now().add(Duration(days: 2)),
-    DateTime.now().add(Duration(days: 3)),
-    DateTime.now().add(Duration(days: 4)),
-    DateTime.now().add(Duration(days: 5)),
-    DateTime.now().add(Duration(days: 6)),
+    DateTime.now().add(const Duration(days: 1)),
+    DateTime.now().add(const Duration(days: 2)),
+    DateTime.now().add(const Duration(days: 3)),
+    DateTime.now().add(const Duration(days: 4)),
+    DateTime.now().add(const Duration(days: 5)),
+    DateTime.now().add(const Duration(days: 6)),
   ];
 
   String data = '';
@@ -132,6 +124,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
   }
 
+  @override
   void initState() {
     super.initState();
 
@@ -178,10 +171,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         String id = data['id'];
 
         this.notifications.add(detail);
-        this.notificationsid.add(id);
+        notificationsid.add(id);
 
         this.data = data.toString();
-        print('Received data......homepage: $data ' + '$detail');
+        //print('Received data......homepage: $data ' detail);
       });
       if (data['user'] != null) {
         setState(() {});
@@ -189,17 +182,17 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     });
 
     FlutterLocalNotificationsPlugin notifications =
-        new FlutterLocalNotificationsPlugin();
-    var androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var iOSInit = IOSInitializationSettings();
+        FlutterLocalNotificationsPlugin();
+    var androidInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOSInit = const IOSInitializationSettings();
 
-    _message = new TextEditingController();
+    _message = TextEditingController();
     var init = InitializationSettings(android: androidInit, iOS: iOSInit);
   }
 
   List<DropdownMenuItem<String>> _dropDownItem() {
-    List<String> _options1 = ['Option 1', 'Option 2', 'Option 3', 'Status'];
-    return _options1
+    List<String> options1 = ['Option 1', 'Option 2', 'Option 3', 'Status'];
+    return options1
         .map((value) => DropdownMenuItem(
               value: value,
               child: Text(value.toString()),
@@ -400,11 +393,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         //         ),
         //       ),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
+          preferredSize: const Size.fromHeight(70),
           child: AppBar(
             automaticallyImplyLeading: false,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -420,7 +413,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.notification_add_rounded),
+                    icon: const Icon(Icons.notification_add_rounded),
                     onPressed: () {
                       // Navigator.push(
                       //     context,
@@ -433,7 +426,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             builder: (context) => NotificationActivityScreen()),
                       );*/
                     },
-                    color: Color.fromARGB(255, 243, 242, 245),
+                    color: const Color.fromARGB(255, 243, 242, 245),
                   ),
                   // IconButton(
                   //   icon: Icon(Icons.menu_sharp),
@@ -487,7 +480,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   IconButton(
                     splashRadius: 20,
                     iconSize: 20,
-                    color: Color.fromARGB(255, 175, 10, 10),
+                    color: const Color.fromARGB(255, 175, 10, 10),
                     onPressed: () {
                       _animationControllerL.reset();
                       _animationControllerL.forward();
@@ -522,7 +515,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ],
               ),
             ],
-            backgroundColor: Color.fromARGB(255, 242, 242, 244),
+            backgroundColor: const Color.fromARGB(255, 242, 242, 244),
             title: InkWell(
               onTap: () {
                 //Get.to(GenerateQRPage());
@@ -539,7 +532,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
             ),
             // const Text('Plannig'),
-            bottom: PreferredSize(
+            bottom: const PreferredSize(
               preferredSize: Size.fromHeight(kToolbarHeight),
               child: Column(),
             ),
@@ -551,11 +544,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   "Planning",
                   style: TextStyle(fontSize: 30),
                 ),
-                SizedBox(width: 40),
+                const SizedBox(width: 40),
                 ElevatedButton(
                   onPressed: () {
                     // Do something when the button is pressed
@@ -565,10 +558,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     //logout();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, backgroundColor: Colors.white,
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.mode_edit),
                       SizedBox(width: 8),
@@ -599,11 +591,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 //         ),
                 Text(
                   DateFormat('  MMMM  d ,y ').format(_selectedDay),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 Text(
                   DateFormat(' ~ MMMM  d ,y ').format(_selectedDay2),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 //    ElevatedButton(
                 //                 onPressed: () {},
@@ -655,7 +647,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                         return ListView.separated(
                           itemCount: snapshot.data!.length,
                           separatorBuilder: (context, index) {
-                            return Divider();
+                            return const Divider();
                           },
                           itemBuilder: (context, index) {
                             // int red = Random().nextInt(256);
@@ -746,7 +738,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                           // scrollDirection: Axis.horizontal,
                           //  reverse: true,
                           separatorBuilder: (context, index) {
-                            return Divider();
+                            return const Divider();
                           },
                           itemCount: snapshot.data!.length,
 
@@ -758,8 +750,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                             // Set the new background color
                             Color backgroundColor =
                                 Color.fromARGB(255, red, blue, green);
-                            Color.fromARGB(255, 227, 111, 22);
-                            List<String> _selectedOptions =
+                            const Color.fromARGB(255, 227, 111, 22);
+                            List<String> selectedOptions =
                                 List.filled(snapshot.data!.length, 'Status');
                             int itemCount = snapshot.data!.length ?? 0;
                             int reversedIndex = itemCount - 1 - index;
@@ -865,13 +857,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           // itemBuilder: (context, int index) {
           //   return Imagebuild(not[index]);
           // },
-          leading: Icon(Icons.notification_important),
+          leading: const Icon(Icons.notification_important),
           isThreeLine: false,
           dense: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           selected: false,
           enabled: true,
-          trailing: Icon(Icons.arrow_forward),
+          trailing: const Icon(Icons.arrow_forward),
           title: Text(not[index].detail as String),
           subtitle: Text(not[index].detail as String),
           onTap: () {
@@ -895,7 +887,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -920,12 +912,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     );
   }
 
-  buildCardH(Activity activity, index, _backgroundColors) {
+  buildCardH(Activity activity, index, backgroundColors) {
     return Card(
       elevation: 7,
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
-        color: _backgroundColors,
+        color: backgroundColors,
         child: Container(
           height: Get.height * 0.3,
           margin: const EdgeInsets.only(left: 2),
@@ -943,7 +935,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 20,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           _animationController.reset();
                           _animationController.forward();
@@ -959,7 +951,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 12,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           // _animationController.reset();
                           // _animationController.forward();
@@ -982,7 +974,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ],
               ),
               Container(
-                color: _backgroundColors,
+                color: backgroundColors,
                 height: Get.height * 0.1,
                 // padding: const EdgeInsets.all(2),
                 alignment: Alignment.center,
@@ -991,7 +983,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     print(index);
                     // Get.to(activitydetalSecreen(activity));
                   },
-                  title: Text(
+                  title: const Text(
 // activity.title
                       "Restaurent ",
                       style: TextStyle(
@@ -1002,12 +994,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     clipBehavior: Clip.antiAlias,
                     height: 80,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       activity.url,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
@@ -1021,21 +1013,21 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     clipBehavior: Clip.antiAlias,
                     height: 50,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       activity.url,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
                   SizedBox(width: Get.width * 0.01),
-                  Column(
+                  const Column(
                     children: [
                       Text(
                         "Restoron Name",
-                        style: const TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ],
                   ),
@@ -1081,11 +1073,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     items: _dropDownItem(),
                     onChanged: (value) {
                       setState(() {
-                        print('${index} and ${value}');
+                        print('$index and $value');
                       });
                     },
                     value: selectedItemValue[3],
-                    hint: Text('0'),
+                    hint: const Text('0'),
                   ),
                   // DropdownButton<String>(
                   //   items: _options.map((String option) {
@@ -1105,7 +1097,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   //   },
                   // ),
 
-                  SizedBox(width: 2),
+                  const SizedBox(width: 2),
                 ],
               ),
               const Divider(
@@ -1114,7 +1106,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 endIndent: 14,
                 thickness: 1.8,
               ),
-              Column(
+              const Column(
                 children: [
                   Row(
                     children: [
@@ -1162,7 +1154,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       Icon(Icons.flag),
                       Text(
                         "Restorent location",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 20),
@@ -1209,12 +1201,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
           //       })
 
-          Icon(Icons.image),
+          const Icon(Icons.image),
 
           Text('Item$index'),
           Text(item),
 
-          Icon(Icons.list_alt_sharp),
+          const Icon(Icons.list_alt_sharp),
         ],
       ),
     );
@@ -1223,15 +1215,15 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   buildCard(
     Activity activity,
     index,
-    _backgroundColors,
+    backgroundColors,
   ) {
-    List<String> _selectedOptions1 = List.filled(1000, 'Status');
+    List<String> selectedOptions1 = List.filled(1000, 'Status');
 
     return Card(
       elevation: 7,
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
-        color: _backgroundColors,
+        color: backgroundColors,
         child: Container(
           height: Get.height * 0.3,
           margin: const EdgeInsets.only(left: 2),
@@ -1249,7 +1241,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 20,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           _animationController.reset();
                           _animationController.forward();
@@ -1265,7 +1257,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 12,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           // _animationController.reset();
                           // _animationController.forward();
@@ -1285,7 +1277,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 ],
               ),
               Container(
-                color: _backgroundColors,
+                color: backgroundColors,
                 height: Get.height * 0.1,
                 // padding: const EdgeInsets.all(2),
                 alignment: Alignment.center,
@@ -1293,7 +1285,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   onTap: () {
                     print(index);
                   },
-                  title: Text(
+                  title: const Text(
 // activity.title
                       "Activity",
                       style: TextStyle(
@@ -1304,12 +1296,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     clipBehavior: Clip.antiAlias,
                     height: 80,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       activity.url,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
@@ -1330,7 +1322,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  SizedBox(width: 180),
+                  const SizedBox(width: 180),
 // IconButton(
 //                     // splashRadius: 20,
 //                     // iconSize: 12,
@@ -1391,14 +1383,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     items: _dropDownItem(),
                     onChanged: (value) {
                       setState(() {
-                        print('${index} and ${value}');
+                        print('$index and $value');
                       });
                     },
                     value: selectedItemValue[3],
-                    hint: Text('0'),
+                    hint: const Text('0'),
                   ),
 //this what i will use with api
-                  SizedBox(width: 2),
+                  const SizedBox(width: 2),
                 ],
               ),
               const Divider(
@@ -1409,12 +1401,12 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
               ),
               Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(width: 20),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
@@ -1422,22 +1414,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                       SizedBox(width: 40),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
-                      ),
-                      SizedBox(width: 40),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
                       ),
                     ],
                   ),
@@ -1445,8 +1425,20 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                     children: [
                       const SizedBox(width: 20),
                       Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                      const SizedBox(width: 40),
+                      Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                    ],
+                  ),
+                  const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Text(
                         "ASl France",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 20),
@@ -1472,7 +1464,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             // scrollDirection: Axis.horizontal,
             //  reverse: true,
             separatorBuilder: (context, index) {
-              return Divider();
+              return const Divider();
             },
             itemCount: snapshot.data!.length,
 
@@ -1483,8 +1475,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
               // Set the new background color
               Color backgroundColor = Color.fromARGB(255, red, blue, green);
-              Color.fromARGB(255, 227, 111, 22);
-              List<String> _selectedOptions =
+              const Color.fromARGB(255, 227, 111, 22);
+              List<String> selectedOptions =
                   List.filled(snapshot.data!.length, 'Status');
               int itemCount = snapshot.data!.length ?? 0;
               int reversedIndex = itemCount - 1 - index;

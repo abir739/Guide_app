@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class PlaceDescriptionScreen extends StatelessWidget {
   final Map<String, dynamic> place;
 
-  const PlaceDescriptionScreen({required this.place});
+  const PlaceDescriptionScreen({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
@@ -31,45 +30,45 @@ class PlaceDescriptionScreen extends StatelessWidget {
                 children: [
                   Container(
                     color: Colors.black.withOpacity(0.5),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       horizontal: 16,
                       vertical: 8,
                     ),
                     child: Text(
                       place['name']!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton.icon(
                         onPressed: () {},
-                        icon: Icon(Icons.remove_red_eye),
-                        label: Text('Aperçu'),
+                        icon: const Icon(Icons.remove_red_eye),
+                        label: const Text('Aperçu'),
                         style: TextButton.styleFrom(
-                          primary: Colors.white,
+                          foregroundColor: Colors.white,
                         ),
                       ),
                       TextButton.icon(
                         onPressed: () {},
-                        icon: Icon(Icons.map),
-                        label: Text('Map'),
+                        icon: const Icon(Icons.map),
+                        label: const Text('Map'),
                         style: TextButton.styleFrom(
-                          primary: Colors.white,
+                          foregroundColor: Colors.white,
                         ),
                       ),
                       TextButton.icon(
                         onPressed: () {},
-                        icon: Icon(Icons.comment),
-                        label: Text('Commentaire'),
+                        icon: const Icon(Icons.comment),
+                        label: const Text('Commentaire'),
                         style: TextButton.styleFrom(
-                          primary: Colors.white,
+                          foregroundColor: Colors.white,
                         ),
                       ),
                     ],
@@ -77,8 +76,8 @@ class PlaceDescriptionScreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(height: 16),
-            Padding(
+            const SizedBox(height: 16),
+            const Padding(
               padding: EdgeInsets.symmetric(horizontal: 16),
               child: Text(
                 'Description:',
@@ -89,10 +88,10 @@ class PlaceDescriptionScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Text(
                 place['description']!,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   height: 1.5,
                 ),

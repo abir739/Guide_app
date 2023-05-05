@@ -6,7 +6,7 @@ class ScheduleScreen extends StatelessWidget {
   final DateTime startDate;
   final DateTime endDate;
 
-  ScheduleScreen({
+  const ScheduleScreen({super.key, 
     required this.userName,
     required this.userPhotoUrl,
     required this.startDate,
@@ -17,7 +17,7 @@ class ScheduleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Schedule Screen'),
+        title: const Text('Schedule Screen'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -31,22 +31,22 @@ class ScheduleScreen extends StatelessWidget {
               ),
               Text(
                 userName,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
                 ),
               ),
             ],
           ),
-          SizedBox(height: 20),
-          Text(
+          const SizedBox(height: 20),
+          const Text(
             'Planning days:',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             children: _buildPlanningDays(),
           ),
@@ -62,15 +62,15 @@ class ScheduleScreen extends StatelessWidget {
       String dayString = '${day.day}/${day.month}';
       days.add(
         Container(
-          margin: EdgeInsets.only(right: 10),
-          padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+          margin: const EdgeInsets.only(right: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             color: Colors.blueAccent,
           ),
           child: Text(
             dayString,
-            style: TextStyle(
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 16,
             ),

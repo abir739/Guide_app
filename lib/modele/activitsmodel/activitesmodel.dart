@@ -2,9 +2,6 @@ import 'package:json_annotation/json_annotation.dart';
 
 import '../TouristGuide.dart';
 import '../agance.dart';
-import '../creatorUser.dart';
-import '../touristGroup.dart';
-import '../updaterUser.dart';
 import 'activityTempModel.dart';
 part 'activitesmodel.g.dart';
 

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,7 +7,6 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
 import '../components/custom_textfield.dart';
 
@@ -27,7 +25,7 @@ class _NewActivityState extends State<NewActivity> {
   late String _activityName;
   late String _activityDescription;
   File? _imageFile;
-  bool _pressed = false;
+  final bool _pressed = false;
   bool _isNotificationPressed = false;
   bool _isExtraPressed = false; // Define the variable here
 
@@ -121,7 +119,7 @@ class _NewActivityState extends State<NewActivity> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -130,7 +128,7 @@ class _NewActivityState extends State<NewActivity> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Text(
+                const Text(
                   'New Activity',
                   style: TextStyle(
                     fontSize: 27.0,
@@ -156,7 +154,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.alarm_rounded,
                     size: 18,
                   ),
@@ -181,7 +179,7 @@ class _NewActivityState extends State<NewActivity> {
                     labelText: 'Place',
                     hintText: 'Search for a place',
                     suffixIcon: IconButton(
-                      icon: Icon(Icons.search),
+                      icon: const Icon(Icons.search),
                       onPressed: () async {
                         final String mapsUrl =
                             'https://www.google.com/maps/search/?api=1&query=${placeController.text}';
@@ -205,14 +203,14 @@ class _NewActivityState extends State<NewActivity> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState!.validate()) {
                       // submit form
                     }
                   },
-                  child: Text('Save'),
+                  child: const Text('Save'),
                 ),
                 const SizedBox(height: 16.0),
                 GestureDetector(
@@ -227,11 +225,11 @@ class _NewActivityState extends State<NewActivity> {
                     decoration: BoxDecoration(
                       border: Border.all(color: Colors.grey),
                     ),
-                    padding: EdgeInsets.all(16.0),
-                    child: Column(
+                    padding: const EdgeInsets.all(16.0),
+                    child: const Column(
                       children: [
                         Icon(Icons.cloud_upload),
-                        const SizedBox(height: 8.0),
+                        SizedBox(height: 8.0),
                         Text('Upload a File or an Image'),
                       ],
                     ),
@@ -247,7 +245,7 @@ class _NewActivityState extends State<NewActivity> {
                 const SizedBox(height: 16.0),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Notification',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -267,7 +265,7 @@ class _NewActivityState extends State<NewActivity> {
                   ],
                 ),
                 const SizedBox(height: 8.0),
-                Text(
+                const Text(
                   'Get notified when someones posts a comment on a posting.',
                   style: TextStyle(
                     fontSize: 14.0,
@@ -278,7 +276,7 @@ class _NewActivityState extends State<NewActivity> {
                 const SizedBox(height: 16.0),
                 Row(
                   children: [
-                    Text(
+                    const Text(
                       'Extra',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -299,7 +297,7 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  prefixIcon: Icon(
+                  prefixIcon: const Icon(
                     Icons.attach_money_outlined,
                     size: 18,
                   ),
@@ -333,13 +331,13 @@ class _NewActivityState extends State<NewActivity> {
                         context: context,
                         builder: (BuildContext context) {
                           return AlertDialog(
-                            title: Text("New activity created"),
+                            title: const Text("New activity created"),
                             actions: <Widget>[
                               TextButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text("OK"),
+                                child: const Text("OK"),
                               ),
                             ],
                           );
@@ -348,12 +346,12 @@ class _NewActivityState extends State<NewActivity> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 180, 58, 105),
+                    backgroundColor: const Color.fromARGB(255, 180, 58, 105),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Créer',
                     style: TextStyle(
                       fontSize: 16.0,
@@ -369,20 +367,20 @@ class _NewActivityState extends State<NewActivity> {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text("Are you sure you want to cancel?"),
+                          title: const Text("Are you sure you want to cancel?"),
                           actions: <Widget>[
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text("No"),
+                              child: const Text("No"),
                             ),
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                                 Navigator.of(context).pop();
                               },
-                              child: Text("Yes"),
+                              child: const Text("Yes"),
                             ),
                           ],
                         );
@@ -390,12 +388,12 @@ class _NewActivityState extends State<NewActivity> {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[300],
+                    backgroundColor: Colors.grey[300],
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                   ),
-                  child: Text(
+                  child: const Text(
                     'Annuler',
                     style: TextStyle(
                       fontSize: 16.0,

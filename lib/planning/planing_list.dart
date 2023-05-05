@@ -1,26 +1,16 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 
-import 'package:flutter_svg/flutter_svg.dart';
 
-import 'package:guide_app/planning/guide_plan.dart';
-import 'package:guide_app/planning/planing_detail.dart';
 import 'package:guide_app/planning/planning.dart';
 
-import 'package:intl/intl.dart';
-import 'package:guide_app/activity/newactivityyy.dart';
-import 'package:guide_app/planning/Add_Client.dart';
-import 'package:guide_app/notification/notification.dart';
 
-import '../HelpScreen.dart';
-import '../SettingsScreen.dart';
-import '../destination/destination.dart';
 import '../models/planing_model.dart';
-import '../users/client_list.dart';
 
 class PlanningListPage extends StatefulWidget {
+  const PlanningListPage({super.key});
+
   @override
   _PlanningListPageState createState() => _PlanningListPageState();
 }
@@ -47,7 +37,7 @@ class _PlanningListPageState extends State<PlanningListPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Planning List'),
+        title: const Text('Planning List'),
       ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +48,7 @@ class _PlanningListPageState extends State<PlanningListPage> {
               decoration: InputDecoration(
                 labelText: 'Search',
                 hintText: 'Enter keywords',
-                prefixIcon: Icon(Icons.search),
+                prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -66,9 +56,9 @@ class _PlanningListPageState extends State<PlanningListPage> {
             ),
           ),
           SizedBox(
-            height: 120,
+            height: 520,
             child: ListView.builder(
-              scrollDirection: Axis.horizontal,
+              scrollDirection: Axis.vertical,
               itemCount: _planningList.length,
               itemBuilder: (context, index) {
                 Planning planning = _planningList[index];

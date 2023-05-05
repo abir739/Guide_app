@@ -68,7 +68,7 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword>
   @override
   Widget build(BuildContext context) {
     return CustomTextField(
-      prefixIcon: Icon(
+      prefixIcon: const Icon(
         Icons.lock,
         size: 17,
       ),
@@ -81,16 +81,16 @@ class _CustomTextFieldPasswordState extends State<CustomTextFieldPassword>
         customIcon: AnimatedSwitcher(
             duration: const Duration(milliseconds: 300),
             transitionBuilder: (child, anim) => RotationTransition(
-                  turns: child.key == ValueKey('icon1')
+                  turns: child.key == const ValueKey('icon1')
                       ? Tween<double>(begin: 1, end: 0.75).animate(anim)
                       : Tween<double>(begin: 0.75, end: 1).animate(anim),
                   child: FadeTransition(opacity: anim, child: child),
                 ),
             child: _showPassword
-                ? Icon(Icons.remove_red_eye, key: const ValueKey('icon1'))
-                : Icon(
+                ? const Icon(Icons.remove_red_eye, key: ValueKey('icon1'))
+                : const Icon(
                     Icons.remove_red_eye_sharp,
-                    key: const ValueKey('icon2'),
+                    key: ValueKey('icon2'),
                   )),
         //iconData: Icon( (_showPassword) ? Icons.remove_red_eye : Icons.home ),
       ),

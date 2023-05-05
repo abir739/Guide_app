@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'dart:convert';
 
 import '../destination/destination_test.dart';
 import '../models/users_model.dart';
@@ -13,7 +12,7 @@ import 'package:url_launcher/url_launcher.dart';
 class ProfileScreen extends StatelessWidget {
   final User user;
 
-  ProfileScreen({required this.user});
+  const ProfileScreen({super.key, required this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -24,20 +23,20 @@ class ProfileScreen extends StatelessWidget {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -50,61 +49,61 @@ class ProfileScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(height: 0.5),
-            Text(
+            const SizedBox(height: 0.5),
+            const Text(
               'Client Profile',
               style: TextStyle(
                 fontSize: 27.0,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 14.0),
+            const SizedBox(height: 14.0),
             CircleAvatar(
               backgroundImage: NetworkImage(user.picture),
               radius: 63.0,
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Text(
               '${user.firstName} ${user.lastName}',
-              style: TextStyle(fontSize: 24.0),
+              style: const TextStyle(fontSize: 24.0),
             ),
-            SizedBox(height: 5.0),
+            const SizedBox(height: 5.0),
             Text.rich(
               TextSpan(
                 text: 'ID: ',
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                 ),
                 children: [
                   TextSpan(
-                    text: '${user.id}',
-                    style: TextStyle(fontSize: 12.0),
+                    text: user.id,
+                    style: const TextStyle(fontSize: 12.0),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Row(
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.symmetric(horizontal: 10.0),
+                    margin: const EdgeInsets.symmetric(horizontal: 10.0),
                     height: 2.0,
                     color: Colors.grey[300],
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 10.0),
+            const SizedBox(height: 10.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'Email: ${user.email}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -112,15 +111,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'Phone: ${user.phone}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -128,15 +127,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'BirthDate: ${user.birthDate}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -144,15 +143,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'Address: ${user.address}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -160,15 +159,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'ZipCode: ${user.zipCode}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -176,15 +175,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'Country: ${user.countryId}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -192,15 +191,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'language: ${user.languageId}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -208,15 +207,15 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 15.0),
+            const SizedBox(height: 15.0),
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: Text(
                     'Second Language: ${user.secondLanguageId}',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16.0,
                       fontWeight: FontWeight.w500,
                     ),
@@ -224,7 +223,7 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 65.0),
+            const SizedBox(height: 65.0),
             /* ElevatedButton(
               child: Text('View Profile'),
               onPressed: () {
@@ -241,12 +240,12 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 GestureDetector(
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       color: Colors.blue[400],
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.phone,
                       color: Colors.white,
                     ),
@@ -263,19 +262,19 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       color: Colors.red[400],
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.mail,
                       color: Colors.white,
                     ),
                   ),
                   onTap: () async {
                     // TODO: Send email to the user
-                    String email = Uri.encodeComponent('${user.email}');
+                    String email = Uri.encodeComponent(user.email);
                     String subject =
                         Uri.encodeComponent("Hello ${user.firstName}");
                     String body = Uri.encodeComponent(
@@ -292,12 +291,12 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 GestureDetector(
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       color: Colors.green[400],
                       borderRadius: BorderRadius.circular(20.0),
                     ),
-                    child: Icon(
+                    child: const Icon(
                       Icons.messenger,
                       color: Colors.white,
                     ),
@@ -328,7 +327,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -339,50 +338,50 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -390,8 +389,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -399,8 +398,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

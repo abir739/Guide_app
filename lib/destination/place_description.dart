@@ -1,16 +1,17 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../notification/notification.dart';
 import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
+import 'comment.dart';
 import 'destination_test.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlaceDescriptionScreen extends StatelessWidget {
   final Map<String, dynamic> place;
 
-  const PlaceDescriptionScreen({required this.place});
+  const PlaceDescriptionScreen({super.key, required this.place});
 
   @override
   Widget build(BuildContext context) {
@@ -21,20 +22,20 @@ class PlaceDescriptionScreen extends StatelessWidget {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -46,13 +47,13 @@ class PlaceDescriptionScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Container(
+            SizedBox(
               height: 120,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 itemCount: 10,
                 itemBuilder: (context, index) => Container(
-                  margin: EdgeInsets.all(8),
+                  margin: const EdgeInsets.all(8),
                   width: 80,
                   decoration: BoxDecoration(
                     color: Colors.grey[300],
@@ -64,7 +65,7 @@ class PlaceDescriptionScreen extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             SingleChildScrollView(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,13 +85,13 @@ class PlaceDescriptionScreen extends StatelessWidget {
                       children: [
                         Container(
                           color: Colors.black.withOpacity(0.5),
-                          padding: EdgeInsets.symmetric(
+                          padding: const EdgeInsets.symmetric(
                             horizontal: 16,
                             vertical: 8,
                           ),
                           child: Text(
                             place['name']!,
-                            style: TextStyle(
+                            style: const TextStyle(
                               color: Colors.white,
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -130,41 +131,53 @@ class PlaceDescriptionScreen extends StatelessWidget {
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton.icon(
                           onPressed: () {},
-                          icon: Icon(Icons.remove_red_eye),
-                          label: Text('Aperçu'),
+                          icon: const Icon(Icons.remove_red_eye),
+                          label: const Text('Aperçu'),
                           style: TextButton.styleFrom(
-                            primary: const Color.fromARGB(255, 27, 27, 27),
+                            foregroundColor: const Color.fromARGB(255, 27, 27, 27),
                           ),
                         ),
-                        TextButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.map),
-                          label: Text('Map'),
-                          style: TextButton.styleFrom(
-                            primary: const Color.fromARGB(255, 24, 23, 23),
-                          ),
-                        ),
-                        TextButton.icon(
-                          onPressed: () {},
-                          icon: Icon(Icons.comment),
-                          label: Text('Commentaire'),
-                          style: TextButton.styleFrom(
-                            primary: const Color.fromARGB(255, 12, 12, 12),
-                          ),
-                        ),
+                       TextButton.icon(
+                    onPressed: () {
+                      // Launch the map application with a search query for the place's name
+                      launch('https://www.google.com/maps/search/?api=1&query=${place['name']}');
+                    },
+                    icon: Icon(Icons.map),
+                    label: Text('Map'),
+                    style: TextButton.styleFrom(
+                      primary: const Color.fromARGB(255, 24, 23, 23),
+                    ),
+                  ),
+                       TextButton.icon(
+  onPressed: () {
+    // Navigate to the comment section for the current place
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => CommentSection(placeName: place['name']),
+      ),
+    );
+  },
+  icon: const Icon(Icons.comment),
+  label: const Text('Commentaire'),
+  style: TextButton.styleFrom(
+    foregroundColor: const Color.fromARGB(255, 12, 12, 12),
+  ),
+),
+
                       ],
                     ),
                   ),
-                  SizedBox(height: 16),
-                  Padding(
+                  const SizedBox(height: 16),
+                  const Padding(
                     padding: EdgeInsets.symmetric(horizontal: 16),
                     child: Text(
                       'Description:',
@@ -175,10 +188,10 @@ class PlaceDescriptionScreen extends StatelessWidget {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(16),
+                    padding: const EdgeInsets.all(16),
                     child: Text(
                       place['description']!,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16,
                         height: 1.5,
                       ),
@@ -200,7 +213,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -211,8 +224,8 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.pop(context);
@@ -220,39 +233,39 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -260,8 +273,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -269,8 +282,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);

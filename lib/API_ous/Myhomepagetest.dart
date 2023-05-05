@@ -1,8 +1,5 @@
-import 'dart:convert';
 import 'dart:math';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
@@ -11,7 +8,6 @@ import 'package:lottie/lottie.dart';
 
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
-import 'package:flutter_animated_icons/flutter_animated_icons.dart';
 
 //import 'package:guide_app/Secreen/TimerService.dart';
 //import 'package:guide_app/Secreen/creatitem.dart';
@@ -25,9 +21,7 @@ import 'package:guide_app/modele/activity_model.dart';
 import 'package:guide_app/modele/PlanningHandler.dart';
 import 'package:guide_app/modele/item.dart';
 import 'package:guide_app/modele/plannings.dart';
-import '../Provider/theme_provider.dart';
 //import '../Screens/SettingsPage.dart';
-import '../main.dart';
 import '../modele/http_Activity_handler.dart';
 import '../modele/image_model.dart';
 
@@ -42,8 +36,6 @@ import '../modele/image_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:flutter_animated_icons/icons8.dart';
-import 'package:flutter_animated_icons/useanimations.dart';
-import 'package:sidebarx/sidebarx.dart';
 
 class MyHomePagetest extends StatefulWidget {
   final GoogleSignInAccount? user;
@@ -74,7 +66,7 @@ String? title;
 class _MyHomePagetestState extends State<MyHomePagetest>
     with TickerProviderStateMixin {
   String selectedOption = 'Option 1';
-  List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
+  final List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
   List<String> selectedItemValue = <String>[
     'Option 1',
     'Option 2',
@@ -100,27 +92,27 @@ class _MyHomePagetestState extends State<MyHomePagetest>
   late final List<String> notificationsid = [];
   final List<notif> not = [];
   final List<Color> _colors = [
-    Color.fromARGB(130, 253, 148, 141),
-    Color.fromARGB(255, 158, 207, 248),
-    Color.fromARGB(255, 231, 168, 75),
-    Color.fromARGB(151, 239, 153, 254),
-    Color.fromARGB(165, 171, 252, 174),
+    const Color.fromARGB(130, 253, 148, 141),
+    const Color.fromARGB(255, 158, 207, 248),
+    const Color.fromARGB(255, 231, 168, 75),
+    const Color.fromARGB(151, 239, 153, 254),
+    const Color.fromARGB(165, 171, 252, 174),
   ];
 
   late Color _backgroundColors;
-  final storage = FlutterSecureStorage();
+  final storage = const FlutterSecureStorage();
   late TabController _tabController;
   late DateTime _selectedDay;
   late DateTime _selectedDay2;
-  late int _selectedDaylast = 0;
+  late final int _selectedDaylast = 0;
   late List<DateTime>? days = [
     DateTime.now(),
-    DateTime.now().add(Duration(days: 1)),
-    DateTime.now().add(Duration(days: 2)),
-    DateTime.now().add(Duration(days: 3)),
-    DateTime.now().add(Duration(days: 4)),
-    DateTime.now().add(Duration(days: 5)),
-    DateTime.now().add(Duration(days: 6)),
+    DateTime.now().add(const Duration(days: 1)),
+    DateTime.now().add(const Duration(days: 2)),
+    DateTime.now().add(const Duration(days: 3)),
+    DateTime.now().add(const Duration(days: 4)),
+    DateTime.now().add(const Duration(days: 5)),
+    DateTime.now().add(const Duration(days: 6)),
   ];
 
   String data = '';
@@ -138,6 +130,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
     return "${twoDigits(duration.inHours)}:$twoDigitMinutes:$twoDigitSeconds";
   }
 
+  @override
   void initState() {
     super.initState();
 
@@ -196,17 +189,17 @@ class _MyHomePagetestState extends State<MyHomePagetest>
     });*/
 
     FlutterLocalNotificationsPlugin notifications =
-        new FlutterLocalNotificationsPlugin();
-    var androidInit = AndroidInitializationSettings('@mipmap/ic_launcher');
-    var iOSInit = IOSInitializationSettings();
+        FlutterLocalNotificationsPlugin();
+    var androidInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var iOSInit = const IOSInitializationSettings();
 
-    _message = new TextEditingController();
+    _message = TextEditingController();
     var init = InitializationSettings(android: androidInit, iOS: iOSInit);
   }
 
   List<DropdownMenuItem<String>> _dropDownItem() {
-    List<String> _options1 = ['Option 1', 'Option 2', 'Option 3', 'Status'];
-    return _options1
+    List<String> options1 = ['Option 1', 'Option 2', 'Option 3', 'Status'];
+    return options1
         .map((value) => DropdownMenuItem(
               value: value,
               child: Text(value.toString()),
@@ -407,11 +400,11 @@ class _MyHomePagetestState extends State<MyHomePagetest>
         //         ),
         //       ),
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(70),
+          preferredSize: const Size.fromHeight(70),
           child: AppBar(
             automaticallyImplyLeading: false,
             flexibleSpace: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 gradient: LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -427,7 +420,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.notification_add_rounded),
+                    icon: const Icon(Icons.notification_add_rounded),
                     onPressed: () {
                       // Navigator.push(
                       //     context,
@@ -440,7 +433,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                             builder: (context) => NotificationActivityScreen()),
                       );*/
                     },
-                    color: Color.fromARGB(255, 243, 242, 245),
+                    color: const Color.fromARGB(255, 243, 242, 245),
                   ),
                   // IconButton(
                   //   icon: Icon(Icons.menu_sharp),
@@ -494,7 +487,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                   IconButton(
                     splashRadius: 20,
                     iconSize: 20,
-                    color: Color.fromARGB(255, 175, 10, 10),
+                    color: const Color.fromARGB(255, 175, 10, 10),
                     onPressed: () {
                       _animationControllerL.reset();
                       _animationControllerL.forward();
@@ -529,7 +522,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                 ],
               ),
             ],
-            backgroundColor: Color.fromARGB(255, 242, 242, 244),
+            backgroundColor: const Color.fromARGB(255, 242, 242, 244),
             title: InkWell(
               onTap: () {
                 // Get.to(GenerateQRPage());
@@ -546,7 +539,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
               ),
             ),
             // const Text('Plannig'),
-            bottom: PreferredSize(
+            bottom: const PreferredSize(
               preferredSize: Size.fromHeight(kToolbarHeight),
               child: Column(),
             ),
@@ -558,11 +551,11 @@ class _MyHomePagetestState extends State<MyHomePagetest>
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               // crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(
+                const Text(
                   "Planning",
                   style: TextStyle(fontSize: 30),
                 ),
-                SizedBox(width: 40),
+                const SizedBox(width: 40),
                 ElevatedButton(
                   onPressed: () {
                     // Do something when the button is pressed
@@ -572,10 +565,9 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     // logout();
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
-                    onPrimary: Colors.black,
+                    foregroundColor: Colors.black, backgroundColor: Colors.white,
                   ),
-                  child: Row(
+                  child: const Row(
                     children: [
                       Icon(Icons.mode_edit),
                       SizedBox(width: 8),
@@ -606,11 +598,11 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                 //         ),
                 Text(
                   DateFormat('  MMMM  d ,y ').format(_selectedDay),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 Text(
                   DateFormat(' ~ MMMM  d ,y ').format(_selectedDay2),
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                 ),
                 //    ElevatedButton(
                 //                 onPressed: () {},
@@ -662,7 +654,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                         return ListView.separated(
                           itemCount: snapshot.data!.length,
                           separatorBuilder: (context, index) {
-                            return Divider();
+                            return const Divider();
                           },
                           itemBuilder: (context, index) {
                             // int red = Random().nextInt(256);
@@ -744,7 +736,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       }
                     },
                   ),
-                  Center(
+                  const Center(
                       //   child: FutureBuilder(
                       // future: activityList,
                       // builder: (context, snapshot) {
@@ -805,12 +797,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       // },
                       ),
 // // ),
-                  Center(),
-                  Center(),
-                  Center(),
-                  Center(),
+                  const Center(),
+                  const Center(),
+                  const Center(),
+                  const Center(),
 
-                  Center(),
+                  const Center(),
 //                   listview(),
 //                   listview(),
 //                   listview(),
@@ -879,13 +871,13 @@ class _MyHomePagetestState extends State<MyHomePagetest>
           // itemBuilder: (context, int index) {
           //   return Imagebuild(not[index]);
           // },
-          leading: Icon(Icons.notification_important),
+          leading: const Icon(Icons.notification_important),
           isThreeLine: false,
           dense: true,
-          contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+          contentPadding: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
           selected: false,
           enabled: true,
-          trailing: Icon(Icons.arrow_forward),
+          trailing: const Icon(Icons.arrow_forward),
           title: Text(not[index].detail as String),
           subtitle: Text(not[index].detail as String),
           onTap: () {
@@ -909,7 +901,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
     showModalBottomSheet(
       context: context,
       builder: (BuildContext context) {
-        return Container(
+        return SizedBox(
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -934,12 +926,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
     );
   }
 
-  buildCardH(Activity activity, index, _backgroundColors) {
+  buildCardH(Activity activity, index, backgroundColors) {
     return Card(
       elevation: 7,
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
-        color: _backgroundColors,
+        color: backgroundColors,
         child: Container(
           height: Get.height * 0.3,
           margin: const EdgeInsets.only(left: 2),
@@ -957,7 +949,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 20,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           _animationController.reset();
                           _animationController.forward();
@@ -973,7 +965,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 12,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           // _animationController.reset();
                           // _animationController.forward();
@@ -996,7 +988,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                 ],
               ),
               Container(
-                color: _backgroundColors,
+                color: backgroundColors,
                 height: Get.height * 0.1,
                 // padding: const EdgeInsets.all(2),
                 alignment: Alignment.center,
@@ -1005,7 +997,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     // print(index);
                     // Get.to(activitydetalSecreen(activity));
                   },
-                  title: Text(
+                  title: const Text(
 // activity.title
                       "Restaurent ",
                       style: TextStyle(
@@ -1016,12 +1008,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     clipBehavior: Clip.antiAlias,
                     height: 80,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       activity.url,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
@@ -1035,21 +1027,21 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     clipBehavior: Clip.antiAlias,
                     height: 50,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       activity.url,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
                   SizedBox(width: Get.width * 0.01),
-                  Column(
+                  const Column(
                     children: [
                       Text(
                         "Restoron Name",
-                        style: const TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14),
                       ),
                     ],
                   ),
@@ -1095,11 +1087,11 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     items: _dropDownItem(),
                     onChanged: (value) {
                       setState(() {
-                        print('${index} and ${value}');
+                        print('$index and $value');
                       });
                     },
                     value: selectedItemValue[3],
-                    hint: Text('0'),
+                    hint: const Text('0'),
                   ),
                   // DropdownButton<String>(
                   //   items: _options.map((String option) {
@@ -1119,7 +1111,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                   //   },
                   // ),
 
-                  SizedBox(width: 2),
+                  const SizedBox(width: 2),
                 ],
               ),
               const Divider(
@@ -1128,7 +1120,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                 endIndent: 14,
                 thickness: 1.8,
               ),
-              Column(
+              const Column(
                 children: [
                   Row(
                     children: [
@@ -1176,7 +1168,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       Icon(Icons.flag),
                       Text(
                         "Restorent location",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 20),
@@ -1223,12 +1215,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
 
           //       })
 
-          Icon(Icons.image),
+          const Icon(Icons.image),
 
           Text('Item$index'),
           Text(item),
 
-          Icon(Icons.list_alt_sharp),
+          const Icon(Icons.list_alt_sharp),
         ],
       ),
     );
@@ -1238,15 +1230,15 @@ class _MyHomePagetestState extends State<MyHomePagetest>
     // Activity activity,
     Plannigs planing,
     index,
-    _backgroundColors,
+    backgroundColors,
   ) {
-    List<String> _selectedOptions1 = List.filled(1000, 'Status');
+    List<String> selectedOptions1 = List.filled(1000, 'Status');
 
     return Card(
       elevation: 7,
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
-        color: _backgroundColors,
+        color: backgroundColors,
         child: Container(
           height: Get.height * 0.3,
           margin: const EdgeInsets.only(left: 2),
@@ -1264,7 +1256,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 20,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           _animationController.reset();
                           _animationController.forward();
@@ -1280,7 +1272,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 12,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           // _animationController.reset();
                           // _animationController.forward();
@@ -1300,7 +1292,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                 ],
               ),
               Container(
-                color: _backgroundColors,
+                color: backgroundColors,
                 height: Get.height * 0.1,
                 // padding: const EdgeInsets.all(2),
                 alignment: Alignment.center,
@@ -1308,7 +1300,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                   onTap: () {
                     print(index);
                   },
-                  title: Text(
+                  title: const Text(
 // activity.title
                       "Activity",
                       style: TextStyle(
@@ -1319,12 +1311,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     clipBehavior: Clip.antiAlias,
                     height: 80,
                     // alignment: Alignment.l,
-                    decoration: BoxDecoration(shape: BoxShape.circle),
+                    decoration: const BoxDecoration(shape: BoxShape.circle),
                     child: Image.network(
                       planing.agencyId,
                       errorBuilder: (BuildContext context, Object exception,
                           StackTrace? stackTrace) {
-                        return Icon(Icons.image);
+                        return const Icon(Icons.image);
                       },
                     ),
                   ),
@@ -1345,7 +1337,7 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       ),
                     ],
                   ),
-                  SizedBox(width: 180),
+                  const SizedBox(width: 180),
 // IconButton(
 //                     // splashRadius: 20,
 //                     // iconSize: 12,
@@ -1406,14 +1398,14 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     items: _dropDownItem(),
                     onChanged: (value) {
                       setState(() {
-                        print('${index} and ${value}');
+                        print('$index and $value');
                       });
                     },
                     value: selectedItemValue[3],
-                    hint: Text('0'),
+                    hint: const Text('0'),
                   ),
 //this what i will use with api
-                  SizedBox(width: 2),
+                  const SizedBox(width: 2),
                 ],
               ),
               const Divider(
@@ -1424,12 +1416,12 @@ class _MyHomePagetestState extends State<MyHomePagetest>
               ),
               Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(width: 20),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
@@ -1437,22 +1429,10 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                       SizedBox(width: 40),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
-                      ),
-                      SizedBox(width: 40),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
                       ),
                     ],
                   ),
@@ -1460,8 +1440,20 @@ class _MyHomePagetestState extends State<MyHomePagetest>
                     children: [
                       const SizedBox(width: 20),
                       Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                      const SizedBox(width: 40),
+                      Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                    ],
+                  ),
+                  const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Text(
                         "ASl France",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 20),

@@ -32,7 +32,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
           responseData.map((data) => Planning.fromJson(data)).toList();
 
       // Filter plannings by ID
-      final String planningId = '3aa7fdfe-1902-4f93-8669-d1b384903b39';
+      const String planningId = '3aa7fdfe-1902-4f93-8669-d1b384903b39';
       final Planning selectedPlanning =
           plannings.firstWhere((planning) => planning.id == planningId);
 
@@ -80,7 +80,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
             },
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
         Text(
             'Selected date: ${_selectedDate.day}/${_selectedDate.month}/${_selectedDate.year}'),
       ],

@@ -8,6 +8,8 @@ import '../notification/notification.dart';
 import '../users/client_list.dart';
 
 class ScheduleScreen extends StatefulWidget {
+  const ScheduleScreen({super.key});
+
   @override
   _ScheduleScreenState createState() => _ScheduleScreenState();
 }
@@ -16,9 +18,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   // Define your variables here
   List<DateTime> days = [];
   late DateTime selectedDay;
-  DateTime _startDate = DateTime.now().subtract(Duration(days: 3));
-  DateTime _endDate = DateTime.now().add(Duration(days: 20));
-  List<DateTime> _days = [];
+  final DateTime _startDate = DateTime.now().subtract(const Duration(days: 3));
+  final DateTime _endDate = DateTime.now().add(const Duration(days: 20));
+  final List<DateTime> _days = [];
   int _currentIndex = 0;
 
   @override
@@ -44,20 +46,20 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
           fit: BoxFit.cover,
           height: 36.0,
         ),
-        backgroundColor: Color.fromARGB(255, 207, 207, 219),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
         actions: <Widget>[
           IconButton(
-            icon: Icon(Icons.notifications),
+            icon: const Icon(Icons.notifications),
             onPressed: () {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificationsScreen()),
+                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
               );
             },
           ),
           IconButton(
-            icon: Icon(Icons.menu),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               // Show menu options when button is pressed
               _showMenu(context);
@@ -72,7 +74,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,8 +94,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ],
                   ),
                 ),
-                SizedBox(height: 10.0),
-                Container(
+                const SizedBox(height: 10.0),
+                SizedBox(
                   height: 40.0,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
@@ -138,21 +140,21 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           });
                         },
                         child: Container(
-                          margin: EdgeInsets.symmetric(horizontal: 3.0),
-                          padding: EdgeInsets.symmetric(horizontal: 16.0),
+                          margin: const EdgeInsets.symmetric(horizontal: 3.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(18.0),
                             color: isSelected
-                                ? Color.fromARGB(255, 248, 177, 170)
+                                ? const Color.fromARGB(255, 248, 177, 170)
                                 : Colors.transparent,
                           ),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "$dayOfWeek",
-                                style: TextStyle(
-                                  color: const Color(0xFFEB5F52),
+                                dayOfWeek,
+                                style: const TextStyle(
+                                  color: Color(0xFFEB5F52),
                                   fontSize: 14.0,
                                   fontWeight: FontWeight.bold,
                                   //fontWeight: FontWeight.w500,
@@ -191,14 +193,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     // Navigate to activity details page
                   },
                   child: Container(
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     child: Row(
                       children: [
                         Text(
                           '${startTime.format(context)} - ${endTime.format(context)}',
-                          style: TextStyle(fontSize: 18.0),
+                          style: const TextStyle(fontSize: 18.0),
                         ),
-                        SizedBox(width: 16.0),
+                        const SizedBox(width: 16.0),
                         Expanded(
                           child: Container(
                             height: 100.0,
@@ -206,7 +208,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               borderRadius: BorderRadius.circular(10.0),
                               color: const Color(0xFFEB5F52),
                             ),
-                            child: Column(
+                            child: const Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
@@ -236,7 +238,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     'Reminders',
@@ -246,14 +248,14 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: 8.0),
+                const SizedBox(height: 8.0),
                 Expanded(
                   child: ListView.builder(
                     itemCount: 5,
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 50.0,
-                        margin: EdgeInsets.symmetric(
+                        margin: const EdgeInsets.symmetric(
                             horizontal: 16.0, vertical: 8.0),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12.0),
@@ -262,9 +264,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Padding(
+                            const Padding(
                               padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                                  EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text(
                                 '12:00 PM',
                                 style: TextStyle(
@@ -273,9 +275,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 ),
                               ),
                             ),
-                            Expanded(
+                            const Expanded(
                               child: Padding(
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     horizontal: 16.0),
                                 child: Text(
                                   'Reminder description',
@@ -287,7 +289,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               ),
                             ),
                             IconButton(
-                              icon: Icon(
+                              icon: const Icon(
                                 Icons.delete_outline,
                                 color: Colors.red,
                               ),
@@ -316,7 +318,7 @@ void _showMenu(BuildContext context) {
     backgroundColor: Colors.transparent,
     builder: (BuildContext context) {
       return Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           borderRadius: BorderRadius.only(
             topLeft: Radius.circular(20.0),
             topRight: Radius.circular(20.0),
@@ -327,50 +329,50 @@ void _showMenu(BuildContext context) {
           mainAxisSize: MainAxisSize.min,
           children: [
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('Home'),
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
               onTap: () {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => PlanningListPage()),
+                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.playlist_add_circle_outlined),
-              title: Text('Destination'),
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => DestinationScreen()),
+                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.calendar_month),
-              title: Text('Schedule'),
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Schedule'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.groups),
-              title: Text('Clients'),
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
               onTap: () {
                 // Navigate to activites screen when pressed
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ClientScreen()),
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.feedback),
-              title: Text('Feedbacks'),
+              leading: const Icon(Icons.feedback),
+              title: const Text('Feedbacks'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -378,8 +380,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Settings'),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
               onTap: () {
                 // Navigate to settings screen
                 Navigator.pop(context);
@@ -387,8 +389,8 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: Icon(Icons.info),
-              title: Text('About'),
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
               onTap: () {
                 // Navigate to about screen
                 Navigator.pop(context);
