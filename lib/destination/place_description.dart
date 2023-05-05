@@ -5,6 +5,7 @@ import '../notification/notification.dart';
 import '../planning/guide_plan.dart';
 import '../users/client_list.dart';
 import 'comment.dart';
+import 'reaction.dart';
 import 'destination_test.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -30,7 +31,8 @@ class PlaceDescriptionScreen extends StatelessWidget {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -138,41 +140,53 @@ class PlaceDescriptionScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton.icon(
-                          onPressed: () {},
-                          icon: const Icon(Icons.remove_red_eye),
-                          label: const Text('Aperçu'),
+                          onPressed: () {
+                            // Navigate to the reactions screen for the current place
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    ReactionsScreen(placeName: place['name']),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.add_reaction),
+                          label: const Text('Reaction'),
                           style: TextButton.styleFrom(
-                            foregroundColor: const Color.fromARGB(255, 27, 27, 27),
+                            foregroundColor:
+                                const Color.fromARGB(255, 27, 27, 27),
                           ),
                         ),
-                       TextButton.icon(
-                    onPressed: () {
-                      // Launch the map application with a search query for the place's name
-                      launch('https://www.google.com/maps/search/?api=1&query=${place['name']}');
-                    },
-                    icon: Icon(Icons.map),
-                    label: Text('Map'),
-                    style: TextButton.styleFrom(
-                      primary: const Color.fromARGB(255, 24, 23, 23),
-                    ),
-                  ),
-                       TextButton.icon(
-  onPressed: () {
-    // Navigate to the comment section for the current place
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => CommentSection(placeName: place['name']),
-      ),
-    );
-  },
-  icon: const Icon(Icons.comment),
-  label: const Text('Commentaire'),
-  style: TextButton.styleFrom(
-    foregroundColor: const Color.fromARGB(255, 12, 12, 12),
-  ),
-),
-
+                        TextButton.icon(
+                          onPressed: () {
+                            // Launch the map application with a search query for the place's name
+                            launch(
+                                'https://www.google.com/maps/search/?api=1&query=${place['name']}');
+                          },
+                          icon: Icon(Icons.map),
+                          label: Text('Map'),
+                          style: TextButton.styleFrom(
+                            primary: const Color.fromARGB(255, 24, 23, 23),
+                          ),
+                        ),
+                        TextButton.icon(
+                          onPressed: () {
+                            // Navigate to the comment section for the current place
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    CommentSection(placeName: place['name']),
+                              ),
+                            );
+                          },
+                          icon: const Icon(Icons.comment),
+                          label: const Text('Commentaire'),
+                          style: TextButton.styleFrom(
+                            foregroundColor:
+                                const Color.fromARGB(255, 12, 12, 12),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -238,7 +252,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
                 );
               },
             ),
@@ -248,7 +263,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
                 );
               },
             ),

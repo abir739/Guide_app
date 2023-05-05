@@ -34,6 +34,7 @@ class CommentSection extends StatelessWidget {
     return [
       {'author': 'John Doe', 'text': 'This place is amazing!'},
       {'author': 'Jane Smith', 'text': 'I had a great time here.'},
+      {'author': 'Adam Smith', 'text': 'I love spending my weekends here.'},
     ];
   }
 }
