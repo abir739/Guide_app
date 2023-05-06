@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 
-import 'package:get/get.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -22,17 +20,17 @@ class activitydetalSecreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: [],
-        backgroundColor: Color.fromRGBO(212, 5, 5, 0.976),
-        title: Text("Activity "),
+        actions: const [],
+        backgroundColor: const Color.fromRGBO(212, 5, 5, 0.976),
+        title: const Text("Activity "),
       ),
       body: SafeArea(
-        minimum: EdgeInsets.only(left: 25.0, right: 20.0),
+        minimum: const EdgeInsets.only(left: 25.0, right: 20.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.grey[200],
@@ -46,7 +44,7 @@ class activitydetalSecreen extends StatelessWidget {
                   // ),
                   Text(
                     activity.agency!.name.toString(),
-                    style: TextStyle(
+                    style: const TextStyle(
                       color: Color(0xFF00CDE7),
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
@@ -55,7 +53,7 @@ class activitydetalSecreen extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             SizedBox(
@@ -102,8 +100,8 @@ class activitydetalSecreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(right: 120.0),
+            const Padding(
+              padding: EdgeInsets.only(right: 120.0),
               child: Divider(
                 thickness: 2,
                 color: Colors.white,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ReactionsScreen extends StatelessWidget {
   final String placeName;
 
-  ReactionsScreen({required this.placeName});
+  ReactionsScreen({super.key, required this.placeName});
 
   final List<String> reactions = [
     '😍 Love it!',

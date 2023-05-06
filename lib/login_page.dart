@@ -166,17 +166,7 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            //builder: (context) => Planingtest(),
-                            /*builder: (context) => PlanningScreen(
-                              planningId:
-                                  '3aa7fdfe-1902-4f93-8669-d1b384903b39',
-                            ),*/
                             builder: (context) => const PlanningListPage(),
-                            //builder: (context) => MyHomePagetest(),
-                            /* builder: (context) => PlanningScreen(
-                              planningId:
-                                  "3aa7fdfe-1902-4f93-8669-d1b384903b39",
-                            ),*/
                           ),
                         );
                       }

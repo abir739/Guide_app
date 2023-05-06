@@ -64,6 +64,7 @@ dependencies:
   socket_io_client: ^2.0.1
   file_picker: ^5.2.11
   flutter_html: ^3.0.0-alpha.6
+  percent_indicator: ^4.2.3
 
 
 dev_dependencies:

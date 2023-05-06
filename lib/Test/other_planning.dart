@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:flutter_animated_icons/icons8.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:guide_app/Test/AddActivityScreen.dart';
@@ -37,12 +36,12 @@ late AnimationController _animationControllerL;
 
 HTTPHandlerplaning httpHandlerp = HTTPHandlerplaning();
 HTTPHandlerActivites activiteshanhler = HTTPHandlerActivites();
-final storage = const FlutterSecureStorage();
+const storage = FlutterSecureStorage();
 late Future<List<Item>> item;
 //the same
 // final httpHandlerp = Get.put(HTTPHandlerplaning());
 // late TabController _tabController;
-late List<Tab> tabs = [];
+List<Tab> tabs = [];
 late List<Widget> tabViews;
 ListPlannings plannig = ListPlannings();
 ListActivity activ = ListActivity();
@@ -77,7 +76,7 @@ class _PlaningtestState extends State<Planingtest>
     // _lodeaddata();
     initializeAsyncState();
     activiteslist = activiteshanhler.fetchData(
-        "/api/activities/planningid/996a8585-31d2-4174-911e-d0bb93b2a3f9") as Future<List<Activity>>;
+        "/api/activities/planningid/996a8585-31d2-4174-911e-d0bb93b2a3f9");
     getDataactivity();
     _refreshData();
     _animationControllerL =
@@ -87,7 +86,7 @@ class _PlaningtestState extends State<Planingtest>
     getenddate();
 
     planninglist = httpHandlerp
-        .fetchData("/api/plannings/touristGuideId/${widget.touristGuide!.id}") as Future<List<PlanningMainModel>>;
+        .fetchData("/api/plannings/touristGuideId/${widget.touristGuide!.id}");
 
     print(activiteslist);
     // var time = httpHandlerp.fetchtime("");
@@ -126,7 +125,7 @@ class _PlaningtestState extends State<Planingtest>
   }
 
   Future<void> initializeAsyncState() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     startDate = await getstartDate();
     endDate = await getenddate();
     // _lodeaddata();
@@ -141,11 +140,10 @@ class _PlaningtestState extends State<Planingtest>
 // });
     // var time = await httpHandlerp.fetchtime("");
 
-    print("**********startDate*************************** " +
-        startDate.toString());
+    print("**********startDate*************************** $startDate");
     // print(time);
 
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         // _showWidget = false;
       });
@@ -170,9 +168,9 @@ class _PlaningtestState extends State<Planingtest>
     //     "http://192.168.1.23:3000/api/plannings/touristGuideId/${widget.touristGuide!.id}";
     String? baseUrl = await storage.read(key: "baseurl");
     String baseurlb =
-        "${baseUrl}/api/plannings/touristGuideId/${widget.touristGuide!.id}";
+        "$baseUrl/api/plannings/touristGuideId/${widget.touristGuide!.id}";
     // simulate a delay of 2 seconds to represent a network request to an API
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     List<PlanningMainModel> planingList = [];
 
     final respond = await http
@@ -215,7 +213,7 @@ class _PlaningtestState extends State<Planingtest>
     //     "http://192.168.1.23:3000/api/plannings/touristGuideId/${widget.touristGuide!.id}";
     String? baseUrl = await storage.read(key: "baseurl");
     String baseurlb =
-        "${baseUrl}/api/plannings/touristGuideId/${widget.touristGuide!.id}";
+        "$baseUrl/api/plannings/touristGuideId/${widget.touristGuide!.id}";
     // simulate a delay of 2 seconds to represent a network request to an API
 
     List<PlanningMainModel> planingList = [];
@@ -260,7 +258,7 @@ class _PlaningtestState extends State<Planingtest>
     List<Tab> tabs = [];
     for (var date = startDate;
         date!.isBefore(endDate!);
-        date = date.add(Duration(days: 1))) {
+        date = date.add(const Duration(days: 1))) {
       tabs.add(Tab(text: '${date.day}/${date.month}'));
     }
     tabViews.add(_buildTabView(endDate!));
@@ -387,11 +385,11 @@ class _PlaningtestState extends State<Planingtest>
 //               // )
 //               : null,
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(70),
+            preferredSize: const Size.fromHeight(70),
             child: AppBar(
               automaticallyImplyLeading: false,
               flexibleSpace: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
@@ -407,7 +405,7 @@ class _PlaningtestState extends State<Planingtest>
                 Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.notification_add_rounded),
+                      icon: const Icon(Icons.notification_add_rounded),
                       onPressed: () {
                         // Navigator.push(
                         //     context,
@@ -421,7 +419,7 @@ class _PlaningtestState extends State<Planingtest>
                         //            NotificationActivityScreen()),
                         // );
                       },
-                      color: Color.fromARGB(255, 243, 242, 245),
+                      color: const Color.fromARGB(255, 243, 242, 245),
                     ),
                     // IconButton(
                     //   icon: Icon(Icons.menu_sharp),
@@ -475,7 +473,7 @@ class _PlaningtestState extends State<Planingtest>
                     IconButton(
                       splashRadius: 20,
                       iconSize: 20,
-                      color: Color.fromARGB(255, 175, 10, 10),
+                      color: const Color.fromARGB(255, 175, 10, 10),
                       onPressed: () {
                         // _animationControllerL.reset();
                         // _animationControllerL.forward();
@@ -510,7 +508,7 @@ class _PlaningtestState extends State<Planingtest>
                   ],
                 ),
               ],
-              backgroundColor: Color.fromARGB(255, 242, 242, 244),
+              backgroundColor: const Color.fromARGB(255, 242, 242, 244),
               title: InkWell(
                 // onTap: () {
                 //   Get.to(GenerateQRPage());
@@ -528,7 +526,7 @@ class _PlaningtestState extends State<Planingtest>
               ),
               // const Text('Plannig'),
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(kToolbarHeight),
+                preferredSize: const Size.fromHeight(kToolbarHeight),
                 child: Column(
                   children: [
                     Text(widget.planning!.id.toString()),
@@ -594,7 +592,7 @@ class _PlaningtestState extends State<Planingtest>
                         return ListView.separated(
                           itemCount: snapshot.data!.length,
                           separatorBuilder: (context, index) {
-                            return Divider();
+                            return const Divider();
                           },
                           itemBuilder: (context, index) {
                             return datashow(snapshot.data![index]);
@@ -728,14 +726,14 @@ class _PlaningtestState extends State<Planingtest>
   }
 
   Widget datashow(Activity obj) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: Card(
         color: Colors.amber,
         child: Column(
           children: [
-            Text("id :${obj!.agencyId}"),
-            Text("creatorUser :${obj!.creatorUserId}"),
+            Text("id :${obj.agencyId}"),
+            Text("creatorUser :${obj.creatorUserId}"),
             Text("creatorUser :${obj.agency!.id}"),
             Text("startDate:$startDate"),
             Text("enddate:$endDate"),
@@ -760,9 +758,9 @@ class _PlaningtestState extends State<Planingtest>
     // Fetch the activity data for the given date from the API
     Future<List<String>> _fetchActivityData(DateTime date) async {
       // Replace this with your actual API call to fetch activity data
-      await Future.delayed(Duration(seconds: 2)); // Simulate a network delay
+      await Future.delayed(const Duration(seconds: 2)); // Simulate a network delay
       return List.generate(
-          10, (index) => 'Activity $index on ${startDate}/${date.month}');
+          10, (index) => 'Activity $index on $startDate/${date.month}');
     }
 
     // Build the list view for each tab
@@ -770,7 +768,7 @@ class _PlaningtestState extends State<Planingtest>
       future: _fetchActivityData(date),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else {
@@ -821,12 +819,12 @@ class _PlaningtestState extends State<Planingtest>
 
           //       })
 
-          Icon(Icons.image),
+          const Icon(Icons.image),
 
           Text('Item$index'),
           Text(item),
 
-          Icon(Icons.list_alt_sharp),
+          const Icon(Icons.list_alt_sharp),
         ],
       ),
     );
@@ -842,14 +840,16 @@ class MyScaffold extends StatefulWidget {
   Future<List<Activity>>? activityList;
   String? planningId;
   MyScaffold(
-      {this.startDate, this.endDate, this.activityList, this.planningId});
+      {super.key, this.startDate, this.endDate, this.activityList, this.planningId});
 
+  @override
   _MyScaffoldState createState() => _MyScaffoldState();
 }
 
 class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
   @override
   var activiteslist1;
+  @override
   void initState() {
     super.initState();
     data();
@@ -916,26 +916,26 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                 width: 200,
                 height: 200,
                 child: PopupMenuButton(
-                  color: Color.fromARGB(225, 232, 218, 218),
+                  color: const Color.fromARGB(225, 232, 218, 218),
                   itemBuilder: (BuildContext context) {
                     return [
                       PopupMenuItem(
+                        value: 1,
                         child: Container(
-                            child: Row(
+                            child: const Row(
                           children: [
                             Text('add new  client'),
                             Icon(size: 20, Icons.person_2),
                           ],
                         )),
-                        value: 1,
                       ),
-                      PopupMenuItem(
-                        child: Text('add new Activity'),
+                      const PopupMenuItem(
                         value: 2,
+                        child: Text('add new Activity'),
                       ),
-                      PopupMenuItem(
-                        child: Text('Menu item 3'),
+                      const PopupMenuItem(
                         value: 3,
+                        child: Text('Menu item 3'),
                       ),
                     ];
                   },
@@ -960,13 +960,13 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                       });
                     }
                   },
-                  child: Icon(size: 20, Icons.menu),
+                  child: const Icon(size: 20, Icons.menu),
                 ),
               ),
             ),
             title: Column(
               children: [
-                Row(
+                const Row(
                   children: [
                     // IconButton(
                     //   icon: Icon(Icons.menu),
@@ -995,11 +995,11 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                     //         ),
                     Text(
                       DateFormat('  MMMM  d ,y ').format(startDate!),
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     Text(
                       DateFormat(' ~ MMMM  d ,y ').format(endDate!),
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                     ),
                     //    ElevatedButton(
                     //                 onPressed: () {},
@@ -1028,7 +1028,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
               ],
             ),
             bottom: PreferredSize(
-              preferredSize: Size.fromHeight(50),
+              preferredSize: const Size.fromHeight(50),
               child: Container(
                 color: Colors.white,
                 child: buildTabBar(
@@ -1054,7 +1054,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
           .where((activity) =>
               activity.departureDate != null &&
               activity.returnDate != null &&
-              activity.departureDate!.isBefore(date.add(Duration(days: 1))) &&
+              activity.departureDate!.isBefore(date.add(const Duration(days: 1))) &&
               activity.returnDate!.isAfter(date))
           .toList();
     }
@@ -1066,14 +1066,14 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
         future: _fetchActivityData(date),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final activityData = snapshot.data;
             return ListView.separated(
               separatorBuilder: (context, index) {
-                return Divider();
+                return const Divider();
               },
               itemCount: activityData!.length,
               itemBuilder: (context, index) {
@@ -1137,13 +1137,13 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
     Activity activity,
     index,
   ) {
-    List<String> _selectedOptions1 = List.filled(1000, 'Status');
+    List<String> selectedOptions1 = List.filled(1000, 'Status');
 
     return Card(
       elevation: 7,
       margin: const EdgeInsets.only(left: 16, right: 16),
       child: Container(
-        color: Color.fromARGB(255, 172, 174, 174),
+        color: const Color.fromARGB(255, 172, 174, 174),
         child: Container(
           height: Get.height * 0.3,
           margin: const EdgeInsets.only(left: 2),
@@ -1163,7 +1163,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                       IconButton(
                         // splashRadius: 20,
                         // iconSize: 20,
-                        color: Color.fromARGB(255, 175, 10, 10),
+                        color: const Color.fromARGB(255, 175, 10, 10),
                         onPressed: () {
                           // _animationController.reset();
                           // _animationController.forward();
@@ -1202,15 +1202,15 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                       PopupMenuButton<String>(
                         itemBuilder: (BuildContext context) =>
                             <PopupMenuEntry<String>>[
-                          PopupMenuItem<String>(
+                          const PopupMenuItem<String>(
                             value: 'delete',
                             child: Text('Delete'),
                           ),
-                          PopupMenuItem<String>(
+                          const PopupMenuItem<String>(
                             value: 'update',
                             child: Text('Update'),
                           ),
-                          PopupMenuItem<String>(
+                          const PopupMenuItem<String>(
                             value: 'Add new Activity',
                             child: Text('Add new Activity'),
                           ),
@@ -1222,17 +1222,17 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                             // Perform update action
                           } else if (value == 'Add new Activity') {
                             // Get.to(AddActtivityForm(activity: activity));
-                            Get.to(AddActivityScreen());
+                            Get.to(const AddActivityScreen());
                           }
                         },
-                        icon: Icon(Icons.more_vert),
+                        icon: const Icon(Icons.more_vert),
                       )
                     ],
                   )
                 ],
               ),
               Container(
-                color: Color.fromARGB(255, 246, 248, 249),
+                color: const Color.fromARGB(255, 246, 248, 249),
                 height: Get.height * 0.1,
                 // padding: const EdgeInsets.all(2),
                 alignment: Alignment.center,
@@ -1245,7 +1245,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                   title: Text(
 // activity.title
                       activity.name?.toString() ?? 'N/A',
-                      style: TextStyle(
+                      style: const TextStyle(
                           fontSize: 24,
                           height: 0,
                           fontStyle: FontStyle.italic)),
@@ -1304,7 +1304,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                       ),
                     ],
                   ),
-                  SizedBox(width: 180),
+                  const SizedBox(width: 180),
 // IconButton(
 //                     // splashRadius: 20,
 //                     // iconSize: 12,
@@ -1372,7 +1372,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                   //   hint: Text('0'),
                   // ),
 //this what i will use with api
-                  SizedBox(width: 2),
+                  const SizedBox(width: 2),
                 ],
               ),
               const Divider(
@@ -1383,12 +1383,12 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
               ),
               Column(
                 children: [
-                  Row(
+                  const Row(
                     children: [
                       SizedBox(width: 20),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
@@ -1396,22 +1396,10 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                       SizedBox(width: 40),
                       Text(
                         "france tunisia",
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w200,
                         ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      SizedBox(width: 20),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
-                      ),
-                      SizedBox(width: 40),
-                      Text(
-                        "${DateFormat('EEE, MMM d').format(DateTime.now())}",
                       ),
                     ],
                   ),
@@ -1419,8 +1407,20 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
                     children: [
                       const SizedBox(width: 20),
                       Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                      const SizedBox(width: 40),
+                      Text(
+                        DateFormat('EEE, MMM d').format(DateTime.now()),
+                      ),
+                    ],
+                  ),
+                  const Row(
+                    children: [
+                      SizedBox(width: 20),
+                      Text(
                         "ASl France",
-                        style: const TextStyle(
+                        style: TextStyle(
                             fontSize: 14, fontWeight: FontWeight.bold),
                       ),
                       SizedBox(width: 20),
@@ -1496,7 +1496,7 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
     for (var date = startDate;
         date.isBefore(endDate);
 // .add(Duration(days: 1)));
-        date = date.add(Duration(days: 1))) {
+        date = date.add(const Duration(days: 1))) {
       tabs.add(Tab(text: DateFormat('EEE, MMM d').format(date)));
       tabViews.add(_buildTabView(date));
     }
@@ -1513,12 +1513,12 @@ class _MyScaffoldState extends State<MyScaffold> with TickerProviderStateMixin {
       indicatorColor: Colors.blue,
       labelColor: Colors.blue,
       unselectedLabelColor: Colors.grey,
-      labelStyle: TextStyle(fontWeight: FontWeight.bold),
-      unselectedLabelStyle: TextStyle(fontWeight: FontWeight.bold),
+      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+      unselectedLabelStyle: const TextStyle(fontWeight: FontWeight.bold),
       indicatorSize: TabBarIndicatorSize.label,
       indicatorWeight: 2.0,
-      indicatorPadding: EdgeInsets.symmetric(horizontal: 16),
-      labelPadding: EdgeInsets.symmetric(horizontal: 16),
+      indicatorPadding: const EdgeInsets.symmetric(horizontal: 16),
+      labelPadding: const EdgeInsets.symmetric(horizontal: 16),
       onTap: (index) {},
     );
   }
@@ -1529,7 +1529,7 @@ List<DateTime> getRangeOfDates(DateTime startDate, DateTime endDate) {
 
   for (var date = startDate;
       date.isBefore(endDate);
-      date = date.add(Duration(days: 1))) {
+      date = date.add(const Duration(days: 1))) {
     dates.add(date);
   }
 

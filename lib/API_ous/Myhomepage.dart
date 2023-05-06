@@ -59,7 +59,7 @@ IO.Socket socket = IO.io('ws://192.168.1.12:3000', <String, dynamic>{
 
 class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   String selectedOption = 'Option 1';
-  final List<String> _options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
+  final List<String> options = ['Option 1', 'Option 2', 'Option 3', 'Status'];
   List<String> selectedItemValue = <String>[
     'Option 1',
     'Option 2',
@@ -181,13 +181,13 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       }
     });
 
-    FlutterLocalNotificationsPlugin notifications =
-        FlutterLocalNotificationsPlugin();
-    var androidInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
-    var iOSInit = const IOSInitializationSettings();
+    // FlutterLocalNotificationsPlugin notifications =
+    //     FlutterLocalNotificationsPlugin();
+    // var androidInit = const AndroidInitializationSettings('@mipmap/ic_launcher');
+    // var iOSInit = const IOSInitializationSettings();
 
-    _message = TextEditingController();
-    var init = InitializationSettings(android: androidInit, iOS: iOSInit);
+    // _message = TextEditingController();
+    // var init = InitializationSettings(android: androidInit, iOS: iOSInit);
   }
 
   List<DropdownMenuItem<String>> _dropDownItem() {

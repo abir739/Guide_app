@@ -17,25 +17,27 @@ import 'package:path/path.dart' as path;
 import 'package:async/async.dart';
 
 class AddActivityScreen extends StatefulWidget {
+  const AddActivityScreen({super.key});
+
   @override
   _AddActivityScreenState createState() => _AddActivityScreenState();
 }
 
 class _AddActivityScreenState extends State<AddActivityScreen> {
   final _formKey = GlobalKey<FormState>();
-  String _agencyId = '822fe532-6138-43ea-8f61-9ce209247029';
-  String _activityTemplateId = 'a901463c-b73c-4267-b839-fa9a8d1a621a';
-  String _logo =
+  final String _agencyId = '822fe532-6138-43ea-8f61-9ce209247029';
+  final String _activityTemplateId = 'a901463c-b73c-4267-b839-fa9a8d1a621a';
+  final String _logo =
       '277771965_712318766460223_6468090819953743613_ndf0761ff-f8fc-4296-8c75-1a613d18703f.jpg';
-  String _touristGuideId = 'd771dd42-7c3b-42bb-95b7-fcb64c899f4d';
+  final String _touristGuideId = 'd771dd42-7c3b-42bb-95b7-fcb64c899f4d';
   String planningId = '996a8585-31d2-4174-911e-d0bb93b2a3f9';
   String _currency = '';
   String _reference = '';
-  String _departureDate = '';
-  String _departureNote = '';
-  String _returnDate = '';
-  String _returnNote = '';
-  bool _confirmed = true;
+  final String _departureDate = '';
+  final String _departureNote = '';
+  final String _returnDate = '';
+  final String _returnNote = '';
+  final bool _confirmed = true;
   double _adultPrice = 0.0;
   double _childPrice = 0.0;
   double _babyPrice = 0.0;
@@ -83,7 +85,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     final data = await httpHandlerPlanning.fetchData("/api/plannings");
     setState(() {
       planning = data.cast<PlanningMainModel>();
-      selectedPlanning = data.first as PlanningMainModel;
+      selectedPlanning = data.first;
       isLoading = false;
     });
   }
@@ -95,7 +97,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     final data = await httpHandlerAgancy.fetchData("agencies");
     setState(() {
       agancy = data.cast<Agency>();
-      selectedAgancy = data.first as Agency;
+      selectedAgancy = data.first;
       isLoading = false;
     });
   }
@@ -131,7 +133,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
       context: context,
       initialDate: _selectedDateTime,
       firstDate: DateTime.now(),
-      lastDate: DateTime.now().add(Duration(days: 365)),
+      lastDate: DateTime.now().add(const Duration(days: 365)),
     );
     if (pickedDate != null) {
       final TimeOfDay? pickedTime = await showTimePicker(
@@ -166,9 +168,9 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     request.headers.addAll({'Authorization': 'Bearer $token'});
 
     // Add the file to the request
-    var stream = new http.ByteStream(DelegatingStream.typed(file.openRead()));
+    var stream = http.ByteStream(DelegatingStream.typed(file.openRead()));
     var length = await file.length();
-    var multipartFile = new http.MultipartFile('file', stream, length,
+    var multipartFile = http.MultipartFile('file', stream, length,
         filename: path.basename(file.path));
     request.files.add(multipartFile);
 
@@ -265,7 +267,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
   Future<void> createActivity(newActivity) async {
     try {
       token = (await storage.read(key: "access_token"))!;
-      final url = 'http://localhost:3000/api/activities/';
+      const url = 'http://localhost:3000/api/activities/';
 
       final headers = {
         'accept': 'application/json',
@@ -310,7 +312,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
     // } else {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Activity'),
+        title: const Text('Add Activity'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -360,13 +362,13 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                           print(selectedPlanning!.id);
                         });
                       },
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 52, 3, 201),
                         fontSize: 16.0,
                       ),
                       dropdownColor: Colors.white,
                       iconEnabledColor: Colors.black,
-                      iconDisabledColor: Color.fromARGB(255, 158, 158, 158),
+                      iconDisabledColor: const Color.fromARGB(255, 158, 158, 158),
                     ),
                     const SizedBox(width: 32),
                     DropdownButton<Agency>(
@@ -383,26 +385,26 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                           print(selectedAgancy!.id);
                         });
                       },
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Color.fromARGB(255, 52, 3, 201),
                         fontSize: 16.0,
                       ),
                       dropdownColor: Colors.white,
                       iconEnabledColor: Colors.black,
-                      iconDisabledColor: Color.fromARGB(255, 158, 158, 158),
+                      iconDisabledColor: const Color.fromARGB(255, 158, 158, 158),
                     ),
                   ],
                 ),
               ),
               Center(
-                child: image != null ? Image(image: image!) : Text("text "),
+                child: image != null ? Image(image: image!) : const Text("text "),
               ),
               ElevatedButton(
                 onPressed: pickFile,
-                child: Text('Select File'),
+                child: const Text('Select File'),
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Reference'),
+                decoration: const InputDecoration(labelText: 'Reference'),
                 onChanged: (value) {
                   setState(() {
                     _reference = value;
@@ -410,14 +412,14 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Currency'),
+                decoration: const InputDecoration(labelText: 'Currency'),
                 onChanged: (value) {
                   setState(() {
                     _currency = value;
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // TextFormField(
               //   decoration: InputDecoration(labelText: 'Logo'),
               //   onChanged: (value) {
@@ -435,7 +437,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
               //   },
               // ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Departure Date'),
+                decoration: const InputDecoration(labelText: 'Departure Date'),
                 onTap: _selectDepartureDate,
                 controller: TextEditingController(
                     text: DateFormat('yyyy-MM-dd HH:mm')
@@ -450,7 +452,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
               //   },
               // ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Return Date'),
+                decoration: const InputDecoration(labelText: 'Return Date'),
                 onTap: () => _selectDateTime(context),
                 controller: TextEditingController(
                   text:
@@ -477,7 +479,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
               //   },
               // ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Adult Price'),
+                decoration: const InputDecoration(labelText: 'Adult Price'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -486,7 +488,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Child Price'),
+                decoration: const InputDecoration(labelText: 'Child Price'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -495,7 +497,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Baby Price'),
+                decoration: const InputDecoration(labelText: 'Baby Price'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -504,7 +506,7 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Places Count'),
+                decoration: const InputDecoration(labelText: 'Places Count'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   setState(() {
@@ -512,9 +514,9 @@ class _AddActivityScreenState extends State<AddActivityScreen> {
                   });
                 },
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
-                child: Text('Submit'),
+                child: const Text('Submit'),
                 onPressed: () {
                   // if (_formKey.currentState!.validate()) {
                   // // Save the form data into a newActivity object

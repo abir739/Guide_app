@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/planning/home_tasks.dart';
 import 'package:guide_app/planning/planing_list.dart';
+import 'package:guide_app/planning/Add_tasks.dart';
 
 //import '../destination/destination.dart';
 import '../destination/destination_test.dart';
@@ -54,7 +56,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -265,8 +268,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Padding(
-                              padding:
-                                  EdgeInsets.symmetric(horizontal: 16.0),
+                              padding: EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text(
                                 '12:00 PM',
                                 style: TextStyle(
@@ -277,8 +279,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             ),
                             const Expanded(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 16.0),
+                                padding: EdgeInsets.symmetric(horizontal: 16.0),
                                 child: Text(
                                   'Reminder description',
                                   overflow: TextOverflow.ellipsis,
@@ -335,7 +336,8 @@ void _showMenu(BuildContext context) {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const PlanningListPage()),
                 );
               },
             ),
@@ -345,17 +347,43 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.done_sharp),
+              title: const Text('My Tasks'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
                 );
               },
             ),
             ListTile(
               leading: const Icon(Icons.calendar_month),
-              title: const Text('Schedule'),
+              title: const Text('Tasks'),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_task_outlined),
+              title: const Text('Add Tasks'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreateNewTaskPage(),
+                  ),
                 );
               },
             ),
@@ -368,15 +396,6 @@ void _showMenu(BuildContext context) {
                   context,
                   MaterialPageRoute(builder: (context) => const ClientScreen()),
                 );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.feedback),
-              title: const Text('Feedbacks'),
-              onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/Feedbacks');
               },
             ),
             ListTile(

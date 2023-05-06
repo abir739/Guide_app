@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class ReactionsScreen extends StatefulWidget {
   final String placeName;
 
-  ReactionsScreen({required this.placeName});
+  const ReactionsScreen({super.key, required this.placeName});
 
   @override
   _ReactionsScreenState createState() => _ReactionsScreenState();
@@ -29,14 +29,14 @@ class _ReactionsScreenState extends State<ReactionsScreen> {
           children: [
             Text(
               'Likes: $likes',
-              style: TextStyle(fontSize: 20.0),
+              style: const TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 16.0),
-            Text(
+            const SizedBox(height: 16.0),
+            const Text(
               'Reactions:',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -90,7 +90,7 @@ class ReactionButton extends StatelessWidget {
   final int count;
   final VoidCallback onPressed;
 
-  ReactionButton({
+  const ReactionButton({super.key, 
     required this.icon,
     required this.count,
     required this.onPressed,
@@ -101,10 +101,10 @@ class ReactionButton extends StatelessWidget {
     return Column(
       children: [
         IconButton(
-          icon: Text(icon, style: TextStyle(fontSize: 30.0)),
+          icon: Text(icon, style: const TextStyle(fontSize: 30.0)),
           onPressed: onPressed,
         ),
-        Text('$count', style: TextStyle(fontSize: 16.0)),
+        Text('$count', style: const TextStyle(fontSize: 16.0)),
       ],
     );
   }

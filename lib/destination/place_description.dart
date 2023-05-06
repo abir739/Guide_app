@@ -164,10 +164,10 @@ class PlaceDescriptionScreen extends StatelessWidget {
                             launch(
                                 'https://www.google.com/maps/search/?api=1&query=${place['name']}');
                           },
-                          icon: Icon(Icons.map),
-                          label: Text('Map'),
+                          icon: const Icon(Icons.map),
+                          label: const Text('Map'),
                           style: TextButton.styleFrom(
-                            primary: const Color.fromARGB(255, 24, 23, 23),
+                            foregroundColor: const Color.fromARGB(255, 24, 23, 23),
                           ),
                         ),
                         TextButton.icon(
