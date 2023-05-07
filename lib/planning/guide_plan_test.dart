@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:guide_app/planning/update_reminder.dart';
 
 import '../models/reminder.dart';
 import '../models/task.dart';
@@ -322,6 +323,29 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                   setState(() {
                                     reminders.removeAt(index);
                                   });
+                                },
+                              ),
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.edit,
+                                  color: Colors.blue,
+                                ),
+                                onPressed: () async {
+                                  final updatedReminder = await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          UpdateReminderScreen(
+                                              reminder: reminder),
+                                    ),
+                                  );
+
+                                  if (updatedReminder != null) {
+                                    // Update the reminder in the list
+                                    setState(() {
+                                      reminders[index] = updatedReminder;
+                                    });
+                                  }
                                 },
                               ),
                             ],
