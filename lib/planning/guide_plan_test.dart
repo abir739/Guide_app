@@ -254,56 +254,78 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                   child: ListView.builder(
                     itemCount: reminders.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final reminder = reminders[
-                          index]; // Access the reminder at the specified index
+                      final reminder = reminders[index];
 
-                      return Container(
-                        height: 50.0,
-                        margin: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 8.0),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(12.0),
-                          color: Colors.grey[200],
+                      return Dismissible(
+                        key: Key(reminder.id
+                            .toString()), // Use a unique key for each reminder
+                        direction: DismissDirection.endToStart,
+                        background: Container(
+                          color: Colors.red,
+                          alignment: Alignment.centerRight,
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: const Icon(
+                            Icons.delete,
+                            color: Colors.white,
+                          ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 16.0),
-                              child: Text(
-                                reminder
-                                    .time, // Access the time property of the reminder
-                                style: const TextStyle(
-                                  fontSize: 16.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                            Expanded(
-                              child: Padding(
+                        onDismissed: (direction) {
+                          // Remove the reminder from the list when dismissed
+                          setState(() {
+                            reminders.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                          height: 50.0,
+                          margin: const EdgeInsets.symmetric(
+                            horizontal: 16.0,
+                            vertical: 8.0,
+                          ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12.0),
+                            color: Colors.grey[200],
+                          ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 16.0),
                                 child: Text(
-                                  reminder
-                                      .description, // Access the description property of the reminder
-                                  overflow: TextOverflow.ellipsis,
+                                  reminder.time,
                                   style: const TextStyle(
                                     fontSize: 16.0,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
-                            ),
-                            IconButton(
-                              icon: const Icon(
-                                Icons.delete_outline,
-                                color: Colors.red,
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16.0),
+                                  child: Text(
+                                    reminder.description,
+                                    overflow: TextOverflow.ellipsis,
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                    ),
+                                  ),
+                                ),
                               ),
-                              onPressed: () {
-                                // Delete reminder
-                              },
-                            ),
-                          ],
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.delete_outline,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  // Remove the reminder when the delete button is pressed
+                                  setState(() {
+                                    reminders.removeAt(index);
+                                  });
+                                },
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },
