@@ -42,34 +42,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset(
-          'assets/images/Logo.svg',
-          fit: BoxFit.cover,
-          height: 36.0,
-        ),
-        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications screen when button is pressed
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const NotificationsScreen()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              // Show menu options when button is pressed
-              _showMenu(context);
-            },
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(
@@ -132,11 +104,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                       }
                       bool isSelected = _currentIndex == _days.indexOf(day);
                       return GestureDetector(
-                        /*onTap: () {
-                          setState(() {
-                            selectedDay = day;
-                          });
-                        },*/
                         onTap: () {
                           setState(() {
                             _currentIndex = _days.indexOf(day);
@@ -215,13 +182,13 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  'Activity',
+                                  tasks['name'],
                                   style: TextStyle(
                                       fontSize: 16.0, color: Colors.white),
                                 ),
                                 SizedBox(height: 4.0),
                                 Text(
-                                  'Description',
+                                  tasks['Description'],
                                   style: TextStyle(
                                       fontSize: 14.0, color: Colors.white),
                                 ),
@@ -270,7 +237,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                             const Padding(
                               padding: EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text(
-                                '12:00 PM',
+                                Reminder ['time'],
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
@@ -281,7 +248,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                               child: Padding(
                                 padding: EdgeInsets.symmetric(horizontal: 16.0),
                                 child: Text(
-                                  'Reminder description',
+                                  Reminder ['description'],
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
                                     fontSize: 16.0,
@@ -311,114 +278,4 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       ),
     );
   }
-}
-
-void _showMenu(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context) {
-      return Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                // Navigate to home screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PlanningListPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.playlist_add_circle_outlined),
-              title: const Text('Destination'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DestinationScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.done_sharp),
-              title: const Text('My Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text('Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ScheduleScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.add_task_outlined),
-              title: const Text('Add Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CreateNewTaskPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.groups),
-              title: const Text('Clients'),
-              onTap: () {
-                // Navigate to activites screen when pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ClientScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About'),
-              onTap: () {
-                // Navigate to about screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/about');
-              },
-            ),
-          ],
-        ),
-      );
-    },
-  );
 }

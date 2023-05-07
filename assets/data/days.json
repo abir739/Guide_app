@@ -1,0 +1,45 @@
+[
+    {
+      "name": "Monday",
+      "tasks": [
+        {
+          "time": "9:00 AM",
+          "description": "Task 1"
+        },
+        {
+          "time": "10:00 AM",
+          "description": "Task 2"
+        }
+      ],
+      "reminders": [
+        {
+          "time": "8:30 AM",
+          "text": "Reminder 1"
+        },
+        {
+          "time": "9:30 AM",
+          "text": "Reminder 2"
+        }
+      ]
+    },
+    {
+      "name": "Tuesday",
+      "tasks": [
+        {
+          "time": "11:00 AM",
+          "description": "Task 3"
+        },
+        {
+          "time": "1:00 PM",
+          "description": "Task 4"
+        }
+      ],
+      "reminders": [
+        {
+          "time": "10:30 AM",
+          "text": "Reminder 3"
+        }
+      ]
+    }
+  ]
+  

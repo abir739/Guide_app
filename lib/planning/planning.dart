@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 //import 'package:guide_app/planning/shedule.dart';
 //import 'package:guide_app/planning/shedulee.dart';
-import 'package:guide_app/planning/guide_plan.dart';
+import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
 //import 'package:guide_app/planning/shedule_test.dart';
 import 'package:intl/intl.dart';
@@ -428,8 +428,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 builder: (context) {
                                   return AlertDialog(
                                     title: const Text('Alert Dialog'),
-                                    content:
-                                        const Text('Do you really want to delete?'),
+                                    content: const Text(
+                                        'Do you really want to delete?'),
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
@@ -462,8 +462,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 builder: (context) {
                                   return AlertDialog(
                                     title: const Text('Alert Dialog'),
-                                    content:
-                                        const Text('Do you really want to modify?'),
+                                    content: const Text(
+                                        'Do you really want to modify?'),
                                     actions: <Widget>[
                                       TextButton(
                                         onPressed: () {
@@ -678,7 +678,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -730,8 +731,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                   itemCount: activities.length,
                                   itemBuilder: (context, index) {
                                     return Padding(
-                                      padding:
-                                          const EdgeInsets.symmetric(vertical: 10.0),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 10.0),
                                       child: ElevatedButton(
                                         onPressed: () {
                                           // Handle the button press
@@ -776,7 +777,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                       // Handle the button press
                                       Navigator.of(context).push(
                                         MaterialPageRoute(
-                                          builder: (context) => const NewActivity(),
+                                          builder: (context) =>
+                                              const NewActivity(),
                                         ),
                                       );
                                     },
@@ -812,8 +814,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       borderRadius: BorderRadius.circular(10.0),
                       color: Colors.grey[300],
                     ),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 10.0, vertical: 5.0),
                     child: const Row(
                       children: [
                         Icon(
@@ -895,9 +897,11 @@ class BoxDescriptionPage extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
+                    color: const Color.fromARGB(255, 153, 158, 233)
+                        .withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
@@ -909,9 +913,11 @@ class BoxDescriptionPage extends StatelessWidget {
                 ),
                 const SizedBox(width: 146),
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 153, 158, 233).withOpacity(0.2),
+                    color: const Color.fromARGB(255, 153, 158, 233)
+                        .withOpacity(0.2),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
@@ -972,7 +978,8 @@ class BoxDescriptionPage extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color.fromARGB(255, 252, 56, 121)),
                   ),
-                  child: const Text("Accept", style: TextStyle(color: Colors.white)),
+                  child: const Text("Accept",
+                      style: TextStyle(color: Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {},
@@ -980,7 +987,8 @@ class BoxDescriptionPage extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         const Color.fromARGB(255, 214, 208, 208)),
                   ),
-                  child: const Text("Decline", style: TextStyle(color: Colors.black)),
+                  child: const Text("Decline",
+                      style: TextStyle(color: Colors.black)),
                 ),
               ],
             ),
@@ -1060,7 +1068,8 @@ void _showMenu(BuildContext context) {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const PlanningListPage()),
                 );
               },
             ),
@@ -1070,7 +1079,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
                 );
               },
             ),
@@ -1080,7 +1090,7 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(builder: (context) => ScheduleScreen()),
                 );
               },
             ),

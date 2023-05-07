@@ -7,7 +7,7 @@ class ActiveProjectsCard extends StatelessWidget {
   final String title;
   final String subtitle;
 
-  ActiveProjectsCard({
+  const ActiveProjectsCard({super.key, 
     required this.cardColor,
     required this.loadingPercent,
     required this.title,
@@ -19,8 +19,8 @@ class ActiveProjectsCard extends StatelessWidget {
     return Expanded(
       flex: 1,
       child: Container(
-        margin: EdgeInsets.symmetric(vertical: 10.0),
-        padding: EdgeInsets.all(8.0),
+        margin: const EdgeInsets.symmetric(vertical: 10.0),
+        padding: const EdgeInsets.all(8.0),
         height: 200,
         decoration: BoxDecoration(
           color: cardColor,
@@ -42,7 +42,7 @@ class ActiveProjectsCard extends StatelessWidget {
                 progressColor: Colors.white,
                 center: Text(
                   '${(loadingPercent * 100).round()}%',
-                  style: TextStyle(
+                  style: const TextStyle(
                       fontWeight: FontWeight.w700, color: Colors.white),
                 ),
               ),
@@ -52,7 +52,7 @@ class ActiveProjectsCard extends StatelessWidget {
               children: <Widget>[
                 Text(
                   title,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
@@ -60,7 +60,7 @@ class ActiveProjectsCard extends StatelessWidget {
                 ),
                 Text(
                   subtitle,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12.0,
                     color: Colors.white54,
                     fontWeight: FontWeight.w400,

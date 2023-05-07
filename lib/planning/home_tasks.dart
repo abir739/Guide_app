@@ -7,10 +7,12 @@ import 'package:guide_app/widgets/active_project_card.dart';
 import 'package:guide_app/widgets/top_container.dart';
 
 class HomePage extends StatelessWidget {
+  const HomePage({super.key});
+
   Text subheading(String title) {
     return Text(
       title,
-      style: TextStyle(
+      style: const TextStyle(
           color: LightColors.kDarkBlue,
           fontSize: 20.0,
           fontWeight: FontWeight.w700,
@@ -19,7 +21,7 @@ class HomePage extends StatelessWidget {
   }
 
   static CircleAvatar calendarIcon() {
-    return CircleAvatar(
+    return const CircleAvatar(
       radius: 25.0,
       backgroundColor: LightColors.kGreen,
       child: Icon(
@@ -41,11 +43,11 @@ class HomePage extends StatelessWidget {
             TopContainer(
               height: 250,
               width: width,
-              padding: EdgeInsets.symmetric(horizontal: 20.0),
+              padding: const EdgeInsets.symmetric(horizontal: 20.0),
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Row(
+                    const Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Icon(Icons.menu,
@@ -69,7 +71,7 @@ class HomePage extends StatelessWidget {
                             circularStrokeCap: CircularStrokeCap.round,
                             progressColor: LightColors.kRed,
                             backgroundColor: LightColors.kDarkYellow,
-                            center: CircleAvatar(
+                            center: const CircleAvatar(
                               backgroundColor: LightColors.kBlue,
                               radius: 50.0,
                               backgroundImage: AssetImage(
@@ -81,7 +83,7 @@ class HomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
                               Container(
-                                child: Text(
+                                child: const Text(
                                   'Abir Cherif',
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
@@ -92,7 +94,7 @@ class HomePage extends StatelessWidget {
                                 ),
                               ),
                               Container(
-                                child: Text(
+                                child: const Text(
                                   'Guide',
                                   textAlign: TextAlign.start,
                                   style: TextStyle(
@@ -115,7 +117,7 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       color: Colors.transparent,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 20.0, vertical: 10.0),
                       child: Column(
                         children: <Widget>[
@@ -129,31 +131,31 @@ class HomePage extends StatelessWidget {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => CalendarPage()),
+                                        builder: (context) => const CalendarPage()),
                                   );
                                 },
                                 child: calendarIcon(),
                               ),
                             ],
                           ),
-                          SizedBox(height: 15.0),
-                          TaskColumn(
+                          const SizedBox(height: 15.0),
+                          const TaskColumn(
                             icon: Icons.alarm,
                             iconBackgroundColor: LightColors.kRed,
                             title: 'To Do',
                             subtitle: '5 tasks now. 1 started',
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15.0,
                           ),
-                          TaskColumn(
+                          const TaskColumn(
                             icon: Icons.blur_circular,
                             iconBackgroundColor: LightColors.kDarkYellow,
                             title: 'In Progress',
                             subtitle: '1 tasks now. 1 started',
                           ),
-                          SizedBox(height: 15.0),
-                          TaskColumn(
+                          const SizedBox(height: 15.0),
+                          const TaskColumn(
                             icon: Icons.check_circle_outline,
                             iconBackgroundColor: LightColors.kBlue,
                             title: 'Done',
@@ -164,14 +166,14 @@ class HomePage extends StatelessWidget {
                     ),
                     Container(
                       color: Colors.transparent,
-                      padding: EdgeInsets.symmetric(
+                      padding: const EdgeInsets.symmetric(
                           horizontal: 28.0, vertical: 50.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           subheading('Active Tasks'),
-                          SizedBox(height: 5.0),
-                          Row(
+                          const SizedBox(height: 5.0),
+                          const Row(
                             children: <Widget>[
                               ActiveProjectsCard(
                                 cardColor: LightColors.kGreen,
@@ -188,7 +190,7 @@ class HomePage extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Row(
+                          const Row(
                             children: <Widget>[
                               ActiveProjectsCard(
                                 cardColor: LightColors.kDarkYellow,

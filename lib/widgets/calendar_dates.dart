@@ -7,7 +7,7 @@ class CalendarDates extends StatelessWidget {
   final Color dayColor;
   final Color dateColor;
 
-  CalendarDates({required this.day, required this.date, required this.dayColor, required this.dateColor});
+  const CalendarDates({super.key, required this.day, required this.date, required this.dayColor, required this.dateColor});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class CalendarDates extends StatelessWidget {
             style: TextStyle(
                 fontSize: 16, color: dayColor, fontWeight: FontWeight.w400),
           ),
-          SizedBox(height: 10.0),
+          const SizedBox(height: 10.0),
           Text(
             date,
             style: TextStyle(

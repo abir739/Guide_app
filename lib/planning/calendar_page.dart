@@ -9,10 +9,12 @@ import 'package:guide_app/widgets/task_container.dart';
 import 'package:guide_app/widgets/back_button.dart';
 
 class CalendarPage extends StatelessWidget {
+  const CalendarPage({super.key});
+
   Widget _dashedText() {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 15),
-      child: Text(
+      padding: const EdgeInsets.symmetric(vertical: 15),
+      child: const Text(
         '------------------------------------------',
         maxLines: 1,
         style:
@@ -35,12 +37,12 @@ class CalendarPage extends StatelessWidget {
           ),
           child: Column(
             children: <Widget>[
-              MyBackButton(),
-              SizedBox(height: 30.0),
+              const MyBackButton(),
+              const SizedBox(height: 30.0),
               Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Text(
+                    const Text(
                       'Today',
                       style: TextStyle(
                           fontSize: 30.0, fontWeight: FontWeight.w700),
@@ -57,11 +59,11 @@ class CalendarPage extends StatelessWidget {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CreateNewTaskPage(),
+                              builder: (context) => const CreateNewTaskPage(),
                             ),
                           );
                         },
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Add task',
                             style: TextStyle(
@@ -73,12 +75,12 @@ class CalendarPage extends StatelessWidget {
                       ),
                     ),
                   ]),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       text: 'Productive Day, Abir ',
                       style: TextStyle(
                         fontSize: 18.0,
@@ -88,7 +90,7 @@ class CalendarPage extends StatelessWidget {
                       children: [
                         WidgetSpan(
                           child: Padding(
-                            padding: const EdgeInsets.only(left: 4.0),
+                            padding: EdgeInsets.only(left: 4.0),
                             child: Text(
                               '😍',
                               style: TextStyle(fontSize: 18.0),
@@ -100,16 +102,16 @@ class CalendarPage extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 30),
-              Align(
+              const SizedBox(height: 30),
+              const Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
                   'Mai, 2023',
                   style: TextStyle(fontWeight: FontWeight.w500, fontSize: 20),
                 ),
               ),
-              SizedBox(height: 20.0),
-              Container(
+              const SizedBox(height: 20.0),
+              SizedBox(
                 height: 58.0,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
@@ -128,7 +130,7 @@ class CalendarPage extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   child: Container(
-                    padding: EdgeInsets.symmetric(vertical: 20.0),
+                    padding: const EdgeInsets.symmetric(vertical: 20.0),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -138,7 +140,7 @@ class CalendarPage extends StatelessWidget {
                           child: ListView.builder(
                             itemCount: time.length,
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, int index) =>
                                 Padding(
                               padding:
@@ -147,7 +149,7 @@ class CalendarPage extends StatelessWidget {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   '${time[index]} ${time[index] > 8 ? 'PM' : 'AM'}',
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                     color: Colors.black54,
                                   ),
@@ -156,34 +158,34 @@ class CalendarPage extends StatelessWidget {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           width: 20,
                         ),
                         Expanded(
                           flex: 5,
                           child: ListView(
                             shrinkWrap: true,
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             children: <Widget>[
                               _dashedText(),
-                              TaskContainer(
+                              const TaskContainer(
                                 title: 'Extra Activity',
                                 subtitle:
                                     'Discuss with the colleagues about the future plan',
                                 boxColor: LightColors.kLightYellow2,
                               ),
                               _dashedText(),
-                              TaskContainer(
+                              const TaskContainer(
                                 title: 'Confirm reservations',
                                 subtitle: 'Add Clients',
                                 boxColor: LightColors.kLavender,
                               ),
-                              TaskContainer(
+                              const TaskContainer(
                                 title: 'Call',
                                 subtitle: 'Call to david',
                                 boxColor: LightColors.kPalePink,
                               ),
-                              TaskContainer(
+                              const TaskContainer(
                                 title: 'Travellers Meeting',
                                 subtitle:
                                     'Discuss with clients for new task for the Trip prog',

@@ -170,7 +170,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         String detail = data['detail'];
         String id = data['id'];
 
-        this.notifications.add(detail);
+        notifications.add(detail);
         notificationsid.add(id);
 
         this.data = data.toString();
