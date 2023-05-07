@@ -1,23 +1,19 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:guide_app/planning/home_tasks.dart';
-import 'package:guide_app/planning/planing_list.dart';
-import 'package:guide_app/planning/Add_tasks.dart';
+import 'dart:convert';
 
-//import '../destination/destination.dart';
-import '../destination/destination_test.dart';
-import '../notification/notification.dart';
-import '../users/client_list.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+import '../models/reminder.dart';
+import '../models/task.dart';
 
 class ScheduleScreen extends StatefulWidget {
-  const ScheduleScreen({super.key});
+  const ScheduleScreen({Key? key}) : super(key: key);
 
   @override
   _ScheduleScreenState createState() => _ScheduleScreenState();
 }
 
 class _ScheduleScreenState extends State<ScheduleScreen> {
-  // Define your variables here
   List<DateTime> days = [];
   late DateTime selectedDay;
   final DateTime _startDate = DateTime.now().subtract(const Duration(days: 3));
@@ -25,18 +21,40 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   final List<DateTime> _days = [];
   int _currentIndex = 0;
 
+  List<Task> tasks = [];
+  List<Reminder> reminders = [];
+
   @override
   void initState() {
     super.initState();
-    // Initialize your variables here
     selectedDay = DateTime.now();
     days =
         List.generate(10, (index) => DateTime.now().add(Duration(days: index)));
-    // Generate a list of days between the start and end dates
     int daysDifference = _endDate.difference(_startDate).inDays;
     for (int i = 0; i <= daysDifference; i++) {
       _days.add(_startDate.add(Duration(days: i)));
     }
+
+    loadTasks();
+    loadReminders();
+  }
+
+  Future<void> loadTasks() async {
+    String tasksData = await rootBundle.loadString('assets/data/tasks.json');
+    List<dynamic> tasksJson = jsonDecode(tasksData);
+    setState(() {
+      tasks = tasksJson.map((task) => Task.fromJson(task)).toList();
+    });
+  }
+
+  Future<void> loadReminders() async {
+    String remindersData =
+        await rootBundle.loadString('assets/data/reminders.json');
+    List<dynamic> remindersJson = jsonDecode(remindersData);
+    setState(() {
+      reminders =
+          remindersJson.map((reminder) => Reminder.fromJson(reminder)).toList();
+    });
   }
 
   @override
@@ -158,48 +176,61 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               itemBuilder: (BuildContext context, int index) {
                 final startTime = TimeOfDay(hour: 9 + index, minute: 0);
                 final endTime = TimeOfDay(hour: 10 + index, minute: 0);
-                return InkWell(
-                  onTap: () {
-                    // Navigate to activity details page
-                  },
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      children: [
-                        Text(
-                          '${startTime.format(context)} - ${endTime.format(context)}',
-                          style: const TextStyle(fontSize: 18.0),
-                        ),
-                        const SizedBox(width: 16.0),
-                        Expanded(
-                          child: Container(
-                            height: 100.0,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.0),
-                              color: const Color(0xFFEB5F52),
-                            ),
-                            child: const Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  tasks['name'],
-                                  style: TextStyle(
-                                      fontSize: 16.0, color: Colors.white),
-                                ),
-                                SizedBox(height: 4.0),
-                                Text(
-                                  tasks['Description'],
-                                  style: TextStyle(
-                                      fontSize: 14.0, color: Colors.white),
-                                ),
-                              ],
+
+                // Check if index is within the bounds of tasks list
+                if (index < tasks.length) {
+                  final task =
+                      tasks[index]; // Access the task at the specified index
+
+                  return InkWell(
+                    onTap: () {
+                      // Navigate to activity details page
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Text(
+                            '${startTime.format(context)} - ${endTime.format(context)}',
+                            style: const TextStyle(fontSize: 18.0),
+                          ),
+                          const SizedBox(width: 16.0),
+                          Expanded(
+                            child: Container(
+                              height: 100.0,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.0),
+                                color: const Color(0xFFEB5F52),
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    task.name, // Access the name property of the task
+                                    style: const TextStyle(
+                                      fontSize: 16.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 4.0),
+                                  Text(
+                                    task.description, // Access the description property of the task
+                                    style: const TextStyle(
+                                      fontSize: 14.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                );
+                  );
+                } else {
+                  return const SizedBox(); // Return an empty SizedBox if index is out of bounds
+                }
               },
             ),
           ),
@@ -221,8 +252,11 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                 const SizedBox(height: 8.0),
                 Expanded(
                   child: ListView.builder(
-                    itemCount: 5,
+                    itemCount: reminders.length,
                     itemBuilder: (BuildContext context, int index) {
+                      final reminder = reminders[
+                          index]; // Access the reminder at the specified index
+
                       return Container(
                         height: 50.0,
                         margin: const EdgeInsets.symmetric(
@@ -234,23 +268,27 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 16.0),
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
                               child: Text(
-                                Reminder ['time'],
-                                style: TextStyle(
+                                reminder
+                                    .time, // Access the time property of the reminder
+                                style: const TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
                             ),
-                            const Expanded(
+                            Expanded(
                               child: Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16.0),
                                 child: Text(
-                                  Reminder ['description'],
+                                  reminder
+                                      .description, // Access the description property of the reminder
                                   overflow: TextOverflow.ellipsis,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     fontSize: 16.0,
                                   ),
                                 ),
@@ -262,7 +300,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                 color: Colors.red,
                               ),
                               onPressed: () {
-// Delete reminder
+                                // Delete reminder
                               },
                             ),
                           ],

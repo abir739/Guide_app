@@ -1,40 +1,27 @@
 [
     {
-      "id": "task1",
-      "agencyId": "agency1",
-      "touristGuideId": "guide1",
-      "todoDate": "2023-05-08T09:00:00Z",
-      "checkedDate": "2023-05-08T10:00:00Z",
-      "description": "Task 1 description",
-      "feedback": []
+      "name": "Task 1",
+      "description": "Description 1"
     },
     {
-      "id": "task2",
-      "agencyId": "agency2",
-      "touristGuideId": "guide1",
-      "todoDate": "2023-05-09T09:00:00Z",
-      "checkedDate": "2023-05-09T10:00:00Z",
-      "description": "Task 2 description",
-      "feedback": []
+      "name": "Task 2",
+      "description": "Description 2"
     },
     {
-        "id": "task3",
-        "agencyId": "agency3",
-        "touristGuideId": "guide1",
-        "todoDate": "2023-05-09T09:00:00Z",
-        "checkedDate": "2023-05-09T10:00:00Z",
-        "description": "Task 3 description",
-        "feedback": []
+      "name": "Task 3",
+      "description": "Description 3"
+    },
+    {
+        "name": "Task 1",
+        "description": "Description 1"
       },
       {
-      "id": "task4",
-      "agencyId": "agency4",
-      "touristGuideId": "guide1",
-      "todoDate": "2023-05-09T09:00:00Z",
-      "checkedDate": "2023-05-09T10:00:00Z",
-      "description": "Task  4 description",
-      "feedback": []
-    }
-    
+        "name": "Task 2",
+        "description": "Description 2"
+      },
+      {
+        "name": "Task 3",
+        "description": "Description 3"
+      }
   ]
   
