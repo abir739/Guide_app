@@ -25,6 +25,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.11.1"
+  android_alarm_manager_plus:
+    dependency: "direct main"
+    description:
+      name: android_alarm_manager_plus
+      sha256: "88a8001851fdc9bd54fa4e30d0277bb900a50f3d86ff244da7f027400bf23ac0"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.4"
   archive:
     dependency: transitive
     description:

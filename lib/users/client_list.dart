@@ -62,7 +62,8 @@ class _ClientScreenState extends State<ClientScreen> {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -79,7 +80,7 @@ class _ClientScreenState extends State<ClientScreen> {
         // marginBottom: 10, //margin bottom
         icon: Icons.menu, //icon on Floating action button
         activeIcon: Icons.close, //icon when menu is expanded on button
-        backgroundColor: Colors.deepOrangeAccent, //background color of button
+        backgroundColor: Color(0xFF3A3557), //background color of button
         foregroundColor: Colors.white, //font color, icon color in button
         activeBackgroundColor:
             Colors.deepPurpleAccent, //background color when menu is expanded
@@ -155,7 +156,8 @@ class _ClientScreenState extends State<ClientScreen> {
                         children: [
                           SlidableAction(
                             label: 'Call',
-                            backgroundColor: const Color.fromARGB(255, 27, 97, 39),
+                            backgroundColor:
+                                const Color.fromARGB(255, 27, 97, 39),
                             icon: Icons.phone,
                             onPressed: (context) async {
                               // TODO: Call the user
@@ -233,7 +235,8 @@ void _showMenu(BuildContext context) {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const PlanningListPage()),
                 );
               },
             ),
@@ -243,7 +246,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
                 );
               },
             ),
@@ -253,7 +257,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
                 );
               },
             ),

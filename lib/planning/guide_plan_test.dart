@@ -2,10 +2,19 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/notification/notification.dart';
+import 'package:guide_app/planning/Add_tasks.dart';
+import 'package:guide_app/planning/TaskDetailsPage.dart';
+import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/planning/update_reminder.dart';
 
+import '../destination/destination_test.dart';
 import '../models/reminder.dart';
 import '../models/task.dart';
+import '../users/client_list.dart';
+import 'home_tasks.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -58,9 +67,44 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     });
   }
 
+  void editTask(Task task) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => TaskDetailsPage(task: task)),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: SvgPicture.asset(
+          'assets/images/Logo.svg',
+          fit: BoxFit.cover,
+          height: 36.0,
+        ),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            onPressed: () {
+              // Navigate to notifications screen when button is pressed
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
+              );
+            },
+          ),
+          IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              // Show menu options when button is pressed
+              _showMenu(context);
+            },
+          ),
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
@@ -187,46 +231,110 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     onTap: () {
                       // Navigate to activity details page
                     },
-                    child: Container(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Text(
-                            '${startTime.format(context)} - ${endTime.format(context)}',
-                            style: const TextStyle(fontSize: 18.0),
-                          ),
-                          const SizedBox(width: 16.0),
-                          Expanded(
-                            child: Container(
-                              height: 100.0,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10.0),
-                                color: const Color(0xFFEB5F52),
+                    child: Stack(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Text(
+                                '${startTime.format(context)} - ${endTime.format(context)}',
+                                style: const TextStyle(fontSize: 18.0),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    task.name, // Access the name property of the task
-                                    style: const TextStyle(
-                                      fontSize: 16.0,
-                                      color: Colors.white,
-                                    ),
+                              const SizedBox(width: 16.0),
+                              Expanded(
+                                child: Container(
+                                  height: 100.0,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.0),
+                                    color: const Color(0xFFEB5F52),
                                   ),
-                                  SizedBox(height: 4.0),
-                                  Text(
-                                    task.description, // Access the description property of the task
-                                    style: const TextStyle(
-                                      fontSize: 14.0,
-                                      color: Colors.white,
-                                    ),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        task.name,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                      SizedBox(height: 4.0),
+                                      Text(
+                                        task.description,
+                                        style: const TextStyle(
+                                          fontSize: 14.0,
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
+                                ),
                               ),
-                            ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                        Positioned(
+                          top: 8.0,
+                          right: 8.0,
+                          child: SpeedDial(
+                            icon: Icons.menu,
+                            activeIcon: Icons.close,
+                            backgroundColor: Colors.deepOrangeAccent,
+                            foregroundColor: Colors.white,
+                            activeBackgroundColor: Colors.deepPurpleAccent,
+                            activeForegroundColor: Colors.white,
+                            visible: true,
+                            closeManually: false,
+                            curve: Curves.bounceIn,
+                            overlayColor: Colors.black,
+                            overlayOpacity: 0.5,
+                            onOpen: () => print('OPENING DIAL'),
+                            onClose: () => print('DIAL CLOSED'),
+                            elevation: 5.0,
+                            shape: const CircleBorder(),
+                            children: [
+                              SpeedDialChild(
+                                child: const Icon(Icons.edit),
+                                backgroundColor: Colors.blue,
+                                foregroundColor: Colors.white,
+                                label: 'Update Task',
+                                labelStyle: const TextStyle(fontSize: 18.0),
+                                onTap: () => editTask(task),
+                                onLongPress: () =>
+                                    print('Update Task Long Press'),
+                              ),
+
+                              SpeedDialChild(
+                                child: const Icon(Icons.delete_forever),
+                                backgroundColor: Colors.red,
+                                foregroundColor: Colors.white,
+                                label: 'Delete Task',
+                                labelStyle: const TextStyle(fontSize: 18.0),
+                                onTap: () {
+                                  // Delete the task
+                                  setState(() {
+                                    tasks.removeAt(index);
+                                  });
+                                },
+                                onLongPress: () =>
+                                    print('Delete Task Long Press'),
+                              ),
+                              SpeedDialChild(
+                                child: const Icon(Icons.calendar_today),
+                                foregroundColor: Colors.white,
+                                backgroundColor: Colors.green,
+                                label: 'New Task',
+                                labelStyle: const TextStyle(fontSize: 18.0),
+                                onTap: () => print('New Task'),
+                                onLongPress: () => print('New Task Long Press'),
+                              ),
+
+                              // Add more menu item children here
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                   );
                 } else {
@@ -241,7 +349,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(2.0),
                   child: Text(
                     'Reminders',
                     style: TextStyle(
@@ -250,7 +358,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                     ),
                   ),
                 ),
-                const SizedBox(height: 8.0),
+                const SizedBox(height: 0.5),
                 Expanded(
                   child: ListView.builder(
                     itemCount: reminders.length,
@@ -280,7 +388,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                           height: 50.0,
                           margin: const EdgeInsets.symmetric(
                             horizontal: 16.0,
-                            vertical: 8.0,
+                            vertical: 14.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
@@ -362,4 +470,114 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
       ),
     );
   }
+}
+
+void _showMenu(BuildContext context) {
+  showModalBottomSheet(
+    context: context,
+    backgroundColor: Colors.transparent,
+    builder: (BuildContext context) {
+      return Container(
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(20.0),
+            topRight: Radius.circular(20.0),
+          ),
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ListTile(
+              leading: const Icon(Icons.home),
+              title: const Text('Home'),
+              onTap: () {
+                // Navigate to home screen
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const PlanningListPage()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.playlist_add_circle_outlined),
+              title: const Text('Destination'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.done_sharp),
+              title: const Text('My Tasks'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HomePage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.calendar_month),
+              title: const Text('Tasks'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.add_task_outlined),
+              title: const Text('Add Tasks'),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const CreateNewTaskPage(),
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.groups),
+              title: const Text('Clients'),
+              onTap: () {
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const ClientScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () {
+                // Navigate to settings screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/settings');
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.info),
+              title: const Text('About'),
+              onTap: () {
+                // Navigate to about screen
+                Navigator.pop(context);
+                Navigator.pushNamed(context, '/about');
+              },
+            ),
+          ],
+        ),
+      );
+    },
+  );
 }
