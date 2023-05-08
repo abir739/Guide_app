@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_app/menu.dart';
 //import 'package:guide_app/planning/guide_tasks.dart';
 //import 'package:guide_app/planning/shedule.dart';
 //import 'package:guide_app/planning/shedulee.dart';
@@ -1107,12 +1108,15 @@ void _showMenu(BuildContext context) {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.feedback),
-              title: const Text('Feedbacks'),
+              leading: const Icon(Icons.menu_open),
+              title: const Text('Menu_UI'),
               onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/Feedbacks');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => HomePage(),
+                  ),
+                );
               },
             ),
             ListTile(

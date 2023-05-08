@@ -6,7 +6,7 @@ import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:guide_app/notification/notification.dart';
 import 'package:guide_app/planning/Add_tasks.dart';
-import 'package:guide_app/planning/TaskDetailsPage.dart';
+//import 'package:guide_app/planning/TaskDetailsPage.dart';
 import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/planning/update_reminder.dart';
 import 'package:guide_app/planning/edit_task.dart';
@@ -99,12 +99,12 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     });
   }
 
-  void editTask(Task task) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TaskDetailsPage(task: task)),
-    );
-  }
+  // void editTask(Task task) {
+  //   Navigator.push(
+  //     context,
+  //     MaterialPageRoute(builder: (context) => TaskDetailsPage(task: task)),
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -526,8 +526,7 @@ void _showMenu(BuildContext context) {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                      builder: (context) => const PlanningListPage()),
+                  MaterialPageRoute(builder: (context) => const HomePage()),
                 );
               },
             ),
