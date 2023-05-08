@@ -3,20 +3,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:guide_app/notification/notification.dart';
-import 'package:guide_app/planning/Add_tasks.dart';
-import 'package:guide_app/planning/TaskDetailsPage.dart';
-import 'package:guide_app/planning/planing_list.dart';
-import 'package:guide_app/planning/update_reminder.dart';
 import 'package:guide_app/planning/edit_task.dart';
 import 'package:guide_app/planning/new_task.dart';
 
-import '../destination/destination_test.dart';
-import '../models/reminder.dart';
 import '../models/task.dart';
-import '../users/client_list.dart';
-import 'home_tasks.dart';
 
 class ScheduleScreen extends StatefulWidget {
   const ScheduleScreen({Key? key}) : super(key: key);
@@ -34,7 +24,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
   int _currentIndex = 0;
 
   List<Task> tasks = [];
-  List<Reminder> reminders = [];
 
   @override
   void initState() {
@@ -48,7 +37,6 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     }
 
     loadTasks();
-    loadReminders();
   }
 
   void updateTask(int index) {
@@ -89,54 +77,9 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     });
   }
 
-  Future<void> loadReminders() async {
-    String remindersData =
-        await rootBundle.loadString('assets/data/reminders.json');
-    List<dynamic> remindersJson = jsonDecode(remindersData);
-    setState(() {
-      reminders =
-          remindersJson.map((reminder) => Reminder.fromJson(reminder)).toList();
-    });
-  }
-
-  void editTask(Task task) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => TaskDetailsPage(task: task)),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: SvgPicture.asset(
-          'assets/images/Logo.svg',
-          fit: BoxFit.cover,
-          height: 36.0,
-        ),
-        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            onPressed: () {
-              // Navigate to notifications screen when button is pressed
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const NotificationsScreen()),
-              );
-            },
-          ),
-          IconButton(
-            icon: const Icon(Icons.menu),
-            onPressed: () {
-              // Show menu options when button is pressed
-              _showMenu(context);
-            },
-          ),
-        ],
-      ),
       body: Column(
         children: [
           Expanded(
@@ -374,241 +317,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
               },
             ),
           ),
-          Expanded(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.all(2.0),
-                  child: Text(
-                    'Reminders',
-                    style: TextStyle(
-                      fontSize: 24.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 0.5),
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: reminders.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final reminder = reminders[index];
-
-                      return Dismissible(
-                        key: Key(reminder.id
-                            .toString()), // Use a unique key for each reminder
-                        direction: DismissDirection.endToStart,
-                        background: Container(
-                          color: Colors.red,
-                          alignment: Alignment.centerRight,
-                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                          child: const Icon(
-                            Icons.delete,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onDismissed: (direction) {
-                          // Remove the reminder from the list when dismissed
-                          setState(() {
-                            reminders.removeAt(index);
-                          });
-                        },
-                        child: Container(
-                          height: 50.0,
-                          margin: const EdgeInsets.symmetric(
-                            horizontal: 16.0,
-                            vertical: 14.0,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12.0),
-                            color: Colors.grey[200],
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 16.0),
-                                child: Text(
-                                  reminder.time,
-                                  style: const TextStyle(
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                              Expanded(
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 16.0),
-                                  child: Text(
-                                    reminder.description,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      fontSize: 16.0,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.delete_outline,
-                                  color: Colors.red,
-                                ),
-                                onPressed: () {
-                                  // Remove the reminder when the delete button is pressed
-                                  setState(() {
-                                    reminders.removeAt(index);
-                                  });
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(
-                                  Icons.edit,
-                                  color: Colors.blue,
-                                ),
-                                onPressed: () async {
-                                  final updatedReminder = await Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          UpdateReminderScreen(
-                                              reminder: reminder),
-                                    ),
-                                  );
-
-                                  if (updatedReminder != null) {
-                                    // Update the reminder in the list
-                                    setState(() {
-                                      reminders[index] = updatedReminder;
-                                    });
-                                  }
-                                },
-                              ),
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                ),
-              ],
-            ),
-          ),
         ],
       ),
     );
   }
-}
-
-void _showMenu(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    backgroundColor: Colors.transparent,
-    builder: (BuildContext context) {
-      return Container(
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
-          ),
-          color: Color.fromARGB(255, 255, 255, 255),
-        ),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text('Home'),
-              onTap: () {
-                // Navigate to home screen
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const PlanningListPage()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.playlist_add_circle_outlined),
-              title: const Text('Destination'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DestinationScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.done_sharp),
-              title: const Text('My Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HomePage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.calendar_month),
-              title: const Text('Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const ScheduleScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.add_task_outlined),
-              title: const Text('Add Tasks'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const CreateNewTaskPage(),
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.groups),
-              title: const Text('Clients'),
-              onTap: () {
-                // Navigate to activites screen when pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const ClientScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text('Settings'),
-              onTap: () {
-                // Navigate to settings screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/settings');
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.info),
-              title: const Text('About'),
-              onTap: () {
-                // Navigate to about screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/about');
-              },
-            ),
-          ],
-        ),
-      );
-    },
-  );
 }
