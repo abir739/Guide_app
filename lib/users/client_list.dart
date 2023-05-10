@@ -12,9 +12,8 @@ import '../notification/notification.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import 'package:guide_app/planning/Add_tasks.dart';
 
-import 'package:guide_app/theme/colors/light_colors.dart';
+import 'add_user_screen.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({super.key});
@@ -163,25 +162,27 @@ class _ClientScreenState extends State<ClientScreen> {
                     color: const Color(0xFF3A3557),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const CreateNewTaskPage(),
-                        ),
-                      );
-                    },
-                    child: const Center(
-                      child: Text(
-                        'Add User',
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
-                            fontSize: 16),
-                      ),
-                    ),
-                  ),
+                  child:ElevatedButton(
+  onPressed: () {
+    // Navigator.push(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (context) => AddUserScreen(),
+    //   ),
+    // );
+  },
+  child: const Center(
+    child: Text(
+      'Add User',
+      style: TextStyle(
+        color: Colors.white,
+        fontWeight: FontWeight.w700,
+        fontSize: 16,
+      ),
+    ),
+  ),
+),
+
                 ),
               ]),
           Expanded(
