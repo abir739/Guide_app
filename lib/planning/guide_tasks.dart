@@ -59,7 +59,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     // Navigate to the task creation screen
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TaskCreateScreen()),
+      MaterialPageRoute(builder: (context) => const TaskCreateScreen()),
     ).then((newTask) {
       if (newTask != null) {
         setState(() {
@@ -234,7 +234,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                           color: Colors.white,
                                         ),
                                       ),
-                                      SizedBox(height: 4.0),
+                                      const SizedBox(height: 4.0),
                                       Text(
                                         task.description,
                                         style: const TextStyle(

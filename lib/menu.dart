@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -13,9 +15,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 207, 207, 219),
-        title: Text('Collapsible Sidebar Menu'),
+        title: const Text('Collapsible Sidebar Menu'),
         leading: IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           onPressed: () {
             setState(() {
               _isCollapsed = !_isCollapsed;
@@ -34,13 +36,13 @@ class _HomePageState extends State<HomePage> {
 
   Widget _buildSidebar() {
     return AnimatedContainer(
-      duration: Duration(milliseconds: 300),
+      duration: const Duration(milliseconds: 300),
       width: _isCollapsed ? 0.0 : 200.0,
-      color: Color.fromARGB(255, 73, 7, 64),
+      color: const Color.fromARGB(255, 73, 7, 64),
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          SizedBox(height: 50.0),
+          const SizedBox(height: 50.0),
           _buildMenuItem(Icons.home, 'Home'),
           _buildMenuItem(Icons.settings, 'Settings'),
           _buildMenuItem(Icons.person, 'Profile'),
@@ -58,7 +60,7 @@ class _HomePageState extends State<HomePage> {
       ),
       title: Text(
         title,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       onTap: () {
         // Handle menu item click here
@@ -67,7 +69,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildContent() {
-    return Padding(
+    return const Padding(
       padding: EdgeInsets.all(16.0),
       child: Center(
         child: Text(

@@ -5,7 +5,7 @@ import '../models/task.dart';
 class TaskDetailsPage extends StatefulWidget {
   final Task task;
 
-  TaskDetailsPage({required this.task});
+  const TaskDetailsPage({super.key, required this.task});
 
   @override
   _TaskDetailsPageState createState() => _TaskDetailsPageState();
@@ -35,7 +35,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Task'),
+        title: const Text('Edit Task'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -44,12 +44,12 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
           children: [
             TextFormField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Task Name'),
+              decoration: const InputDecoration(labelText: 'Task Name'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextFormField(
               controller: _descriptionController,
-              decoration: InputDecoration(labelText: 'Task Description'),
+              decoration: const InputDecoration(labelText: 'Task Description'),
             ),
           ],
         ),
@@ -67,7 +67,7 @@ class _TaskDetailsPageState extends State<TaskDetailsPage> {
 
           Navigator.pop(context); // Navigate back to the task list
         },
-        child: Icon(Icons.save),
+        child: const Icon(Icons.save),
       ),
     );
   }

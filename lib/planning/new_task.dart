@@ -3,13 +3,15 @@ import '../models/task.dart';
 import 'package:flutter_svg/svg.dart';
 
 class TaskCreateScreen extends StatefulWidget {
+  const TaskCreateScreen({super.key});
+
   @override
   _TaskCreateScreenState createState() => _TaskCreateScreenState();
 }
 
 class _TaskCreateScreenState extends State<TaskCreateScreen> {
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _descriptionController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

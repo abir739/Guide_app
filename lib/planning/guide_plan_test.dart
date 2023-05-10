@@ -7,7 +7,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:guide_app/notification/notification.dart';
 import 'package:guide_app/planning/Add_tasks.dart';
 //import 'package:guide_app/planning/TaskDetailsPage.dart';
-import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/planning/update_reminder.dart';
 import 'package:guide_app/planning/edit_task.dart';
 import 'package:guide_app/planning/new_task.dart';
@@ -71,7 +70,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
     // Navigate to the task creation screen
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => TaskCreateScreen()),
+      MaterialPageRoute(builder: (context) => const TaskCreateScreen()),
     ).then((newTask) {
       if (newTask != null) {
         setState(() {
@@ -291,7 +290,7 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
                                           color: Colors.white,
                                         ),
                                       ),
-                                      SizedBox(height: 4.0),
+                                      const SizedBox(height: 4.0),
                                       Text(
                                         task.description,
                                         style: const TextStyle(

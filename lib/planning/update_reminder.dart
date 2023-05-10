@@ -93,19 +93,19 @@ class _UpdateReminderScreenState extends State<UpdateReminderScreen> {
             const SizedBox(height: 20.0),
             ElevatedButton(
               onPressed: () => _selectDate(context),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF3A3557), // Use the specified color
+              ),
               child: Text(
                   'Select Date: ${DateFormat('yyyy-MM-dd').format(_selectedDate)}'),
-              style: ElevatedButton.styleFrom(
-                primary: Color(0xFF3A3557), // Use the specified color
-              ),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () => _selectTime(context),
-              child: Text('Select Time: ${_selectedTime.format(context)}'),
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF3A3557), // Use the specified color
+                backgroundColor: const Color(0xFF3A3557), // Use the specified color
               ),
+              child: Text('Select Time: ${_selectedTime.format(context)}'),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
@@ -120,7 +120,7 @@ class _UpdateReminderScreenState extends State<UpdateReminderScreen> {
                 Navigator.pop(context, updatedReminder);
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF3A3557), // Use the specified color
+                backgroundColor: const Color(0xFF3A3557), // Use the specified color
               ),
               child: const Text('Save'),
             ),
