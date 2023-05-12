@@ -3,21 +3,19 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:guide_app/menu.dart';
-//import 'package:guide_app/planning/guide_tasks.dart';
-//import 'package:guide_app/planning/shedule.dart';
-//import 'package:guide_app/planning/shedulee.dart';
+//import 'package:guide_app/menu.dart';
+
 import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
-//import 'package:guide_app/planning/shedule_test.dart';
+
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
 import 'package:guide_app/notification/notification.dart';
 
+import '../countries/example/lib/home_page.dart';
 import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
 import '../users/client_list.dart';
-//import 'package:guide_app/activity/newactivity_test.dart';
 
 class EditActivityScreen extends StatefulWidget {
   final Activity activity;
@@ -1092,7 +1090,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
@@ -1132,9 +1131,11 @@ void _showMenu(BuildContext context) {
               leading: const Icon(Icons.info),
               title: const Text('About'),
               onTap: () {
-                // Navigate to about screen
-                Navigator.pop(context);
-                Navigator.pushNamed(context, '/about');
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const HomePage()),
+                );
               },
             ),
           ],
