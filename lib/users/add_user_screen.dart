@@ -6,6 +6,16 @@ import 'package:intl/intl.dart'; // Import the intl package for date formatting
 import '../models/users_model.dart';
 import 'package:http/http.dart' as http;
 
+class Country {
+  final String name;
+  final String flagUrl;
+
+  Country({
+    required this.name,
+    required this.flagUrl,
+  });
+}
+
 class AddUserScreen extends StatefulWidget {
   final List<User> usersList;
   final Function(User) onUserAdded; // New callback function
@@ -26,17 +36,43 @@ class _AddUserScreenState extends State<AddUserScreen> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _birthDateController = TextEditingController();
-  final TextEditingController _countryController = TextEditingController();
   late DateTime _selectedDate = DateTime.now(); // Initialize with current date
-  
+  late Country _selectedCountry = Country(name: '', flagUrl: '');
+  List<Country> _countriesList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchCountries(); // Fetch the list of countries when the screen initializes
+  }
+
+  Future<void> fetchCountries() async {
+    final response =
+        await http.get(Uri.parse('https://api.example.com/countries'));
+
+    if (response.statusCode == 200) {
+      final List<dynamic> data = jsonDecode(response.body);
+      setState(() {
+        _countriesList = data
+            .map((countryData) => Country(
+                  name: countryData['name'],
+                  flagUrl: countryData['flag_url'],
+                ))
+            .toList();
+        _selectedCountry =
+            _countriesList[0]; // Select the first country by default
+      });
+    } else {
+      throw Exception('Failed to fetch countries');
+    }
+  }
+
   void _addUser() {
-    // Get the user input from the text fields
     String firstName = _firstNameController.text;
     String lastName = _lastNameController.text;
     String phone = _phoneController.text;
     String email = _emailController.text;
     String birthDate = _birthDateController.text;
-    String country = _countryController.text;
 
     // Create a new User object with the input values
     User newUser = User(
@@ -55,7 +91,7 @@ class _AddUserScreenState extends State<AddUserScreen> {
       picture: '',
       address: '',
       zipCode: '',
-      countryId: _countryController.text,
+      countryId: _selectedCountry.name,
       stateId: '',
       cityId: '',
       languageId: '',
@@ -159,6 +195,31 @@ class _AddUserScreenState extends State<AddUserScreen> {
                         NeverScrollableScrollPhysics(), // Prevent the text field from scrolling
                   ),
                 ),
+              ),
+              DropdownButtonFormField<Country>(
+                value: _selectedCountry,
+                items: _countriesList.map((Country country) {
+                  return DropdownMenuItem<Country>(
+                    value: country,
+                    child: Row(
+                      children: [
+                        Image.network(
+                          country.flagUrl,
+                          width: 24,
+                          height: 24,
+                        ),
+                        SizedBox(width: 8.0),
+                        Text(country.name),
+                      ],
+                    ),
+                  );
+                }).toList(),
+                onChanged: (Country? selectedCountry) {
+                  setState(() {
+                    _selectedCountry = selectedCountry!;
+                  });
+                },
+                decoration: InputDecoration(labelText: 'Country'),
               ),
               SizedBox(height: 16.0),
               ElevatedButton(

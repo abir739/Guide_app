@@ -66,6 +66,7 @@ dependencies:
   flutter_html: ^3.0.0-alpha.6
   percent_indicator: ^4.2.3
   android_alarm_manager_plus: ^2.1.4
+  mask_text_input_formatter: ^2.4.0
 
 
 dev_dependencies:
