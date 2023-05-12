@@ -25,7 +25,7 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
               height: 36.0,
             ),
             const SizedBox(
-                width: 30.0), // Add spacing between the logo and the text
+                width: 30.0), 
             const Text('New Task'),
           ],
         ),

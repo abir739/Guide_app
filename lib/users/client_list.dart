@@ -9,11 +9,9 @@ import '../planning/planing_list.dart';
 import '../planning/shedule.dart';
 import '../users/client_profile.dart';
 import '../notification/notification.dart';
-import 'package:flutter_speed_dial/flutter_speed_dial.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-
-import 'add_user_screen.dart';
+import '../users/add_user_screen.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({super.key});
@@ -23,7 +21,7 @@ class ClientScreen extends StatefulWidget {
 }
 
 class _ClientScreenState extends State<ClientScreen> {
-  List<User> _users = [];
+  List<User> _users = []; // Define the _users list here
 
   @override
   void initState() {
@@ -41,10 +39,33 @@ class _ClientScreenState extends State<ClientScreen> {
     });
   }
 
+  void _onUserAdded(User newUser) {
+    setState(() {
+      _users.add(newUser);
+    });
+  }
+
   void _navigateToProfile(User user) {
     Navigator.push(
       context,
       MaterialPageRoute(builder: (context) => ProfileScreen(user: user)),
+    );
+  }
+
+  void _navigateToAddUserScreen() {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => AddUserScreen(
+          key: UniqueKey(), // Pass a unique Key object
+          usersList: _users,
+          onUserAdded: (newUser) {
+            setState(() {
+              _users.add(newUser);
+            });
+          },
+        ),
+      ),
     );
   }
 
@@ -79,60 +100,6 @@ class _ClientScreenState extends State<ClientScreen> {
           ),
         ],
       ),
-      floatingActionButton: SpeedDial(
-        // marginBottom: 10, //margin bottom
-        icon: Icons.menu, //icon on Floating action button
-        activeIcon: Icons.close, //icon when menu is expanded on button
-        backgroundColor: const Color(0xFF3A3557), //background color of button
-        foregroundColor: Colors.white, //font color, icon color in button
-        activeBackgroundColor:
-            Colors.deepPurpleAccent, //background color when menu is expanded
-        activeForegroundColor: Colors.white,
-        // buttonSize: 56.0, //button size
-        visible: true,
-        closeManually: false,
-        curve: Curves.bounceIn,
-        overlayColor: Colors.black,
-        overlayOpacity: 0.5,
-        onOpen: () => print('OPENING DIAL'), // action when menu opens
-        onClose: () => print('DIAL CLOSED'), //action when menu closes
-
-        elevation: 8.0, //shadow elevation of button
-        shape: const CircleBorder(), //shape of button
-
-        children: [
-          SpeedDialChild(
-            //speed dial child
-            child: const Icon(Icons.accessibility),
-            backgroundColor: Colors.red,
-            foregroundColor: Colors.white,
-            label: 'Add Client',
-            labelStyle: const TextStyle(fontSize: 18.0),
-            onTap: () => print('FIRST CHILD'),
-            onLongPress: () => print('FIRST CHILD LONG PRESS'),
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.delete_forever),
-            backgroundColor: Colors.blue,
-            foregroundColor: Colors.white,
-            label: 'Delete Client',
-            labelStyle: const TextStyle(fontSize: 18.0),
-            onTap: () => print('Delete Client'),
-            onLongPress: () => print('Delete Client'),
-          ),
-          SpeedDialChild(
-            child: const Icon(Icons.calendar_today),
-            foregroundColor: Colors.white,
-            backgroundColor: Colors.green,
-            label: 'Add a Program',
-            labelStyle: const TextStyle(fontSize: 18.0),
-            onTap: () => print('THIRD CHILD'),
-            onLongPress: () => print('THIRD CHILD LONG PRESS'),
-          ),
-
-          //add more menu item children here
-        ],
-      ),
       body: Column(
         children: [
           const SizedBox(height: 10.0),
@@ -162,27 +129,19 @@ class _ClientScreenState extends State<ClientScreen> {
                     color: const Color(0xFF3A3557),
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child:ElevatedButton(
-  onPressed: () {
-    // Navigator.push(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (context) => AddUserScreen(),
-    //   ),
-    // );
-  },
-  child: const Center(
-    child: Text(
-      'Add User',
-      style: TextStyle(
-        color: Colors.white,
-        fontWeight: FontWeight.w700,
-        fontSize: 16,
-      ),
-    ),
-  ),
-),
-
+                  child: ElevatedButton(
+                    onPressed: _navigateToAddUserScreen,
+                    child: const Center(
+                      child: Text(
+                        'Add User',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w700,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
               ]),
           Expanded(
@@ -230,7 +189,7 @@ class _ClientScreenState extends State<ClientScreen> {
                                 return element.id == user.id;
                               }); //go through the loop and match content to delete from list
                               setState(() {
-                                //refresh UI after deleting element from list
+                                //refresh Interface after deleting element from list
                               });
                             },
                           ),

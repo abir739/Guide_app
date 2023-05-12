@@ -9,7 +9,8 @@ class User {
   String gender;
   String firstName;
   String lastName;
-  Map<String, dynamic> birthDate;
+  // Map<String, dynamic> birthDate;
+  String birthDate;
   String picture;
   String address;
   String zipCode;
