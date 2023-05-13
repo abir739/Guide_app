@@ -1,3 +1,4 @@
+import 'package:circle_flags/circle_flags.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -63,8 +64,7 @@ class ProfileScreen extends StatelessWidget {
             CircleAvatar(
               backgroundImage: user.picture.isNotEmpty
                   ? NetworkImage(user.picture) as ImageProvider<Object>?
-                  : AssetImage('path_to_default_image')
-                      as ImageProvider<Object>,
+                  : const AssetImage('path_to_default_image'),
               radius: 63.0,
             ),
 
@@ -182,17 +182,87 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
             const SizedBox(height: 15.0),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     const SizedBox(width: 10.0),
+            //     Expanded(
+            //       child: Text(
+            //         'Country: ${user.countryId}',
+            //         style: const TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.w500,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(width: 10.0),
                 Expanded(
-                  child: Text(
-                    'Country: ${user.countryId}',
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //const SizedBox(width: 10.0),
+                      Text(
+                        'Country: ${user.countryId}',
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      CircleFlag(
+                        '${user.countryId}',
+                        size: 20,
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+            // const SizedBox(height: 15.0),
+            // Row(
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     const SizedBox(width: 10.0),
+            //     Expanded(
+            //       child: Text(
+            //         'Language: ${user.languageId}',
+            //         style: const TextStyle(
+            //           fontSize: 16.0,
+            //           fontWeight: FontWeight.w500,
+            //         ),
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            const SizedBox(height: 15.0),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(width: 10.0),
+                Expanded(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //const SizedBox(width: 10.0),
+                      Text(
+                        'Language: ${user.languageId}',
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      CircleFlag(
+                        '${user.languageId}',
+                        size: 20,
+                      ),
+                    ],
                   ),
                 ),
               ],
@@ -203,32 +273,28 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 const SizedBox(width: 10.0),
                 Expanded(
-                  child: Text(
-                    'language: ${user.languageId}',
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      //const SizedBox(width: 10.0),
+                      Text(
+                        'Second Language: ${user.secondLanguageId}',
+                        style: const TextStyle(
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      const SizedBox(width: 10.0),
+                      CircleFlag(
+                        '${user.secondLanguageId}',
+                        size: 20,
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 15.0),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(width: 10.0),
-                Expanded(
-                  child: Text(
-                    'Second Language: ${user.secondLanguageId}',
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+
             const SizedBox(height: 65.0),
             /* ElevatedButton(
               child: Text('View Profile'),

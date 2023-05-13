@@ -118,14 +118,14 @@ class _ClientScreenState extends State<ClientScreen> {
             children: <Widget>[
               const SizedBox(width: 5.0),
               const Text(
-                'Liste de passagers',
-                style: TextStyle(
-                  fontSize: 27.0,
-                  fontWeight: FontWeight.bold,
-                  color: Color(0xFF3A3557),
-                ),
+        'Liste de passagers',
+        style: TextStyle(
+          fontSize: 27.0,
+          fontWeight: FontWeight.bold,
+          color: Color(0xFF3A3557),
+        ),
               ),
-              SizedBox(width: 14.5),
+              const SizedBox(width: 14.5),
               Container(
                 height: 40.0,
                 width: 100,
@@ -135,8 +135,7 @@ class _ClientScreenState extends State<ClientScreen> {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: const Color(0xFFEB5F52),
-                    onPrimary: Colors.white,
+                    foregroundColor: Colors.white, backgroundColor: const Color(0xFFEB5F52),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30),
                     ),
