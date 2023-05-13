@@ -3,7 +3,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
-//import 'package:guide_app/menu.dart';
+import 'package:guide_app/menu.dart';
 
 import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
@@ -12,7 +12,6 @@ import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
 import 'package:guide_app/notification/notification.dart';
 
-import '../countries/example/lib/home_page.dart';
 import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
 import '../users/client_list.dart';

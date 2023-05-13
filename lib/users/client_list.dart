@@ -11,7 +11,9 @@ import '../users/client_profile.dart';
 import '../notification/notification.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
-import '../users/add_user_screen.dart';
+import 'new_user.dart';
+
+//import '../users/add_user_screen.dart';
 
 class ClientScreen extends StatefulWidget {
   const ClientScreen({super.key});
@@ -111,39 +113,51 @@ class _ClientScreenState extends State<ClientScreen> {
           //   ),
           // ),
           Row(
-              //mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                const SizedBox(width: 05.0),
-                const Text(
-                  'Liste de passagers',
-                  style: TextStyle(
-                    fontSize: 27.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              const SizedBox(width: 5.0),
+              const Text(
+                'Liste de passagers',
+                style: TextStyle(
+                  fontSize: 27.0,
+                  fontWeight: FontWeight.bold,
+                  color: Color(0xFF3A3557),
                 ),
-                Container(
-                  height: 40.0,
-                  width: 120,
-                  decoration: BoxDecoration(
-                    color: const Color(0xFF3A3557),
-                    borderRadius: BorderRadius.circular(30),
+              ),
+              SizedBox(width: 14.5),
+              Container(
+                height: 40.0,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: const Color(0xFFEB5F52),
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: const Color(0xFFEB5F52),
+                    onPrimary: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(30),
+                    ),
                   ),
-                  child: ElevatedButton(
-                    onPressed: _navigateToAddUserScreen,
-                    child: const Center(
-                      child: Text(
-                        'Add User',
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w700,
-                          fontSize: 16,
-                        ),
+                  onPressed: _navigateToAddUserScreen,
+                  child: const Center(
+                    child: Text(
+                      'Add User',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
                       ),
                     ),
                   ),
                 ),
-              ]),
+              ),
+            ],
+          ),
+
+          const SizedBox(height: 17.0),
           Expanded(
             child: ListView.builder(
               itemCount: _users.length,

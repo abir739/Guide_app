@@ -1,1 +1,0 @@
-enum Names { common, offical }

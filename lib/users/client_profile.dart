@@ -31,7 +31,8 @@ class ProfileScreen extends StatelessWidget {
               // Navigate to notifications screen when button is pressed
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const NotificationsScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const NotificationsScreen()),
               );
             },
           ),
@@ -55,34 +56,39 @@ class ProfileScreen extends StatelessWidget {
               style: TextStyle(
                 fontSize: 27.0,
                 fontWeight: FontWeight.bold,
+                color: Color(0xFF3A3557),
               ),
             ),
             const SizedBox(height: 14.0),
             CircleAvatar(
-              backgroundImage: NetworkImage(user.picture),
+              backgroundImage: user.picture.isNotEmpty
+                  ? NetworkImage(user.picture) as ImageProvider<Object>?
+                  : AssetImage('path_to_default_image')
+                      as ImageProvider<Object>,
               radius: 63.0,
             ),
+
             const SizedBox(height: 10.0),
             Text(
               '${user.firstName} ${user.lastName}',
               style: const TextStyle(fontSize: 24.0),
             ),
             const SizedBox(height: 5.0),
-            Text.rich(
-              TextSpan(
-                text: 'ID: ',
-                style: const TextStyle(
-                  fontSize: 18.0,
-                  fontWeight: FontWeight.bold,
-                ),
-                children: [
-                  TextSpan(
-                    text: user.id,
-                    style: const TextStyle(fontSize: 12.0),
-                  ),
-                ],
-              ),
-            ),
+            // Text.rich(
+            //   TextSpan(
+            //     text: 'ID: ',
+            //     style: const TextStyle(
+            //       fontSize: 18.0,
+            //       fontWeight: FontWeight.bold,
+            //     ),
+            //     children: [
+            //       TextSpan(
+            //         text: user.id,
+            //         style: const TextStyle(fontSize: 12.0),
+            //       ),
+            //     ],
+            //   ),
+            // ),
             const SizedBox(height: 10.0),
             Row(
               children: [
@@ -344,7 +350,8 @@ void _showMenu(BuildContext context) {
                 // Navigate to home screen
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const PlanningListPage()),
+                  MaterialPageRoute(
+                      builder: (context) => const PlanningListPage()),
                 );
               },
             ),
@@ -354,7 +361,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const DestinationScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const DestinationScreen()),
                 );
               },
             ),
@@ -364,7 +372,8 @@ void _showMenu(BuildContext context) {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const ScheduleScreen()),
+                  MaterialPageRoute(
+                      builder: (context) => const ScheduleScreen()),
                 );
               },
             ),
