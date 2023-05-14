@@ -180,8 +180,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
   final DateTime _startDate = DateTime.now().subtract(const Duration(days: 3));
   final DateTime _endDate = DateTime.now().add(const Duration(days: 20));
   final List<DateTime> _days = [];
-  String _selectedStatus = 'Pending';
-  final List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
+
   int _currentIndex = 0;
 
   @override
@@ -263,6 +262,22 @@ class _PlanningScreenState extends State<PlanningScreen> {
     ),
     Activity(
       id: "6",
+      name: "Visites",
+      time: "10:00-14:00",
+      price: "28,51€",
+      logoPath: 'assets/images/vis.svg',
+      symbolName: 'Excursion Stars Wars',
+      photoPath:
+          "https://unsacsurledos.com/wp-content/uploads/2016/12/PC051057.jpg",
+      place: "Tunisia-Gabes",
+      description:
+          "Quand l’histoire nous emporte de l’autre côté de l’écran ! Après la découverte des décors de Game of Thrones en Irlande du Nord, nous voici dans ceux de Star Wars en Tunisie. Au milieu du désert, nous sommes partis explorer la planète Tatooine, sur les traces de Anakin, Luke, Obi-Wan, Darth et Vador. Voici notre aventure en mode Jedi et toutes les informations pour visiter les lieux de tournage Star Wars en Tunisie." +
+              "Star Wars en Tunisie: " +
+              "Star Wars, une saga qu’on ne présente plus ! Qu’on soit fan ou pas, tout le monde connait le souffle rauque de Darth Vador, le cri de Luke, le bikini de Leia et la dégaine de Han Solo. Mais peu savent où les épisodes ont été tournés !" +
+              "C’est dans le sud de la Tunisie, au milieu des étendues désertiques, que des passages de la trilogie originale (épisodes IV – V – VI) et de la « Prélogie » (épisodes I – II – III) ont été tournés, tout spécialement les épisodes I (tourné en 1997, sorti en 1999), II (tourné en 2000, sorti en 2002), III (tourné en 2003, sorti en 2005) et IV (tourné en 1976, sorti en 1977) ,' tous ceux qui concernent la planete Tatooine, planete natale du mignon petit blondinet Anakin Skywalker.",
+    ),
+    Activity(
+      id: "7",
       name: "Activities",
       time: "10:00-12:30",
       price: "48,51€",
@@ -271,7 +286,9 @@ class _PlanningScreenState extends State<PlanningScreen> {
       photoPath:
           'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1c/cd/1b/31/caption.jpg?w=500&h=400&s=1',
       place: 'Par Djerba Explore',
-      description: 'Ile de Djerba: excursion : une heure et demie en quad',
+      description:
+          'Essayez le quad à Djerba pour un circuit aventureux et passionnant, adapté aux débutants, aux cyclistes expérimentés et aux groupes. Parcourez des paysages incroyables remplis d' +
+              "eucalyptus et de figuiers de Barbarie avec des machines de haute qualité et avec un guide spécialisé.",
     ),
   ];
 
@@ -342,283 +359,236 @@ class _PlanningScreenState extends State<PlanningScreen> {
     );
   }
 
-  /*Widget _buildBox() {
-    return Container(
-      height: 240.0,
-      decoration: BoxDecoration(
-        color: Color.fromRGBO(
-          Random().nextInt(255),
-          Random().nextInt(255),
-          Random().nextInt(255),
-          0.5,
-        ),
-        borderRadius: BorderRadius.circular(8.0),
-      ),
-    );
-  }*/
   List<Widget> _buildBoxes() {
-    //String _selectedStatus = 'Pending';
-    //List<String> _statusOptions = ['Pending', 'In progress', 'Completed'];
-
-    // List of boxes to be built dynamically
     List<Widget> boxes = [];
-    // Generate a random number of boxes between 3 and 10
-    int numBoxes = 3 + DateTime.now().millisecond % 8;
 
-    // Loop through the number of boxes and add them to the list
-    for (int i = 0; i < numBoxes; i++) {
-      for (int j = 0; j < activities.length; j++) {
-        Activity index = activities[j];
-        // Generate a random color for each box
-        Random random = Random();
-        Color boxColor = Color.fromRGBO(
-          Random().nextInt(255),
-          Random().nextInt(255),
-          Random().nextInt(255),
-          0.5,
-        );
-        // Generate a random height for each box between 50 and 150
-        double boxHeight = 250.0 /*+ DateTime.now().millisecond % 100*/;
+    for (int j = 0; j < activities.length; j++) {
+      Activity index = activities[j];
+      // Generate a random color for each box
+      Random random = Random();
+      Color boxColor = Color.fromRGBO(
+        Random().nextInt(255),
+        Random().nextInt(255),
+        Random().nextInt(255),
+        0.5,
+      );
+      // Generate a random height for each box between 50 and 150
+      double boxHeight = 250.0 /*+ DateTime.now().millisecond % 100*/;
 
-        //Box's Detail
-        Widget box = GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => BoxDescriptionPage(
-                  activity: index,
-                ),
+      //Box's Detail
+      Widget box = GestureDetector(
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => BoxDescriptionPage(
+                activity: index,
               ),
-            );
-          },
-          child: Container(
-            height: boxHeight,
-            decoration: BoxDecoration(
-              color: boxColor.withOpacity(0.6),
-              borderRadius: BorderRadius.circular(8.0),
             ),
-            margin: const EdgeInsets.all(10),
-            padding: const EdgeInsets.all(10),
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const SizedBox(height: 4),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Text(
-                          index.time,
-                          style: const TextStyle(fontSize: 18),
-                        ),
-                        const SizedBox(width: 170.0),
-                        const Icon(Icons.notifications),
-                        const SizedBox(width: 6.0),
-                        PopupMenuButton(
-                          onSelected: (value) {
-                            if (value == "delete") {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Alert Dialog'),
-                                    content: const Text(
-                                        'Do you really want to delete?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          // execute delete action
-                                          activities.removeWhere((element) {
-                                            return element.id == index.id;
-                                          });
-                                          setState(() {
-                                            // refresh UI after deleting element from list
-                                          });
-                                          Navigator.pop(
-                                              context); // close dialog
-                                        },
-                                        child: const Text('Yes'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context); // close dialog
-                                        },
-                                        child: const Text('Close'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            } else if (value == "modify") {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: const Text('Alert Dialog'),
-                                    content: const Text(
-                                        'Do you really want to modify?'),
-                                    actions: <Widget>[
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context); // close dialog
-                                          // navigate to EditActivityScreen to edit the activity data
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  EditActivityScreen(
-                                                      activity: index),
-                                            ),
-                                          ).then((value) {
-                                            // refresh UI after returning from EditActivityScreen
-                                            setState(() {});
-                                          });
-                                        },
-                                        child: const Text('Yes'),
-                                      ),
-                                      TextButton(
-                                        onPressed: () {
-                                          Navigator.pop(
-                                              context); // close dialog
-                                        },
-                                        child: const Text('Close'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            }
-                          },
-                          itemBuilder: (context) => [
-                            const PopupMenuItem(
-                              value: "delete",
-                              child: Row(
-                                children: [
-                                  Icon(Icons.delete),
-                                  SizedBox(width: 5),
-                                  Text("Delete"),
-                                ],
-                              ),
-                            ),
-                            const PopupMenuItem(
-                              value: "modify",
-                              child: Row(
-                                children: [
-                                  Icon(Icons.edit),
-                                  SizedBox(width: 5),
-                                  Text("Modify"),
-                                ],
-                              ),
-                            ),
-                          ],
-                          child: const Icon(Icons.more_vert),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 14),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 14),
-                        ClipOval(
-                          child: SvgPicture.asset(
-                            index.logoPath,
-                            fit: BoxFit.cover,
-                            height: 40.0,
-                          ),
-                        ),
-                        const SizedBox(width: 8, height: 16),
-                        Text(
-                          index.name,
-                          style: const TextStyle(
-                              fontSize: 17, fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(
-                          height: 4,
-                          width: 79,
-                        ),
-                        Container(
-                          decoration: BoxDecoration(
-                            color: const Color.fromARGB(255, 221, 216, 216),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: DropdownButton<String>(
-                            value: _selectedStatus,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedStatus = newValue!;
-                              });
-                            },
-                            items: _statusOptions
-                                .map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        const SizedBox(height: 20),
-                        ClipOval(
-                          child: Image.network(
-                            index.photoPath,
-                            width: 50,
-                            height: 50,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(width: 6, height: 80),
-                        Text(
-                          index.symbolName,
-                          style: const TextStyle(
-                              fontSize: 13, fontWeight: FontWeight.bold),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Container(
-                          child: SvgPicture.asset(
-                            'assets/images/place.svg',
-                            width: 13,
-                            height: 13,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        const SizedBox(height: 26, width: 10),
-                        Text(
-                          index.place,
-                          style: const TextStyle(
-                            color: Color.fromARGB(255, 8, 8, 8),
-                            fontStyle: FontStyle.italic,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ],
-            ),
+          );
+        },
+        child: Container(
+          height: boxHeight,
+          decoration: BoxDecoration(
+            color: boxColor.withOpacity(0.6),
+            borderRadius: BorderRadius.circular(8.0),
           ),
-        );
+          margin: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const SizedBox(height: 4),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        index.time,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(width: 170.0),
+                      const Icon(Icons.notifications),
+                      const SizedBox(width: 6.0),
+                      PopupMenuButton(
+                        onSelected: (value) {
+                          if (value == "delete") {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Alert Dialog'),
+                                  content: const Text(
+                                      'Do you really want to delete?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        // execute delete action
+                                        activities.removeWhere((element) {
+                                          return element.id == index.id;
+                                        });
+                                        setState(() {
+                                          // refresh UI after deleting element from list
+                                        });
+                                        Navigator.pop(context); // close dialog
+                                      },
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context); // close dialog
+                                      },
+                                      child: const Text('Close'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          } else if (value == "modify") {
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                return AlertDialog(
+                                  title: const Text('Alert Dialog'),
+                                  content: const Text(
+                                      'Do you really want to modify?'),
+                                  actions: <Widget>[
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context); // close dialog
+                                        // navigate to EditActivityScreen to edit the activity data
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                EditActivityScreen(
+                                                    activity: index),
+                                          ),
+                                        ).then((value) {
+                                          // refresh UI after returning from EditActivityScreen
+                                          setState(() {});
+                                        });
+                                      },
+                                      child: const Text('Yes'),
+                                    ),
+                                    TextButton(
+                                      onPressed: () {
+                                        Navigator.pop(context); // close dialog
+                                      },
+                                      child: const Text('Close'),
+                                    ),
+                                  ],
+                                );
+                              },
+                            );
+                          }
+                        },
+                        itemBuilder: (context) => [
+                          const PopupMenuItem(
+                            value: "delete",
+                            child: Row(
+                              children: [
+                                Icon(Icons.delete),
+                                SizedBox(width: 5),
+                                Text("Delete"),
+                              ],
+                            ),
+                          ),
+                          const PopupMenuItem(
+                            value: "modify",
+                            child: Row(
+                              children: [
+                                Icon(Icons.edit),
+                                SizedBox(width: 5),
+                                Text("Modify"),
+                              ],
+                            ),
+                          ),
+                        ],
+                        child: const Icon(Icons.more_vert),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 14),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 14),
+                      ClipOval(
+                        child: SvgPicture.asset(
+                          index.logoPath,
+                          fit: BoxFit.cover,
+                          height: 40.0,
+                        ),
+                      ),
+                      const SizedBox(width: 8, height: 16),
+                      Text(
+                        index.name,
+                        style: const TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(
+                        height: 4,
+                        width: 79,
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      const SizedBox(height: 20),
+                      ClipOval(
+                        child: Image.network(
+                          index.photoPath,
+                          width: 50,
+                          height: 50,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 6, height: 80),
+                      Text(
+                        index.symbolName,
+                        style: const TextStyle(
+                            fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        child: SvgPicture.asset(
+                          'assets/images/place.svg',
+                          width: 13,
+                          height: 13,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(height: 26, width: 10),
+                      Text(
+                        index.place,
+                        style: const TextStyle(
+                          color: Color.fromARGB(255, 8, 8, 8),
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
 
-        // Add the box widget to the list of boxes
-        boxes.add(box);
-      }
+      // Add the box widget to the list of boxes
+      boxes.add(box);
     }
+
     return boxes;
   }
 
@@ -651,17 +621,6 @@ class _PlanningScreenState extends State<PlanningScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final start = DateFormat("MMM dd, yyyy").format(_startDate);
-    final end = DateFormat("MMM dd, yyyy").format(_endDate);
-    List<String> works = [
-      'Work 1',
-      'Work 2',
-      'Work 3',
-      'Work 4',
-      'Work 5',
-      'Work 6'
-    ]; // add the _works list
-
     return Scaffold(
       appBar: AppBar(
         title: SvgPicture.asset(
@@ -729,12 +688,154 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 child: ListView.builder(
                                   itemCount: activities.length,
                                   itemBuilder: (context, index) {
+                                    // Check if the activity name already exists
+                                    bool isDuplicate = activities
+                                            .where((activity) =>
+                                                activity.name ==
+                                                activities[index].name)
+                                            .toList()
+                                            .length >
+                                        1;
+
+                                    // Display the activity only if it is the first occurrence of its name
+                                    if (isDuplicate &&
+                                        index > 0 &&
+                                        activities[index].name ==
+                                            activities[index - 1].name) {
+                                      return Container();
+                                    }
+
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10.0),
                                       child: ElevatedButton(
                                         onPressed: () {
-                                          // Handle the button press
+                                          String selectedActivityName =
+                                              activities[index].name;
+                                          List<Activity>
+                                              activitiesWithSameName =
+                                              activities
+                                                  .where((activity) =>
+                                                      activity.name ==
+                                                      selectedActivityName)
+                                                  .toList();
+
+                                          // Display the list of activities with the same name
+                                          showModalBottomSheet(
+                                            context: context,
+                                            builder: (context) {
+                                              return Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.6,
+                                                padding:
+                                                    const EdgeInsets.all(20.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const Text(
+                                                      'Activities with the Same Name',
+                                                      style: TextStyle(
+                                                        fontSize: 24.0,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                        height: 20.0),
+                                                    Expanded(
+                                                      child: ListView.builder(
+                                                        itemCount:
+                                                            activitiesWithSameName
+                                                                .length,
+                                                        itemBuilder:
+                                                            (context, index) {
+                                                          return Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .symmetric(
+                                                                    vertical:
+                                                                        10.0),
+                                                            child:
+                                                                ElevatedButton(
+                                                              onPressed: () {
+                                                                // Handle the button press
+                                                              },
+                                                              style:
+                                                                  ElevatedButton
+                                                                      .styleFrom(
+                                                                backgroundColor:
+                                                                    Colors.grey[
+                                                                        300],
+                                                                shape:
+                                                                    RoundedRectangleBorder(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              10.0),
+                                                                ),
+                                                              ),
+                                                              child: Row(
+                                                                children: [
+                                                                  SvgPicture
+                                                                      .asset(
+                                                                    activitiesWithSameName[
+                                                                            index]
+                                                                        .logoPath,
+                                                                    width: 40.0,
+                                                                    height:
+                                                                        40.0,
+                                                                  ),
+                                                                  const SizedBox(
+                                                                      width:
+                                                                          16.0),
+                                                                  Text(
+                                                                    activitiesWithSameName[
+                                                                            index]
+                                                                        .symbolName,
+                                                                    style:
+                                                                        const TextStyle(
+                                                                      fontSize:
+                                                                          16.0,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      color: Colors
+                                                                          .black,
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                              ),
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                        height: 20.0),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      children: [
+                                                        // Add other buttons or actions if needed
+                                                        ElevatedButton(
+                                                          onPressed: () {
+                                                            Navigator.pop(
+                                                                context);
+                                                          },
+                                                          child: const Text(
+                                                              'Close'),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          );
                                         },
                                         style: ElevatedButton.styleFrom(
                                           backgroundColor: Colors.grey[300],
@@ -852,14 +953,6 @@ class _PlanningScreenState extends State<PlanningScreen> {
           ),
         ],
       ),
-      /*floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          // add new activity
-        },
-        tooltip: 'Add Activity',
-        child: Icon(Icons.add),
-        backgroundColor: Color.fromARGB(255, 243, 151, 208),
-      ),*/
     );
   }
 }
@@ -868,7 +961,6 @@ class BoxDescriptionPage extends StatelessWidget {
   final Activity activity;
 
   const BoxDescriptionPage({super.key, required this.activity});
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -933,9 +1025,6 @@ class BoxDescriptionPage extends StatelessWidget {
               activity.symbolName,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            /*SizedBox(height: 8),
-          Text(place.address),*/
-
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -966,84 +1055,21 @@ class BoxDescriptionPage extends StatelessWidget {
               style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 8),
-            Text(activity.description),
+            Expanded(
+              child: SingleChildScrollView(
+                child: Text(
+                  activity.description,
+                ),
+              ),
+            ),
             const SizedBox(height: 16),
-            // Row(
-            //   mainAxisAlignment: MainAxisAlignment.spaceAround,
-            //   children: [
-            //     ElevatedButton(
-            //       onPressed: () {},
-            //       style: ButtonStyle(
-            //         backgroundColor: MaterialStateProperty.all<Color>(
-            //             const Color.fromARGB(255, 252, 56, 121)),
-            //       ),
-            //       child: const Text("Accept",
-            //           style: TextStyle(color: Colors.white)),
-            //     ),
-            //     ElevatedButton(
-            //       onPressed: () {},
-            //       style: ButtonStyle(
-            //         backgroundColor: MaterialStateProperty.all<Color>(
-            //             const Color.fromARGB(255, 214, 208, 208)),
-            //       ),
-            //       child: const Text("Decline",
-            //           style: TextStyle(color: Colors.black)),
-            //     ),
-            //   ],
-            // ),
           ],
         ),
-        // ),
       ),
     );
   }
 }
 
-// Define a function to show the menu options
-/*void _showMenu(BuildContext context) {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) {
-      return Container(
-        child: Wrap(
-          children: <Widget>[
-            ListTile(
-              leading: const Icon(Icons.local_hotel_outlined),
-              title: const Text('Hotels'),
-              onTap: () {
-                // Navigate to hotels screen when pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => AddClientScreen()),
-                );
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text('Restaurants'),
-              onTap: () {
-                // Navigate to restaurants screen when pressed
-                Navigator.pushNamed(context, '/restaurants');
-              },
-            ),
-            /* ListTile(
-              leading: const Icon(Icons.category),
-              title: const Text('Activié/Visite'),
-              onTap: () {
-                // Navigate to activites screen when pressed
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => VisitesScreen()),
-                );
-              },
-            ),*/
-          ],
-        ),
-      );
-    },
-  );
-}
-*/
 void _showMenu(BuildContext context) {
   showModalBottomSheet(
     context: context,
@@ -1105,29 +1131,6 @@ void _showMenu(BuildContext context) {
                 );
               },
             ),
-            // ListTile(
-            //   leading: const Icon(Icons.menu_open),
-            //   title: const Text('Menu_UI'),
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //         builder: (context) => const HomePage(),
-            //       ),
-            //     );
-            //   },
-            // ),
-//             ListTile(
-//   leading: const Icon(Icons.settings),
-//   title: const Text('Settings'),
-//   onTap: () {
-//     // Navigate to activites screen when pressed
-//     bool isDarkModeActive = ModalRoute.of(context)!.isCurrent && ModalRoute.of(context)!.settings.name == '/darkScreen';
-//     if (!isDarkModeActive) {
-//       Navigator.pushNamed(context, '/darkScreen');
-//     }
-//   },
-// ),
             ListTile(
               leading: const Icon(Icons.info),
               title: const Text('About'),

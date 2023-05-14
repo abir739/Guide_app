@@ -7,10 +7,14 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+
 import '../components/custom_textfield.dart';
 
+
 class NewActivity extends StatefulWidget {
-  const NewActivity({Key? key}) : super(key: key);
+  final Function(Map<String, dynamic>) onActivityAdded; // Add this line
+
+  const NewActivity({Key? key, required this.onActivityAdded}) : super(key: key); // Modify the constructor
 
   @override
   _NewActivityState createState() => _NewActivityState();
@@ -22,9 +26,8 @@ class _NewActivityState extends State<NewActivity> {
 
   String _place = '';
   late String _activityName;
-  late String _activityDescription;
   File? _imageFile;
-  final bool _pressed = false;
+
   bool _isNotificationPressed = false;
   bool _isExtraPressed = false; // Define the variable here
 
@@ -229,7 +232,7 @@ class _NewActivityState extends State<NewActivity> {
                       children: [
                         Icon(Icons.cloud_upload),
                         SizedBox(height: 8.0),
-                        Text('Upload an Image'),
+                        Text('Upload a File or an Image'),
                       ],
                     ),
                   ),
@@ -312,100 +315,94 @@ class _NewActivityState extends State<NewActivity> {
                   },
                 ),
                 const SizedBox(height: 16.0),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        if (_formKey.currentState!.validate()) {
-                          // Save the new activity
-                          _formKey.currentState!.save();
+                ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate()) {
+                      // Save the new activity
+                      _formKey.currentState!.save();
 
-                          // Do something with the form data, e.g. send to a server
-                          print(_activityName);
-                          print(_dateTime.toString());
-                          print(_place);
+                      // Do something with the form data, e.g. send to a server
+                      print(_activityName);
+                      print(_dateTime.toString());
+                      print(_place);
 
-                          // Navigate back to the previous screen
-                          Navigator.of(context).pop();
+                      // Navigate back to the previous screen
+                      Navigator.of(context).pop();
 
-                          showDialog(
-                            context: context,
-                            builder: (BuildContext context) {
-                              return AlertDialog(
-                                title: const Text("New activity created"),
-                                actions: <Widget>[
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.of(context).pop();
-                                    },
-                                    child: const Text("OK"),
-                                  ),
-                                ],
-                              );
-                            },
+                      showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: const Text("New activity created"),
+                            actions: <Widget>[
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("OK"),
+                              ),
+                            ],
                           );
-                        }
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            const Color.fromARGB(255, 180, 58, 105),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Save',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Color.fromARGB(255, 252, 250, 250),
-                        ),
-                      ),
+                        },
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color.fromARGB(255, 180, 58, 105),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text(
-                                  "Are you sure you want to cancel?"),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("No"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("Yes"),
-                                ),
-                              ],
-                            );
-                          },
+                  ),
+                  child: const Text(
+                    'Créer',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Color.fromARGB(255, 252, 250, 250),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16.0),
+                ElevatedButton(
+                  onPressed: () {
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: const Text("Are you sure you want to cancel?"),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("No"),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).pop();
+                              },
+                              child: const Text("Yes"),
+                            ),
+                          ],
                         );
                       },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[300],
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                      ),
-                      child: const Text(
-                        'Cancel',
-                        style: TextStyle(
-                          fontSize: 16.0,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                        ),
-                      ),
+                    );
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.grey[300],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                  ],
+                  ),
+                  child: const Text(
+                    'Annuler',
+                    style: TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ],
             ),
