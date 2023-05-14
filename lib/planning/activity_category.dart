@@ -14,6 +14,7 @@ import 'package:guide_app/notification/notification.dart';
 
 import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
+import '../notification/create_notification.dart';
 import '../users/client_list.dart';
 
 class EditActivityScreen extends StatefulWidget {
@@ -736,7 +737,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                                       CrossAxisAlignment.start,
                                                   children: [
                                                     const Text(
-                                                      'Activities with the Same Name',
+                                                      'Activities List',
                                                       style: TextStyle(
                                                         fontSize: 24.0,
                                                         fontWeight:
@@ -868,41 +869,40 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 ),
                               ),
                               const SizedBox(height: 20.0),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      // Handle the button press
-                                      Navigator.of(context).push(
-                                        MaterialPageRoute(
-                                          builder: (context) =>
-                                              const NewActivity(),
-                                        ),
-                                      );
-                                    },
-                                    child: const Text('Ajouter autre'),
-                                  ),
-                                  Row(
-                                    children: [
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          // Handle the button press
-                                        },
-                                        child: const Text('Enregistrer'),
-                                      ),
-                                      const SizedBox(width: 10.0),
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        child: const Text('Annuler'),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                              // Row(
+                              //   mainAxisAlignment:
+                              //       MainAxisAlignment.spaceBetween,
+                              //   children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  // Handle the button press
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(
+                                      builder: (context) => const NewActivity(),
+                                    ),
+                                  );
+                                },
+                                child: const Text('New Activity'),
                               ),
+                              // Row(
+                              //   children: [
+                              //     ElevatedButton(
+                              //       onPressed: () {
+                              //         // Handle the button press
+                              //       },
+                              //       child: const Text('Enregistrer'),
+                              //     ),
+                              //     const SizedBox(width: 10.0),
+                              //     ElevatedButton(
+                              //       onPressed: () {
+                              //         Navigator.pop(context);
+                              //       },
+                              //       child: const Text('Annuler'),
+                              //     ),
+                              //   ],
+                              // ),
+                              //   ],
+                              // ),
                             ],
                           ),
                         );
@@ -964,12 +964,32 @@ class BoxDescriptionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: Text(
+      //     activity.name,
+      //     style: const TextStyle(
+      //       color: Color.fromARGB(255, 38, 6, 39),
+      //     ),
+      //   ),
+      //   backgroundColor: const Color.fromARGB(255, 207, 207, 219),
+      // ),
       appBar: AppBar(
-        title: Text(
-          activity.name,
-          style: const TextStyle(
-            color: Color.fromARGB(255, 38, 6, 39),
-          ),
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/Logo.svg',
+              fit: BoxFit.cover,
+              height: 36.0,
+            ),
+            const SizedBox(
+                width: 30.0), // Add spacing between the logo and the text
+            Text(
+              activity.name,
+              style: const TextStyle(
+                color: Color.fromARGB(255, 38, 6, 39),
+              ),
+            ),
+          ],
         ),
         backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
@@ -984,7 +1004,7 @@ class BoxDescriptionPage extends StatelessWidget {
             Image.network(activity.photoPath),
             const SizedBox(height: 16),
             /* Text(place.time),*/
-
+            const SizedBox(height: 16),
             Row(
               children: [
                 Container(
@@ -1020,11 +1040,12 @@ class BoxDescriptionPage extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 16),
             Text(
               activity.symbolName,
               style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -1128,6 +1149,18 @@ void _showMenu(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const ClientScreen()),
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.notification_add),
+              title: const Text('Create Notification'),
+              onTap: () {
+                // Navigate to activites screen when pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddNotification()),
                 );
               },
             ),

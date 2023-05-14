@@ -136,10 +136,6 @@ class _NewActivityState extends State<NewActivity> {
                 ),
                 const SizedBox(height: 16.0),
                 CustomTextField(
-                  /*prefixIcon: Icon(
-                    Icons.location_city,
-                    size: 18,
-                  ),*/
                   labelText: "Activity name",
                   validator: (value) {
                     if (value == null || value.isEmpty) {

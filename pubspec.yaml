@@ -68,6 +68,8 @@ dependencies:
   android_alarm_manager_plus: ^2.1.4
   mask_text_input_formatter: ^2.4.0
   circle_flags: ^1.0.4
+  feature_notifier: ^1.0.4
+  flutter_datetime_picker: ^1.5.1
 
 
 dev_dependencies:
