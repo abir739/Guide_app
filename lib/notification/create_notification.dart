@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../components/custom_textfield.dart';
-import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
 
 class AddNotification extends StatefulWidget {
   const AddNotification({Key? key}) : super(key: key);
@@ -103,7 +103,7 @@ class _AddNotificationState extends State<AddNotification> {
         return AlertDialog(
           title: const Text('Success'),
           content: Text(
-            'A notification sent to $selectedGroup at ${selectedTime.hour}:${selectedTime.minute}',
+            'A notification sent to $selectedGroup',
             style: TextStyle(fontSize: 18, color: Colors.white),
           ),
           actions: [
@@ -153,20 +153,6 @@ class _AddNotificationState extends State<AddNotification> {
       payload: selectedGroup, // Use the selected group as the payload
     );
 
-    // Schedule the notification at the selected time
-
-    // await flutterLocalNotificationsPlugin.zonedSchedule(
-    //   0,
-    //   _titleController.text,
-    //   _bodyController.text,
-    //   tz.TZDateTime.from(selectedTime, tz.local),
-    //   platformChannelSpecifics,
-    //   payload: selectedGroup,
-    //   androidAllowWhileIdle: true,
-    //   uiLocalNotificationDateInterpretation:
-    //       UILocalNotificationDateInterpretation.absoluteTime,
-    // );
-
     _showSuccessDialog(selectedGroup); // Show the success dialog
   }
 
@@ -213,22 +199,6 @@ class _AddNotificationState extends State<AddNotification> {
               labelText: 'Body',
             ),
             const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                DatePicker.showTimePicker(
-                  context,
-                  showTitleActions: true,
-                  onChanged: (date) {
-                    setState(() {
-                      selectedTime = date;
-                    });
-                  },
-                  currentTime: selectedTime,
-                );
-              },
-              child: Text(
-                  'Select Time: ${selectedTime.hour}:${selectedTime.minute}'),
-            ),
 
             DropdownButtonFormField<String>(
               value: selectedGroup,
