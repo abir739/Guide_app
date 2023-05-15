@@ -195,7 +195,7 @@ class _AddNotificationState extends State<AddNotification> {
             const SizedBox(height: 16.0),
 
             CustomTextField(
-              controller: _titleController,
+              controller: _bodyController,
               labelText: 'Body',
             ),
             const SizedBox(height: 16.0),

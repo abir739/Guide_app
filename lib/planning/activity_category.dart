@@ -1183,8 +1183,8 @@ class BoxDescriptionPage extends StatelessWidget {
 // }
 
 void _showMenu(BuildContext context) {
-  final Color primary = Colors.black;
-  final Color active = Colors.white;
+  final Color primary = Colors.white;
+  final Color active = Colors.black;
 
   double screenHeight = MediaQuery.of(context).size.height;
 
@@ -1201,7 +1201,7 @@ void _showMenu(BuildContext context) {
             clipper: OvalRightBorderClipper(),
             child: Drawer(
               child: Container(
-                padding: const EdgeInsets.only(left: 16.0, right: 80),
+                padding: const EdgeInsets.only(left: 26.0, right: 140),
                 decoration: BoxDecoration(
                   color: primary,
                   boxShadow: [BoxShadow(color: Colors.black45)],
@@ -1215,21 +1215,21 @@ void _showMenu(BuildContext context) {
                   child: SingleChildScrollView(
                     child: Column(
                       children: <Widget>[
-                        Container(
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            icon: Icon(
-                              Icons.power_settings_new,
-                              color: active,
-                            ),
-                            onPressed: () {},
-                          ),
-                        ),
+                        // Container(
+                        //   alignment: Alignment.centerRight,
+                        //   child: IconButton(
+                        //     icon: Icon(
+                        //       Icons.power_settings_new,
+                        //       color: active,
+                        //     ),
+                        //     onPressed: () {},
+                        //   ),
+                        // ),
 
                         /// ---------------------------
                         /// Building header for drawer .
                         /// ---------------------------
-
+                        SizedBox(height: 28.0),
                         Container(
                           height: 90,
                           alignment: Alignment.center,
@@ -1253,7 +1253,7 @@ void _showMenu(BuildContext context) {
                         Text(
                           "Abir Cherif",
                           style: TextStyle(
-                              color: const Color.fromARGB(255, 218, 205, 205),
+                              color: Colors.purple.withOpacity(0.6),
                               fontSize: 18.0,
                               fontWeight: FontWeight.w600),
                         ),
@@ -1265,7 +1265,7 @@ void _showMenu(BuildContext context) {
                         /// ---------------------------
                         /// Building items list  for drawer .
                         /// ---------------------------
-
+                        SizedBox(height: 16.0),
                         ListTile(
                           leading: Icon(Icons.home, color: active),
                           title: Text('Home', style: TextStyle(color: active)),
@@ -1342,6 +1342,36 @@ void _showMenu(BuildContext context) {
                                   builder: (context) => HomePage()),
                             );
                           },
+                        ),
+
+                        /// ---------------------------
+                        /// last Item for drawer
+                        /// ---------------------------
+
+                        _buildDivider(),
+                        SizedBox(height: 28.0),
+                        Column(
+                          children: <Widget>[
+                            ListTile(
+                              title: Text(
+                                'Log In',
+                                style: TextStyle(
+                                  fontFamily: 'Bahij Janna',
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  color: Colors.purple.withOpacity(0.6),
+                                ),
+                                textAlign: TextAlign.left,
+                              ),
+                              trailing: Icon(Icons.login, color: Colors.red),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).padding.bottom,
+                            )
+                          ],
                         ),
                       ],
                     ),
