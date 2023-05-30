@@ -5,10 +5,14 @@ import 'package:guide_app/destination/place_description.dart';
 
 import '../notification/create_notification.dart';
 import '../notification/notification.dart';
-import '../planning/guide_plan.dart';
+// import '../planning/guide_plan.dart';
 import '../planning/home_tasks.dart';
-import '../planning/planing_list.dart';
+// import '../planning/planing_list.dart';
+// import '../users/client_list.dart';
+// import 'package:guide_app/planning/guide_plan_test.dart';
 import '../users/client_list.dart';
+import 'package:guide_app/planning/guide_plan_test.dart';
+import 'package:guide_app/planning/planing_list.dart';
 
 class DestinationScreen extends StatefulWidget {
   const DestinationScreen({super.key});
@@ -207,7 +211,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Bonjour John',
+                  'Hello Abir',
                   style: TextStyle(
                     fontSize: 27.0,
                     fontWeight: FontWeight.bold,
@@ -215,8 +219,9 @@ class _DestinationScreenState extends State<DestinationScreen> {
                 ),
                 CircleAvatar(
                   radius: 40.0,
-                  backgroundImage: NetworkImage(
-                      'https://randomuser.me/api/portraits/men/1.jpg'),
+                  backgroundImage: AssetImage(
+                    'assets/images/abir.jpeg',
+                  ),
                 ),
               ],
             ),
@@ -453,6 +458,10 @@ class _DestinationScreenState extends State<DestinationScreen> {
 //     },
 //   );
 // }
+
+//
+
+//
 
 void _showMenu(BuildContext context) {
   final Color primary = Colors.white;

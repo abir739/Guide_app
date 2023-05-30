@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:guide_app/menu.dart';
@@ -50,8 +51,23 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      // appBar: AppBar(
+      //   title: const Text("Edit Activity"),
+      // ),
       appBar: AppBar(
-        title: const Text("Edit Activity"),
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/Logo.svg',
+              fit: BoxFit.cover,
+              height: 36.0,
+            ),
+            const SizedBox(
+                width: 30.0), // Add spacing between the logo and the text
+            const Text("Edit Activity"),
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -118,29 +134,63 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
   }
 }
 
-void showDialogForModify(BuildContext context, Function() onConfirm) {
-  showDialog(
+void showAlertDialogOnOkCallback(
+  String title,
+  String msg,
+  DialogType dialogType,
+  BuildContext context,
+  VoidCallback onOkPress,
+) {
+  AwesomeDialog(
     context: context,
-    builder: (BuildContext context) {
-      return AlertDialog(
-        title: const Text("Modify Confirmation"),
-        content: const Text("Are you sure you want to modify this activity?"),
-        actions: <Widget>[
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: const Text("CANCEL"),
-          ),
-          TextButton(
-            onPressed: () {
-              onConfirm();
-              Navigator.pop(context);
-            },
-            child: const Text("MODIFY"),
-          ),
-        ],
-      );
+    animType: AnimType.TOPSLIDE,
+    dialogType: dialogType,
+    title: title,
+    desc: msg,
+    btnOkIcon: Icons.check_circle,
+    btnOkColor: Colors.green.shade900,
+    btnOkOnPress: onOkPress,
+  ).show();
+}
+
+// void showDialogForModify(BuildContext context, Function() onConfirm) {
+//   showDialog(
+//     context: context,
+//     builder: (BuildContext context) {
+//       return AlertDialog(
+//         title: const Text("Modify Confirmation"),
+//         content: const Text("Are you sure you want to modify this activity?"),
+//         actions: <Widget>[
+//           TextButton(
+//             onPressed: () => Navigator.pop(context),
+//             child: const Text("CANCEL"),
+//           ),
+//           TextButton(
+//             onPressed: () {
+//               onConfirm();
+//               Navigator.pop(context);
+//             },
+//             child: const Text("MODIFY"),
+//           ),
+//         ],
+//       );
+//     },
+//   );
+// }
+
+void showDialogForModify(BuildContext context, Function() onConfirm) {
+  AwesomeDialog(
+    context: context,
+    animType: AnimType.TOPSLIDE,
+    dialogType: DialogType.INFO,
+    title: 'Modify Confirmation',
+    desc: 'Are you sure you want to modify this activity?',
+    btnCancelOnPress: () => Navigator.pop(context),
+    btnOkOnPress: () {
+      onConfirm();
+      Navigator.pop(context);
     },
-  );
+  ).show();
 }
 
 // the description of an activity
@@ -210,8 +260,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'Dar El Jeld : avec sa localisation atypique au milieu du souk de Tunis, cette demeure exceptionnelle reconvertit en restaurant chic et raffiné propose divers plats orientaux et tunisiens d’exception : généreux et goûteux, vous serez agréablement séduit !',
     ),
     Activity(
-      id: "2",
-      name: "Vols",
+      id: "1",
+      name: "Flights",
       time: "14:00-14:45",
       price: "0€",
       logoPath: 'assets/images/Vol.svg',
@@ -223,9 +273,9 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'cette aéroport porte le nom de la cité historique de Carthage qui est située à cette aéroport. Lors de sa mise en exploitation, aérodrome est connu sous le nom de Tunis-El Aouina.',
     ),
     Activity(
-      id: "3",
-      name: "Transport",
-      time: "14:00-14:45",
+      id: "2",
+      name: "Bus",
+      time: "15:00-15:45",
       price: "0€",
       logoPath: 'assets/images/bus.svg',
       symbolName: 'Aéroport de Tunis',
@@ -236,9 +286,9 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'cette aéroport porte le nom de la cité historique de Carthage qui est située à cette aéroport. Lors de sa mise en exploitation, aérodrome est connu sous le nom de Tunis-El Aouina.',
     ),
     Activity(
-      id: "4",
-      name: "Hotles",
-      time: "16:00-16:50",
+      id: "3",
+      name: "Hotels",
+      time: "15:45-17:30",
       price: "0€",
       logoPath: 'assets/images/hottt.svg',
       symbolName: 'Royal Azur Hotel Thalassa',
@@ -249,8 +299,21 @@ class _PlanningScreenState extends State<PlanningScreen> {
           'L’Hôtel Royal Azur Thalassa propose une de?couverte Tunisienne à travers une déambulation dans ses espaces à caractère culturel profond.',
     ),
     Activity(
+      id: "4",
+      name: "Restaurants",
+      time: "18:00-20:00",
+      price: "0€",
+      logoPath: 'assets/images/restt.svg',
+      symbolName: 'Restaurant Dar El Jeld',
+      photoPath:
+          'https://www.sejours-tunisie.com/wp-content/uploads/2019/02/meilleurs-restaurants-tunis.jpg',
+      place: 'Tunisie, Tunis',
+      description:
+          'Dar El Jeld : avec sa localisation atypique au milieu du souk de Tunis, cette demeure exceptionnelle reconvertit en restaurant chic et raffiné propose divers plats orientaux et tunisiens d’exception : généreux et goûteux, vous serez agréablement séduit !',
+    ),
+    Activity(
       id: "5",
-      name: "Visites",
+      name: "Visits",
       time: "17:00-18:00",
       price: "28,51€",
       logoPath: 'assets/images/vis.svg',
@@ -263,7 +326,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
     ),
     Activity(
       id: "6",
-      name: "Visites",
+      name: "Visits",
       time: "10:00-14:00",
       price: "28,51€",
       logoPath: 'assets/images/vis.svg',
@@ -405,51 +468,77 @@ class _PlanningScreenState extends State<PlanningScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 4),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        index.time,
-                        style: const TextStyle(fontSize: 18),
-                      ),
-                      const SizedBox(width: 170.0),
-                      const Icon(Icons.notifications),
-                      const SizedBox(width: 6.0),
-                      PopupMenuButton(
+                 Row(
+  mainAxisAlignment: MainAxisAlignment.start,
+  children: [
+    Text(
+      index.time,
+      style: const TextStyle(fontSize: 18),
+    ),
+    const SizedBox(width: 170.0),
+    GestureDetector(
+      onTap: () {
+        // Navigate to activity's notification page for the selected activity
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ActivityNotificationPage(),
+          ),
+        );
+      },
+      child: Icon(Icons.notifications),
+    ),
+    const SizedBox(width: 6.0),
+                      //
+
+                      PopupMenuButton<String>(
                         onSelected: (value) {
                           if (value == "delete") {
-                            showDialog(
+                            AwesomeDialog(
                               context: context,
-                              builder: (context) {
-                                return AlertDialog(
-                                  title: const Text('Alert Dialog'),
-                                  content: const Text(
-                                      'Do you really want to delete?'),
-                                  actions: <Widget>[
-                                    TextButton(
-                                      onPressed: () {
-                                        // execute delete action
-                                        activities.removeWhere((element) {
-                                          return element.id == index.id;
-                                        });
-                                        setState(() {
-                                          // refresh UI after deleting element from list
-                                        });
-                                        Navigator.pop(context); // close dialog
-                                      },
-                                      child: const Text('Yes'),
-                                    ),
-                                    TextButton(
-                                      onPressed: () {
-                                        Navigator.pop(context); // close dialog
-                                      },
-                                      child: const Text('Close'),
-                                    ),
-                                  ],
-                                );
+                              animType: AnimType.TOPSLIDE,
+                              dialogType: DialogType.WARNING,
+                              title: 'Alert Dialog',
+                              desc: 'Do you really want to delete?',
+                              btnCancelOnPress: () {},
+                              btnOkOnPress: () {
+                                // execute delete action
+                                activities.removeWhere(
+                                    (element) => element.id == index.id);
+                                setState(() {
+                                  // refresh UI after deleting element from list
+                                });
                               },
-                            );
+                              btnCancelText: 'Close',
+                              btnOkText: 'Yes',
+                            ).show();
                           } else if (value == "modify") {
+                            //     AwesomeDialog(
+                            //       context: context,
+                            //       animType: AnimType.TOPSLIDE,
+                            //       dialogType: DialogType.INFO,
+                            //       title: 'Alert Dialog',
+                            //       desc: 'Do you really want to modify?',
+                            //       btnCancelOnPress: () {},
+                            //       btnOkOnPress: () {
+                            //         Navigator.pop(context); // close dialog
+                            //         // navigate to EditActivityScreen to edit the activity data
+                            //         Navigator.push(
+                            //           context,
+                            //           MaterialPageRoute(
+                            //             builder: (context) =>
+                            //                 EditActivityScreen(activity: index),
+                            //           ),
+                            //         ).then((value) {
+                            //           // refresh UI after returning from EditActivityScreen
+                            //           setState(() {});
+                            //         });
+                            //       },
+                            //       btnCancelText: 'Close',
+                            //       btnOkText: 'Yes',
+                            //     ).show();
+                            //   }
+                            // },
                             showDialog(
                               context: context,
                               builder: (context) {
@@ -510,7 +599,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             ),
                           ),
                         ],
-                        child: const Icon(Icons.more_vert),
+                        child: Icon(Icons.more_vert),
                       ),
                     ],
                   ),

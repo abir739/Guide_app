@@ -6,6 +6,7 @@ import 'dart:io';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:awesome_dialog/awesome_dialog.dart';
 
 import '../components/custom_textfield.dart';
 
@@ -359,32 +360,64 @@ class _NewActivityState extends State<NewActivity> {
                         ),
                       ),
                     ),
+                    // ElevatedButton(
+                    //   onPressed: () {
+                    //     showDialog(
+                    //       context: context,
+                    //       builder: (BuildContext context) {
+                    //         return AlertDialog(
+                    //           title: const Text(
+                    //               "Are you sure you want to cancel?"),
+                    //           actions: <Widget>[
+                    //             TextButton(
+                    //               onPressed: () {
+                    //                 Navigator.of(context).pop();
+                    //               },
+                    //               child: const Text("No"),
+                    //             ),
+                    //             TextButton(
+                    //               onPressed: () {
+                    //                 Navigator.of(context).pop();
+                    //                 Navigator.of(context).pop();
+                    //               },
+                    //               child: const Text("Yes"),
+                    //             ),
+                    //           ],
+                    //         );
+                    //       },
+                    //     );
+                    //   },
+                    //   style: ElevatedButton.styleFrom(
+                    //     backgroundColor: Colors.grey[300],
+                    //     shape: RoundedRectangleBorder(
+                    //       borderRadius: BorderRadius.circular(10.0),
+                    //     ),
+                    //   ),
+                    //   child: const Text(
+                    //     'Cancel',
+                    //     style: TextStyle(
+                    //       fontSize: 16.0,
+                    //       fontWeight: FontWeight.bold,
+                    //       color: Colors.black,
+                    //     ),
+                    //   ),
+                    // ),
+
                     ElevatedButton(
                       onPressed: () {
-                        showDialog(
+                        AwesomeDialog(
                           context: context,
-                          builder: (BuildContext context) {
-                            return AlertDialog(
-                              title: const Text(
-                                  "Are you sure you want to cancel?"),
-                              actions: <Widget>[
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("No"),
-                                ),
-                                TextButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: const Text("Yes"),
-                                ),
-                              ],
-                            );
+                          animType: AnimType.TOPSLIDE,
+                          dialogType: DialogType.INFO,
+                          title: 'Are you sure you want to cancel?',
+                          btnCancelOnPress: () => Navigator.of(context).pop(),
+                          btnOkOnPress: () {
+                            Navigator.of(context).pop();
+                            Navigator.of(context).pop();
                           },
-                        );
+                          btnCancelText: 'No',
+                          btnOkText: 'Yes',
+                        ).show();
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.grey[300],

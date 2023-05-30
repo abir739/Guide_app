@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class CommentSection extends StatelessWidget {
   final String placeName;
@@ -12,7 +13,20 @@ class CommentSection extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Comments for $placeName'),
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/Logo.svg',
+              fit: BoxFit.cover,
+              height: 36.0,
+            ),
+            const SizedBox(
+                width: 30.0), // Add spacing between the logo and the text
+            //  Text('Comments for $placeName'),
+            const Text('Comments'),
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: ListView.builder(
         itemCount: comments.length,

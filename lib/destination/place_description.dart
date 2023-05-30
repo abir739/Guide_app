@@ -3,7 +3,7 @@ import 'package:flutter_svg/svg.dart';
 
 import '../notification/create_notification.dart';
 import '../notification/notification.dart';
-import '../planning/guide_plan.dart';
+import '../planning/guide_plan_test.dart';
 import '../planning/home_tasks.dart';
 import '../planning/planing_list.dart';
 import '../users/client_list.dart';
@@ -154,8 +154,8 @@ class PlaceDescriptionScreen extends StatelessWidget {
                               ),
                             );
                           },
-                          icon: const Icon(Icons.add_reaction),
-                          label: const Text('Reaction'),
+                          icon: const Icon(Icons.list),
+                          label: const Text('Add'),
                           style: TextButton.styleFrom(
                             foregroundColor:
                                 const Color.fromARGB(255, 27, 27, 27),
@@ -318,6 +318,8 @@ class PlaceDescriptionScreen extends StatelessWidget {
 //   );
 // }
 
+//
+
 void _showMenu(BuildContext context) {
   final Color primary = Colors.white;
   final Color active = Colors.black;
@@ -476,6 +478,19 @@ void _showMenu(BuildContext context) {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomePage()),
+                            );
+                          },
+                        ),
+                        _buildDivider(),
+                        ListTile(
+                          leading: const Icon(Icons.done_sharp),
+                          title: const Text('My Tasks'),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const HomePage(),
+                              ),
                             );
                           },
                         ),

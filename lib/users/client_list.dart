@@ -121,14 +121,14 @@ class _ClientScreenState extends State<ClientScreen> {
             children: <Widget>[
               const SizedBox(width: 5.0),
               const Text(
-                'Liste de passagers',
+                'List of travelers',
                 style: TextStyle(
                   fontSize: 27.0,
                   fontWeight: FontWeight.bold,
                   color: Color(0xFF3A3557),
                 ),
               ),
-              const SizedBox(width: 14.5),
+              const SizedBox(width: 32.5),
               Container(
                 height: 40.0,
                 width: 100,

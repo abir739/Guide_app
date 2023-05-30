@@ -712,6 +712,8 @@ class _ScheduleScreenState extends State<ScheduleScreen> {
 //   );
 // }
 
+// 
+
 void _showMenu(BuildContext context) {
   final Color primary = Colors.white;
   final Color active = Colors.black;
@@ -870,19 +872,6 @@ void _showMenu(BuildContext context) {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => HomePage()),
-                            );
-                          },
-                        ),
-                        _buildDivider(),
-                        ListTile(
-                          leading: const Icon(Icons.done_sharp),
-                          title: const Text('My Tasks'),
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const HomePage(),
-                              ),
                             );
                           },
                         ),

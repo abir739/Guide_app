@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class ReactionsScreen extends StatefulWidget {
   final String placeName;
@@ -19,8 +20,21 @@ class _ReactionsScreenState extends State<ReactionsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Reactions for ${widget.placeName}'),
+    
+        appBar: AppBar(
+        title: Row(
+          children: [
+            SvgPicture.asset(
+              'assets/images/Logo.svg',
+              fit: BoxFit.cover,
+              height: 36.0,
+            ),
+            const SizedBox(
+                width: 30.0), // Add spacing between the logo and the text
+             Text('Reactions for ${widget.placeName}'),
+          ],
+        ),
+        backgroundColor: const Color.fromARGB(255, 207, 207, 219),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
