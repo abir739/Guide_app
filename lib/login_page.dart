@@ -199,11 +199,11 @@ class _LoginPageState extends State<LoginPage> {
         height: 100,
         child: Center(
           child: Text.rich(TextSpan(children: [
-            TextSpan(
-                text: "Don't have an account?",
-                style: TextStyle(color: primary.withOpacity(0.5))),
-            const TextSpan(text: "  "),
-            const TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
+            // TextSpan(
+            //     text: "Don't have an account?",
+            //     style: TextStyle(color: primary.withOpacity(0.5))),
+            // const TextSpan(text: "  "),
+            // const TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
           ])),
         ));
   }
@@ -241,7 +241,7 @@ class _LoginPageState extends State<LoginPage> {
     return GestureDetector(
       onTap: () {},
       child: Container(
-        child: const Text("Forgot Password", style: TextStyle(color: primary)),
+        // child: const Text("Forgot Password", style: TextStyle(color: primary)),
       ),
     );
   }

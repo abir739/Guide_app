@@ -1,37 +1,40 @@
 [
     {
         "sender_photo_url":
-            "https://randomuser.me/api/portraits/men/81.jpg",
+            "https://randomuser.me/api/portraits/men/80.jpg",
         "sender_name": "John Doe",
         "sender_type": "Voyageur",
         "message_type": "Sidi Bou Said",
         "message_photo_url":
             "https://travelfree.info/wp-content/uploads/2020/06/tunisia-2425441_1280-e1593516163383.jpg",
         "time": "30 mn ago",
+        "description": "Sorry I can't sort today with the group , I'm sick",
         "address": "Tunisia-tunis",
         "activity_time": "Monday at 8 AM"
       },
     {
       "sender_photo_url":
-          "https://randomuser.me/api/portraits/women/68.jpg",
+          "https://randomuser.me/api/portraits/women/58.jpg",
       "sender_name": "Linda Smith",
       "sender_type": "Administrator",
       "message_type": "Restaurant: Dar El Jeld",
       "message_photo_url":
           "https://voyage-tunisie.info/wp-content/uploads/2019/02/Dar-Hamouda-Pacha-Tunis.jpg",
           "time": "1 hour ago",
+          "description": "There is an important update regarding the system.",
           "address": "Dar El Jeld, Tunis",
           "activity_time": "Today at 6:00 PM"
         },
         {
           "sender_photo_url":
-              "https://randomuser.me/api/portraits/men/81.jpg",
+              "https://randomuser.me/api/portraits/men/82.jpg",
           "sender_name": "John Doe",
           "sender_type": "Voyageur",
           "message_type": "Carthage",
           "message_photo_url":
               "https://www.planetware.com/photos-large/TUN/tunisia-tunis-carthage.jpg",
-          "time": "23 hours ago",
+          "time": "3 hours ago",
+          "description": "You have received a new message from John Doe.",
           "address": "Tunisia-tunis-carthage",
           "activity_time": "Today at 9:00 AM"
         },
@@ -44,6 +47,7 @@
           "message_photo_url":
               "https://www.planetware.com/wpimages/2020/09/tunisia-top-attractions-el-djem-amphitheater.jpg",
           "time": "Yesterday at 5:30 PM",
+          "description": "Sorry I can't sort today with the group , I'm sick",
           "address": "Tunisia-El-Djem",
           "activity_time": "Saturday at 9:00 AM"
         },
@@ -56,6 +60,7 @@
             "message_photo_url":
                 "https://images.unsplash.com/photo-1529778878640-34d72448e9c4",
             "time": "9:00 AM",
+            "description": "Sorry I can't sort today with the group , I'm sick",
             "address": "456 Elm St, Anytown USA",
             "activity_time": "Saturday at 4:00 PM"
           },
@@ -68,6 +73,7 @@
             "message_photo_url":
                 "https://media-cdn.tripadvisor.com/media/photo",
                 "time": "12:30 PM",
+                "description": "Sorry I can't sort today with the group , I'm sick",
                 "address": "123 Main St, Anytown USA",
                 "activity_time": "Today at 6:00 PM"
               }

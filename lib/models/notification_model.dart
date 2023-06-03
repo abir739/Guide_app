@@ -5,6 +5,7 @@ class NotificationModel {
   String messageType;
   String messagePhotoUrl;
   String time;
+  String description;
   String address;
   String activityTime;
 
@@ -15,6 +16,7 @@ class NotificationModel {
     required this.messageType,
     required this.messagePhotoUrl,
     required this.time,
+    required this.description,
     required this.address,
     required this.activityTime,
   });
@@ -27,6 +29,7 @@ class NotificationModel {
       messageType: json['message_type'],
       messagePhotoUrl: json['message_photo_url'],
       time: json['time'],
+      description: json['description'],
       address: json['address'],
       activityTime: json['activity_time'],
     );

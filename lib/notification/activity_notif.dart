@@ -350,6 +350,7 @@ class CommentList extends StatelessWidget {
     // Replace this with your actual list of comments
     List<String> comments = [
       'Great activity!',
+      
       'I enjoyed it a lot.',
       'Could be better.',
     ];

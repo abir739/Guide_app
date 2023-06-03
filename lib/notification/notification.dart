@@ -61,6 +61,70 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
     });
   }
 
+  void _showReplyDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Compose Reply'),
+          content: TextFormField(
+            decoration: const InputDecoration(
+              labelText: 'Reply',
+            ),
+            maxLines: 3,
+            // Handle user input
+            onChanged: (value) {
+              // You can store the reply message in a variable or update the notification model with the reply message
+            },
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                // Send the reply message and handle the reply action
+                _sendReply();
+                Navigator.pop(context);
+              },
+              child: const Text('Send'),
+            ),
+            TextButton(
+              onPressed: () {
+                // Cancel the reply action
+                Navigator.pop(context);
+              },
+              child: const Text('Cancel'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _sendReply() {
+    // Get the reply message and handle the send action
+    // You can access the reply message using a variable or update the notification model with the reply message
+  }
+
+ void _showNotificationDetails(NotificationModel notification) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text('Notification Details'),
+        content: Text(notification.description),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+            child: Text('Close'),
+          ),
+        ],
+      );
+    },
+  );
+}
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +170,9 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                   ),
                   margin: const EdgeInsets.all(10),
                   child: ListTile(
+                    onTap: () {
+                      _showNotificationDetails(notifications[index]);
+                    },
                     leading: CircleAvatar(
                       backgroundImage:
                           NetworkImage(notifications[index].senderPhotoUrl),
@@ -154,23 +221,24 @@ class _NotificationsScreenState extends State<NotificationsScreen> {
                           ],
                         ),
                         const SizedBox(height: 10),
-                        Text(
-                          notifications[index].address,
-                          style: const TextStyle(
-                            color: Colors.black,
-                          ),
-                        ),
-                        const SizedBox(height: 8),
+                        // Text(
+                        //   notifications[index].address,
+                        //   style: const TextStyle(
+                        //     color: Colors.black,
+                        //   ),
+                        // ),
+
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
-                            Text(notifications[index].activityTime),
+                            // Text(notifications[index].activityTime),
                             const SizedBox(
                                 width:
                                     100), // Add some space between the buttons
                             TextButton(
                               onPressed: () {
-                                // Handle the "Accept" button press
+                                // Handle the "Reply" button press
+                                _showReplyDialog();
                               },
                               style: ButtonStyle(
                                 backgroundColor: MaterialStateProperty.all<
@@ -525,5 +593,32 @@ class OvalRightBorderClipper extends CustomClipper<Path> {
   @override
   bool shouldReclip(CustomClipper<Path> oldClipper) {
     return true;
+  }
+}
+
+class NotificationDetailsScreen extends StatelessWidget {
+  final NotificationModel notification;
+
+  const NotificationDetailsScreen({required this.notification});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Notification Details'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(16),
+        children: [
+          Text('Sender: ${notification.senderName}'),
+          Text('Type: ${notification.messageType}'),
+          Text('Time: ${notification.time}'),
+          Text('Description: ${notification.description}'),
+          Text('Address: ${notification.address}'),
+          Text('Activity Time: ${notification.activityTime}'),
+          // Add more details as needed
+        ],
+      ),
+    );
   }
 }

@@ -5,11 +5,8 @@ import 'package:guide_app/destination/place_description.dart';
 
 import '../notification/create_notification.dart';
 import '../notification/notification.dart';
-// import '../planning/guide_plan.dart';
+
 import '../planning/home_tasks.dart';
-// import '../planning/planing_list.dart';
-// import '../users/client_list.dart';
-// import 'package:guide_app/planning/guide_plan_test.dart';
 import '../users/client_list.dart';
 import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
