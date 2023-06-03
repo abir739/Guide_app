@@ -53,7 +53,7 @@ dependencies:
   permission_handler: ^10.2.0
   google_sign_in: ^6.0.2
   flutter_speed_dial: ^6.2.0
-  flutter_slidable: ^2.0.0
+  flutter_slidable: ^3.0.0
   flutter_login_facebook: ^1.6.2
   firebase_auth: ^4.2.2
   json_annotation: ^4.8.0
@@ -69,6 +69,7 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   circle_flags: ^1.0.4
   awesome_dialog: ^3.0.2
+  curved_navigation_bar: ^1.0.3
 
 
 

@@ -5,7 +5,8 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:guide_app/menu.dart';
-
+// import 'package:guide_app/notification/ActivityNotification.dart';
+import 'package:guide_app/notification/activity_notif.dart';
 import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
 
@@ -468,27 +469,27 @@ class _PlanningScreenState extends State<PlanningScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const SizedBox(height: 4),
-                 Row(
-  mainAxisAlignment: MainAxisAlignment.start,
-  children: [
-    Text(
-      index.time,
-      style: const TextStyle(fontSize: 18),
-    ),
-    const SizedBox(width: 170.0),
-    GestureDetector(
-      onTap: () {
-        // Navigate to activity's notification page for the selected activity
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => ActivityNotificationPage(),
-          ),
-        );
-      },
-      child: Icon(Icons.notifications),
-    ),
-    const SizedBox(width: 6.0),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        index.time,
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                      const SizedBox(width: 170.0),
+                      GestureDetector(
+                        onTap: () {
+                          // Navigate to activity's notification page for the selected activity
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ActivityNotificationPage(),
+                            ),
+                          );
+                        },
+                        child: Icon(Icons.notifications),
+                      ),
+                      const SizedBox(width: 6.0),
                       //
 
                       PopupMenuButton<String>(
