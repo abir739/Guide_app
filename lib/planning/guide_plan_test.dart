@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -887,7 +888,7 @@ void _showMenu(BuildContext context) {
                           children: <Widget>[
                             ListTile(
                               title: Text(
-                                'Log In',
+                                  'Log out',
                                 style: TextStyle(
                                   fontFamily: 'Bahij Janna',
                                   fontWeight: FontWeight.w600,
@@ -898,7 +899,11 @@ void _showMenu(BuildContext context) {
                               ),
                               trailing: Icon(Icons.login, color: Colors.red),
                               onTap: () {
-                                Navigator.of(context).pop();
+                                // Log out and quit the app
+                                // You can add your own code here for logging out
+
+                                // Exit the app
+                                exit(0);
                               },
                             ),
                             SizedBox(

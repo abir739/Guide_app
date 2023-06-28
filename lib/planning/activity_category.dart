@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
@@ -960,10 +961,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 ),
                               ),
                               const SizedBox(height: 20.0),
-                             
                               ElevatedButton(
                                 onPressed: () {
-                                 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => const NewActivity(),
@@ -972,7 +971,6 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 },
                                 child: const Text('New Activity'),
                               ),
-                             
                             ],
                           ),
                         );
@@ -1402,7 +1400,7 @@ void _showMenu(BuildContext context) {
                           },
                         ),
                         _buildDivider(),
-                         ListTile(
+                        ListTile(
                           leading: Icon(Icons.info, color: active),
                           title: Text('About', style: TextStyle(color: active)),
                           onTap: () {
@@ -1413,6 +1411,7 @@ void _showMenu(BuildContext context) {
                             );
                           },
                         ),
+
                         /// ---------------------------
                         /// last Item for drawer
                         /// ---------------------------
@@ -1423,7 +1422,7 @@ void _showMenu(BuildContext context) {
                           children: <Widget>[
                             ListTile(
                               title: Text(
-                                'Log In',
+                                'Log out',
                                 style: TextStyle(
                                   fontFamily: 'Bahij Janna',
                                   fontWeight: FontWeight.w600,
@@ -1434,7 +1433,11 @@ void _showMenu(BuildContext context) {
                               ),
                               trailing: Icon(Icons.login, color: Colors.red),
                               onTap: () {
-                                Navigator.of(context).pop();
+                                // Log out and quit the app
+                                // You can add your own code here for logging out
+
+                                // Exit the app
+                                exit(0);
                               },
                             ),
                             SizedBox(
