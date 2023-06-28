@@ -35,6 +35,16 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
         padding: const EdgeInsets.all(26.0),
         child: Column(
           children: [
+            CustomTextField(
+              controller: _nameController,
+              labelText: 'Task Name',
+            ),
+            const SizedBox(height: 16.0),
+            CustomTextField(
+              controller: _descriptionController,
+              labelText: 'Description',
+            ),
+            const SizedBox(height: 16.0),
             Container(
               height: 410,
               width: MediaQuery.of(context).size.width,
@@ -45,16 +55,6 @@ class _TaskCreateScreenState extends State<TaskCreateScreen> {
                   fit: BoxFit.cover,
                 ),
               ),
-            ),
-            const SizedBox(height: 16.0),
-            CustomTextField(
-              controller: _nameController,
-              labelText: 'Task Name',
-            ),
-            const SizedBox(height: 16.0),
-            CustomTextField(
-              controller: _descriptionController,
-              labelText: 'Description',
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(

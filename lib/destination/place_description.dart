@@ -1,5 +1,7 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/about_page.dart';
 
 import '../notification/create_notification.dart';
 import '../notification/notification.dart';
@@ -145,20 +147,21 @@ class PlaceDescriptionScreen extends StatelessWidget {
                       children: [
                         TextButton.icon(
                           onPressed: () {
-                            // Navigate to the reactions screen for the current place
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    ReactionsScreen(placeName: place['name']),
-                              ),
-                            );
+                            AwesomeDialog(
+                              context: context,
+                              dialogType: DialogType.SUCCES,
+                              animType: AnimType.SCALE,
+                              title: 'Success',
+                              desc:
+                                  'The current place is added with success to the program of the trip.',
+                              btnOkText: 'OK',
+                              btnOkOnPress: () {},
+                            )..show();
                           },
-                          icon: const Icon(Icons.list),
-                          label: const Text('Add'),
+                          icon: Icon(Icons.list),
+                          label: Text('Add'),
                           style: TextButton.styleFrom(
-                            foregroundColor:
-                                const Color.fromARGB(255, 27, 27, 27),
+                            foregroundColor: Color.fromARGB(255, 27, 27, 27),
                           ),
                         ),
                         TextButton.icon(
@@ -477,10 +480,11 @@ void _showMenu(BuildContext context) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => AboutPage()),
                             );
                           },
                         ),
+
                         _buildDivider(),
                         ListTile(
                           leading: const Icon(Icons.done_sharp),

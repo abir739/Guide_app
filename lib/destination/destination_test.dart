@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/about_page.dart';
 import 'package:guide_app/destination/place_description.dart';
 //import 'package:guide_app/destination/place_description_test.dart';
 
@@ -617,7 +618,7 @@ void _showMenu(BuildContext context) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => AboutPage()),
                             );
                           },
                         ),

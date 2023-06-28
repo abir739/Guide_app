@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:guide_app/about_page.dart';
 import 'package:guide_app/planning/home_tasks.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'dart:convert';
@@ -485,7 +486,7 @@ void _showMenu(BuildContext context) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => AboutPage()),
                             );
                           },
                         ),

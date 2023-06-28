@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
 
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:guide_app/about_page.dart';
 import 'package:guide_app/menu.dart';
 // import 'package:guide_app/notification/ActivityNotification.dart';
 import 'package:guide_app/notification/activity_notif.dart';
@@ -959,13 +960,10 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 ),
                               ),
                               const SizedBox(height: 20.0),
-                              // Row(
-                              //   mainAxisAlignment:
-                              //       MainAxisAlignment.spaceBetween,
-                              //   children: [
+                             
                               ElevatedButton(
                                 onPressed: () {
-                                  // Handle the button press
+                                 
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                       builder: (context) => const NewActivity(),
@@ -974,25 +972,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                 },
                                 child: const Text('New Activity'),
                               ),
-                              // Row(
-                              //   children: [
-                              //     ElevatedButton(
-                              //       onPressed: () {
-                              //         // Handle the button press
-                              //       },
-                              //       child: const Text('Enregistrer'),
-                              //     ),
-                              //     const SizedBox(width: 10.0),
-                              //     ElevatedButton(
-                              //       onPressed: () {
-                              //         Navigator.pop(context);
-                              //       },
-                              //       child: const Text('Annuler'),
-                              //     ),
-                              //   ],
-                              // ),
-                              //   ],
-                              // ),
+                             
                             ],
                           ),
                         );
@@ -1422,18 +1402,17 @@ void _showMenu(BuildContext context) {
                           },
                         ),
                         _buildDivider(),
-                        ListTile(
+                         ListTile(
                           leading: Icon(Icons.info, color: active),
                           title: Text('About', style: TextStyle(color: active)),
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HomePage()),
+                                  builder: (context) => AboutPage()),
                             );
                           },
                         ),
-
                         /// ---------------------------
                         /// last Item for drawer
                         /// ---------------------------
