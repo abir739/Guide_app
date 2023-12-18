@@ -5,16 +5,7 @@ import 'package:guide_app/planning/planing_list.dart';
 import 'package:guide_app/success_login_page.dart';
 import 'package:guide_app/themes/colors.dart';
 import 'package:guide_app/utils/icon_name.dart';
-//import 'package:guide_app/planning/planning.dart';
-//import 'package:guide_app/planning/planning_test.dart';
 import 'package:flutter_svg/svg.dart';
-
-//import 'API_ous/Myhomepage.dart';
-//import 'API_ous/Myhomepagetest.dart';
-//import 'call_API/plan_API.dart';
-//import 'call_API/activity_API.dart';
-//import 'View/planning.dart';
-//import 'View/planning_test.dart';
 import 'components/border_button_widget.dart';
 import 'components/custom_appbar.dart';
 import 'components/custom_button_widget.dart';
@@ -195,16 +186,10 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Widget _buildBottomNavigationBar() {
-    return SizedBox(
+    return const SizedBox(
         height: 100,
         child: Center(
-          child: Text.rich(TextSpan(children: [
-            // TextSpan(
-            //     text: "Don't have an account?",
-            //     style: TextStyle(color: primary.withOpacity(0.5))),
-            // const TextSpan(text: "  "),
-            // const TextSpan(text: "Sign Up", style: TextStyle(color: primary)),
-          ])),
+          child: Text.rich(TextSpan(children: [])),
         ));
   }
 
@@ -240,9 +225,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _getForgetPassword() {
     return GestureDetector(
       onTap: () {},
-      child: Container(
-        // child: const Text("Forgot Password", style: TextStyle(color: primary)),
-      ),
+      child: Container(),
     );
   }
 
@@ -268,7 +251,7 @@ class _LoginPageState extends State<LoginPage> {
             children: [
               BorderButtonV2(
                 preIcon: IconName.facebook,
-                iconSize: 30,
+                iconSize: 22,
                 onTap: () {
                   _facebookLogin();
                 },
@@ -278,7 +261,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               BorderButtonV2(
                 preIcon: IconName.google,
-                iconSize: 30,
+                iconSize: 22,
                 onTap: _handleSignIn,
               ),
               const SizedBox(
@@ -286,7 +269,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               BorderButtonV2(
                 preIcon: IconName.apple,
-                iconSize: 30,
+                iconSize: 22,
                 onTap: () {},
               )
             ],

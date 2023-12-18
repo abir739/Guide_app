@@ -1,21 +1,15 @@
 import 'dart:math';
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:awesome_dialog/awesome_dialog.dart';
-
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:guide_app/about_page.dart';
-import 'package:guide_app/menu.dart';
-// import 'package:guide_app/notification/ActivityNotification.dart';
 import 'package:guide_app/notification/activity_notif.dart';
 import 'package:guide_app/planning/guide_plan_test.dart';
 import 'package:guide_app/planning/planing_list.dart';
-
 import 'package:intl/intl.dart';
 import 'package:guide_app/activity/newactivityyy.dart';
 import 'package:guide_app/notification/notification.dart';
-
 import '../destination/destination_test.dart';
 import '../models/planing_model.dart';
 import '../notification/create_notification.dart';
@@ -54,9 +48,6 @@ class _EditActivityScreenState extends State<EditActivityScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("Edit Activity"),
-      // ),
       appBar: AppBar(
         title: Row(
           children: [
@@ -456,12 +447,13 @@ class _PlanningScreenState extends State<PlanningScreen> {
         },
         child: Container(
           height: boxHeight,
+          width: 300.0,
           decoration: BoxDecoration(
             color: boxColor.withOpacity(0.6),
             borderRadius: BorderRadius.circular(8.0),
           ),
-          margin: const EdgeInsets.all(10),
-          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -489,7 +481,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                             ),
                           );
                         },
-                        child: Icon(Icons.notifications),
+                        child: const Icon(Icons.notifications),
                       ),
                       const SizedBox(width: 6.0),
                       //
@@ -637,8 +629,8 @@ class _PlanningScreenState extends State<PlanningScreen> {
                       ClipOval(
                         child: Image.network(
                           index.photoPath,
-                          width: 50,
-                          height: 50,
+                          width: 80,
+                          height: 80,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -848,7 +840,7 @@ class _PlanningScreenState extends State<PlanningScreen> {
                                                           return Padding(
                                                             padding:
                                                                 const EdgeInsets
-                                                                        .symmetric(
+                                                                    .symmetric(
                                                                     vertical:
                                                                         10.0),
                                                             child:
@@ -1251,8 +1243,8 @@ class BoxDescriptionPage extends StatelessWidget {
 // }
 
 void _showMenu(BuildContext context) {
-  final Color primary = Colors.white;
-  final Color active = Colors.black;
+  const Color primary = Colors.white;
+  const Color active = Colors.black;
 
   double screenHeight = MediaQuery.of(context).size.height;
 
@@ -1262,7 +1254,8 @@ void _showMenu(BuildContext context) {
     isScrollControlled: true,
     builder: (BuildContext context) {
       return SizedBox(
-        width: MediaQuery.of(context).size.width * 0.8, // Set the desired width
+        width:
+            MediaQuery.of(context).size.width * 0.99, // Set the desired width
         child: Container(
           height: MediaQuery.of(context).size.height - 77,
           child: ClipPath(

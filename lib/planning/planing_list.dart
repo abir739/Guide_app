@@ -1,10 +1,6 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-
-// import 'package:guide_app/planning/planning.dart';
 import 'package:guide_app/planning/activity_category.dart';
-
 import '../models/planing_model.dart';
 
 class PlanningListPage extends StatefulWidget {
