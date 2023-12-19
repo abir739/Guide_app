@@ -1,21 +1,22 @@
 <<<<<<< HEAD
 # guide_app
 
-A new Flutter project.
 
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
 =======
 # Guide_app
 Tourist Guide UI-app in Flutter Firebase
+# ScreenShots
+You can found all the ScreenShots in a Folder named Interfaces
+
+![Screenshot 1](https://github.com/abir739/Guide_app/blob/main/Interfaces/3.jpg)
+![Screenshot 2](https://github.com/abir739/Guide_app/blob/main/Interfaces/4.1.jpg)
+![Screenshot 3](https://github.com/abir739/Guide_app/blob/main/Interfaces/4.jpg)
+![Screenshot 4](https://github.com/abir739/Guide_app/blob/main/Interfaces/5.jpg)
+![Screenshot 5](https://github.com/abir739/Guide_app/blob/main/Interfaces/6.jpg)
+![Screenshot 6](https://github.com/abir739/Guide_app/blob/main/Interfaces/7.jpg)
+![Screenshot 7](https://github.com/abir739/Guide_app/blob/main/Interfaces/8.jpg)
+![Screenshot 8](https://github.com/abir739/Guide_app/blob/main/Interfaces/9.jpg)
+![Screenshot 9](https://github.com/abir739/Guide_app/blob/main/Interfaces/act_cate.jpg)
+![Screenshot 10](https://github.com/abir739/Guide_app/blob/main/Interfaces/act_detail1.jpg)
+
 >>>>>>> origin_1/main
