@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Guide_app
 Tourist Guide UI-app in Flutter Firebase
 # ScreenShots
@@ -26,8 +26,8 @@ You can found all the ScreenShots in a Folder named Interfaces
     <td style="margin-left: 10px;"><img src="https://github.com/abir739/Guide_app/blob/main/Interfaces/reply_notif.jpg" alt="Screenshot 2"></td>
    
   </tr>
-  <!-- Add more rows with screenshots as needed -->
+
 </table>
 
 
->>>>>>> origin_1/main
+
